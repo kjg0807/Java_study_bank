@@ -1,4 +1,4 @@
-package com.naver.start.bank;
+package com.naver.start.bankMember;
 
 import java.util.Date;
 

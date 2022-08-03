@@ -1,4 +1,4 @@
-package com.naver.start.bank;
+package com.naver.start.bankMember;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,7 +56,7 @@ public class BankMembersDAO implements MembersDAO
 			bankMembersDTO.setName(rs.getString("name"));
 			bankMembersDTO.setEmail(rs.getString("email"));
 			bankMembersDTO.setPhone(rs.getString("phone"));
-			ar.add(bankMembersDTO);
+			ar.add(bankMembersDTO);			
 			
 			System.out.println("USERID: " + bankMembersDTO.getUserid() + ", PWD: " + bankMembersDTO.getPwd() + ", NAME: " + bankMembersDTO.getName()
 					+ ", Email: " + bankMembersDTO.getEmail() + ", PHONE: " + bankMembersDTO.getPhone());

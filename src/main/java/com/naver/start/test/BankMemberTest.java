@@ -1,7 +1,7 @@
 package com.naver.start.test;
 
-import com.naver.start.bank.BankMembersDAO;
-import com.naver.start.bank.BankMembersDTO;
+import com.naver.start.bankMember.BankMembersDAO;
+import com.naver.start.bankMember.BankMembersDTO;
 
 public class BankMemberTest
 {

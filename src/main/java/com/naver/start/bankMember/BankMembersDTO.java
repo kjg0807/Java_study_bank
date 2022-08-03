@@ -1,4 +1,4 @@
-package com.naver.start.bank;
+package com.naver.start.bankMember;
 
 public class BankMembersDTO
 {

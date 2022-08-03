@@ -1,13 +1,13 @@
-package com.naver.start.bank;
+package com.naver.start.bankBook;
 
 public class BankBookDTO
 {
-	private int bookNum; // auto increment
+	private long bookNum; // auto increment
 	private String bookName; // 예금주
 	private double bookRate; // 이자율
-	private boolean bookSale; // 판매됫는지 아닌지
+	private Integer bookSale; // 판매됫는지 아닌지
 
-	public int getBookNum()
+	public long getBookNum()
 	{
 		return bookNum;
 	}
@@ -37,12 +37,12 @@ public class BankBookDTO
 		this.bookRate = bookRate;
 	}
 
-	public boolean isBookSale()
+	public int getBookSale()
 	{
 		return bookSale;
 	}
 
-	public void setBookSale(boolean bookSale)
+	public void setBookSale(int bookSale)
 	{
 		this.bookSale = bookSale;
 	}

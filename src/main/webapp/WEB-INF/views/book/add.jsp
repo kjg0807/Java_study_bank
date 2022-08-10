@@ -10,40 +10,20 @@
 BankBookDTO bankMembersDTO = (BankBookDTO) request.getAttribute("add");
 %>
 <body>
-	<h1>Product Insert</h1>
+	<h1>Add Page</h1>
 	<form action="./add" method="post">
 		<table>
 			<tr>
-				<td>BookNum</td>
-				<td>
-					<input type="text" name="booknum" placeholder="Booknum" onfocus="this.placeholder=''" onblur="this.placeholder='Booknum'">
-				</td>
+				<td>Name</td>
+				<td><input type="text" name="bookName" placeholder="Bookname" onfocus="this.placeholder=''" onblur="this.placeholder='Bookname'"></td>
 			</tr>
 			<tr>
-				<td>BookName</td>
-				<td>
-					<input type="text" name="bookname" placeholder="Bookname" onfocus="this.placeholder=''" onblur="this.placeholder='Bookname'">
-				</td>
+				<td>Rate</td>
+				<td><input type="text" name="bookRate" placeholder="Bookrate" onfocus="this.placeholder=''" onblur="this.placeholder='Bookrate'"></td>
 			</tr>
 			<tr>
-				<td>BookRate</td>
-				<td>
-					<input type="text" name="bookrate" placeholder="Bookrate" onfocus="this.placeholder=''" onblur="this.placeholder='Bookrate'">
-				</td>
-			</tr>
-			<tr>
-				<td>BookSale</td>
-				<td>
-					<input type="text" name="booksale" placeholder="Booksale" onfocus="this.placeholder=''" onblur="this.placeholder='Booksale'">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="Insert">
-				</td>
-				<td>
-					<input type="reset" value="reset">
-				</td>
+				<td><input type="submit" value="Insert"></td>
+				<td><input type="reset" value="reset"></td>
 			</tr>
 		</table>
 	</form>

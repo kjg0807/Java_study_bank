@@ -9,7 +9,7 @@
 <body>
 	<h1>Login Page</h1>
 	<!-- 로그인 - 아이디, 패스워드, 로그인 버튼 -->
-	<form action="/Login" method="post">
+	<form action="/login" method="post">
 		<!-- action-절대경로: /test/member/Login -->
 		아이디: <input type="text" name="id" placeholder="ID 입력" onfocus="this.placeholder=''" onblur="this.placeholder='ID 입력'"> 
 		<br> 
@@ -20,7 +20,7 @@
 		<input type="submit" value="로그인"> 
 		<input type="reset" value="초기화">
 		<hr>		 
-		<a href="/study_index.html>">Index Page</a>
+		<a href="./home.jsp>">Home</a>
 		<!-- <a href="/study_index.html">인덱스 페이지</a>  -->
 		<!--<a href="./study_index.html">인덱스</a>-->
 		<br> <br> 

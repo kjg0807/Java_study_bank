@@ -1,5 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <html>
 <head>
 <title>Home</title>
@@ -12,8 +12,10 @@
 </html>
 <a href="./member/login">Login</a>
 <a href="./member/join">Join</a>
+<a href="./member/search">Search</a>
+<a href="./member/list">List</a>
 <br>
 <a href="./book/list">List</a>
 <a href="./book/detail?bookNum=1">Detail</a>
 <br>
-<a href="./book/add">Product Insert</a>
+<a href="./book/add">Add Page</a>

@@ -54,7 +54,7 @@ ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>) request.getAttribute("list"
 		<h3>list</h3>
 		<a href="/test_index.html>">Index Page</a>
 		<br>
-		<a href="./detail">BankBook Detail</a>
+		<a href="./detail">BankBook Detail</a>		
 	</form>
 </body>
 </html>

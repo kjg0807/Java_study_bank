@@ -63,6 +63,8 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 		<a href="./member/Login">Login</a>
 		<!-- 절대경로 -->
 		<a href="/member/Join">Join</a>
+		<br>
+		<a href="./list">리스트보기</a>
 	</form>
 </body>
 </html>

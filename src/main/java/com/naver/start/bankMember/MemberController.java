@@ -1,22 +1,25 @@
 package com.naver.start.bankMember;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/member/*")
-// 이 클래스는 Controller 역할, Container(객체 생성, 소멸) 에게 이 클래스의 객체 생성 위임
+// �씠 �겢�옒�뒪�뒗 Controller �뿭�븷, Container(媛앹껜 �깮�꽦, �냼硫�) �뿉寃� �씠 �겢�옒�뒪�쓽 媛앹껜
+// �깮�꽦 �쐞�엫
 public class MemberController
 {
 	// BankMembersDTO bankMembersDTO = new BankMembersDTO();
 	// BankMembersDAO bankMembersDAO = new BankMembersDAO();
-	// annotation -> @: 설명 + 실행
+	// annotation -> @: �꽕紐� + �떎�뻾
 
-	// url: /member/Login 이 실행될 때 Login 메서드 실행
-	@RequestMapping(value = "login") // "" 안으로 이동
+	// url: /member/Login �씠 �떎�뻾�맆 �븣 Login 硫붿꽌�뱶 �떎�뻾
+	@RequestMapping(value = "login", method = RequestMethod.GET) // "" �븞�쑝濡� �씠�룞
 	public String Login()
 	{
 		System.out.println("Login Test");
@@ -24,9 +27,17 @@ public class MemberController
 		return "member/login";
 	}
 
+	@RequestMapping(value = "login", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
+	public String Login(BankMembersDTO bankMembersDTO)
+	{
+		System.out.println("DB Login Test");
+
+		return "member/login";
+	}
+
 	// join /member/join Get
 	@RequestMapping(value = "join", method = RequestMethod.GET)
-	// member/join에서 get으로 들어오는 method만 사용
+	// member/join�뿉�꽌 get�쑝濡� �뱾�뼱�삤�뒗 method留� �궗�슜
 	public String join()
 	{
 		System.out.println("Join get Test");
@@ -36,11 +47,12 @@ public class MemberController
 
 	// Post
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	// member/join에서 post으로 들어오는 method만 사용
+	// member/join�뿉�꽌 post�쑝濡� �뱾�뼱�삤�뒗 method留� �궗�슜
 	public String join(BankMembersDTO bankMembersDTO) throws Exception
 	{
-		// (HttpServletRequest request, String pwd, String name, String email, String phone)
-		// -> DTO로 바꾸면 밑에 선언을 안해도 자동바꿔줌
+		// (HttpServletRequest request, String pwd, String name, String email, String
+		// phone)
+		// -> DTO濡� 諛붽씀硫� 諛묒뿉 �꽑�뼵�쓣 �븞�빐�룄 �옄�룞諛붽퓭以�
 		System.out.println("Join post Test");
 		BankMembersDAO bankMembersDAO = new BankMembersDAO();
 		// String a = request.getParameter("id");
@@ -53,5 +65,44 @@ public class MemberController
 		System.out.println(rs == 1);
 
 		return "member/join";
+	}
+
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String search() throws Exception
+	{
+		System.out.println("Search Test");
+		
+		return "member/search";
+	}
+
+	@RequestMapping(value = "search", method = RequestMethod.POST)
+	public String search(String search, Model model) throws Exception
+	{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("Search Submit Test");
+		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		// ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
+		ArrayList<BankMembersDTO> ar = new ArrayList();
+		for (int i = 0; i < 10; i++)
+		{
+			BankMembersDTO bankMembersDTO = new BankMembersDTO();
+			bankMembersDTO.setUserid("id" + i);
+			bankMembersDTO.setName("name" + i);
+			bankMembersDTO.setEmail("email" + i);
+			bankMembersDTO.setPhone("phone" + i);
+			ar.add(bankMembersDTO);
+		}
+		mv.setViewName("member/list");
+		model.addAttribute("list", ar);
+
+		return "member/search";
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String list() throws Exception
+	{
+		System.out.println("List");
+		
+		return "member/list";
 	}
 }

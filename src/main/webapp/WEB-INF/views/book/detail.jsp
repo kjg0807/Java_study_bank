@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <%
+//요청이 발생하면 생성, 응답이 나가면 소멸 : RequestScope
 BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 %>
 <body>

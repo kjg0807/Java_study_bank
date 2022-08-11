@@ -35,7 +35,7 @@ public class MemberController
 		System.out.println("DB Login Test");
 
 		// return "member/login";
-		return "redirect:..";
+		return "redirect:../";
 	}
 
 	// join /member/join Get
@@ -115,7 +115,7 @@ public class MemberController
 		System.out.println("List Post");
 		BankMembersDAO bankMembersDAO = new BankMembersDAO();
 		ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/list");
 		mv.addObject("list", ar);

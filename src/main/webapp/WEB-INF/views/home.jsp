@@ -13,7 +13,6 @@
 <a href="./member/login">Login</a>
 <a href="./member/join">Join</a>
 <a href="./member/search">Search</a>
-<a href="./member/list">List</a>
 <br>
 <a href="./book/list">List</a>
 <a href="./book/detail?bookNum=1">Detail</a>

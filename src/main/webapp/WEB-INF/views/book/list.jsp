@@ -37,7 +37,7 @@ ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>) request.getAttribute("list"
 			%>
 			<tr>
 				<td>
-					<a href="./detail?booknum=<%=bankBookDTO.getBookNum()%>">
+					<a href="./detail?bookNum=<%=bankBookDTO.getBookNum()%>">
 						<%=bankBookDTO.getBookName()%>
 					</a>
 				</td>

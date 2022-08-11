@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<%
+<%--<%
 BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
-%>
+--%>
 <body>
 	<h1>BankBook Detail</h1>
 	<table border="1" cellpadding="0" cellspacing="5">
@@ -19,6 +19,7 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 			<th>Sale</th>
 		</tr>
 		<tr>
+		<td>${ requestScope.dto }</td>
 			<td><%=bankBookDTO.getBookNum()%></td>
 			<td><%=bankBookDTO.getBookName()%></td>
 			<td><%=bankBookDTO.getBookRate()%></td>

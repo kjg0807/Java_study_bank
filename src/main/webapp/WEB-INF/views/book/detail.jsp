@@ -11,10 +11,6 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 %>
 <body>
 	<h1>BankBook Detail</h1>
-	<%
-	if (bankBookDTO != null)
-	{
-	%>
 	<table border="1" cellpadding="0" cellspacing="5">
 		<tr>
 			<th>Num</th>
@@ -26,33 +22,8 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 			<td><%=bankBookDTO.getBookNum()%></td>
 			<td><%=bankBookDTO.getBookName()%></td>
 			<td><%=bankBookDTO.getBookRate()%></td>
-			<td>
-				<%
-				if (bankBookDTO.getBookSale() == 1)
-				{
-				%>
-				판매 중<%
-				}
-				else
-				{
-				%>
-				판매 종료
-				<%
-				}
-				%>
-			</td>
 		</tr>
 	</table>
-	<%
-	}
-	else
-	{
-	%>
-	<h3>데이터가 존재하지 않습니다.</h3>
-	<%
-	}
-	%>
-
 	<form action="/detail" method="post">
 		<h3>detail</h3>
 		<a href="./bankBook/list">BankBook List</a>

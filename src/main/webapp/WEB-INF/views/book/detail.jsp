@@ -19,10 +19,13 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 			<th>Sale</th>
 		</tr>
 		<tr>
-		<td>${ requestScope.dto }</td>
-			<td><%=bankBookDTO.getBookNum()%></td>
+			<td>${requestScope.dto.getBookNum() }</td>
+			<td>${requestScope.dto.bookName }</td>
+			<td>${dto.bookRate }</td>
+			<td>${dto.bookSale }</td>
+			<!-- <td><%--<%=bankBookDTO.getBookNum()%></td>
 			<td><%=bankBookDTO.getBookName()%></td>
-			<td><%=bankBookDTO.getBookRate()%></td>
+			<td><%=bankBookDTO.getBookRate()%> --%></td>  -->
 		</tr>
 	</table>
 	<form action="/detail" method="post">

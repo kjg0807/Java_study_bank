@@ -120,8 +120,8 @@ public class BankBookDAO implements BookDAO
 			bankBookDTO.setBookSale(rs.getInt("booksale"));
 		}
 
-		System.out.println("BookNum: " + bankBookDTO.getBookNum() + ", BookName: " + bankBookDTO.getBookName() + ", BookRate: "
-				+ bankBookDTO.getBookRate() + ", BookSale: " + bankBookDTO.getBookSale());
+//		System.out.println("BookNum: " + bankBookDTO.getBookNum() + ", BookName: " + bankBookDTO.getBookName() + ", BookRate: "
+//				+ bankBookDTO.getBookRate() + ", BookSale: " + bankBookDTO.getBookSale());
 
 		DBConnector.disConnect(rs, st, DBConn);
 

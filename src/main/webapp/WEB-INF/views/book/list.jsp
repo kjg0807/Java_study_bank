@@ -21,14 +21,6 @@ ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>) request.getAttribute("list"
 				<th>Name</th>
 				<th>Rate</th>
 			</tr>
-			<tr>
-				<td>Name1</td>
-				<td>0.012</td>
-			</tr>
-			<tr>
-				<td>Name2</td>
-				<td>3.14</td>
-			</tr>
 		</thead>
 		<tbody>
 			<%
@@ -37,7 +29,7 @@ ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>) request.getAttribute("list"
 			%>
 			<tr>
 				<td>
-					<a href="./detail?booknum=<%=bankBookDTO.getBookNum()%>">
+					<a href="./detail?bookNum=<%=bankBookDTO.getBookNum()%>">
 						<%=bankBookDTO.getBookName()%>
 					</a>
 				</td>
@@ -54,7 +46,7 @@ ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>) request.getAttribute("list"
 		<h3>list</h3>
 		<a href="/test_index.html>">Index Page</a>
 		<br>
-		<a href="./detail">BankBook Detail</a>		
+		<a href="./detail">BankBook Detail</a>
 	</form>
 </body>
 </html>

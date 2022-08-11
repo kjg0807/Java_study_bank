@@ -18,21 +18,21 @@ public class BookController
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(Model model) throws Exception
 	{
-		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2°¡Áö ÇÕÄ£ °Í
+		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä£ ï¿½ï¿½
 		System.out.println("List Test");
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		// DB ¾øÀ»¶§
-		ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
-		for (int i = 0; i < 10; i++)
-		{
-			BankBookDTO bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBookName("bookName" + i);
-			bankBookDTO.setBookNum((long) i);
-			bankBookDTO.setBookRate(Math.random());
-			bankBookDTO.setBookSale(1);
-			ar.add(bankBookDTO);
-		}
-		// ArrayList<BankBookDTO> ar = bankBookDAO.getList(); //DBÀÖÀ¸¸é ÁÖ¼®ÇØÁ¦
+		// DB ì—†ëŠ” ì‚¬ëŒ ì£¼ì„í•´ì œ
+		// ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
+		// for (int i = 0; i < 10; i++)
+		// {
+		// BankBookDTO bankBookDTO = new BankBookDTO();
+		// bankBookDTO.setBookName("bookName" + i);
+		// bankBookDTO.setBookNum((long) i);
+		// bankBookDTO.setBookRate(Math.random());
+		// bankBookDTO.setBookSale(1);
+		// ar.add(bankBookDTO);
+		// }
+		ArrayList<BankBookDTO> ar = bankBookDAO.getList(); // DB ì—†ëŠ” ì‚¬ëŒ ì£¼ì„
 		model.addAttribute("list", ar);
 
 		return "book/list";
@@ -44,11 +44,11 @@ public class BookController
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Detail Test");
 		// System.out.println("bookNum: " + bookNum);
-		// BankBookDAO bankBookDAO = new BankBookDAO();
-		// bankBookDTO = bankBookDAO.getDetail(bankBookDTO); //DB ÀÖÀ¸¸é ÁÖ¼® ÇØÁ¦
-		bankBookDTO.setBookName("name");
-		bankBookDTO.setBookRate(3.14);
-		bankBookDTO.setBookSale(1);
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		bankBookDTO = bankBookDAO.getDetail(bankBookDTO); // DB ì—†ëŠ” ì‚¬ëŒ ì£¼ì„
+		// bankBookDTO.setBookName("name");
+		// bankBookDTO.setBookRate(3.14);
+		// bankBookDTO.setBookSale(1);
 		mv.setViewName("book/detail");
 		mv.addObject("dto", bankBookDTO);
 
@@ -74,10 +74,10 @@ public class BookController
 		System.out.println(bankBookDTO.getBookName());
 		System.out.println(bankBookDTO.getBookRate());
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		//int rs = bankBookDAO.setBankBook(bankBookDTO);
-		
+		// int rs = bankBookDAO.setBankBook(bankBookDTO);
+
 		mv.setViewName("redirect:./list");
-		//µî·Ï ÈÄ list page·Î ÀÌµ¿
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ list pageï¿½ï¿½ ï¿½Ìµï¿½
 
 		return mv;
 	}

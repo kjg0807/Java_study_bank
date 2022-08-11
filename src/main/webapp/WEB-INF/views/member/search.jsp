@@ -11,7 +11,7 @@ BankMembersDTO bankMembersDTO = (BankMembersDTO) request.getAttribute("search");
 %>
 <body>
 	<h1>Search Page</h1>
-	<form action="./search" method="post">
+	<form action="search" method="post">
 		<div>
 			<input type="text" name="search">
 		</div>

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.naver.start.bankBook.BankBookDTO;
+
 @Controller
 @RequestMapping(value = "/member/*")
 // �씠 �겢�옒�뒪�뒗 Controller �뿭�븷, Container(媛앹껜 �깮�꽦, �냼硫�) �뿉寃� �씠 �겢�옒�뒪�쓽 媛앹껜
@@ -32,7 +34,8 @@ public class MemberController
 	{
 		System.out.println("DB Login Test");
 
-		return "member/login";
+		// return "member/login";
+		return "redirect:..";
 	}
 
 	// join /member/join Get
@@ -64,21 +67,20 @@ public class MemberController
 		int rs = bankMembersDAO.setJoin(bankMembersDTO);
 		System.out.println(rs == 1);
 
-		return "member/join";
+		return "redirect:../member/login";
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public String search() throws Exception
 	{
 		System.out.println("Search Test");
-		
+
 		return "member/search";
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.POST)
-	public String search(String search, Model model) throws Exception
+	public ModelAndView search(String search, Model model) throws Exception
 	{
-		ModelAndView mv = new ModelAndView();
 		System.out.println("Search Submit Test");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
 		// ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
@@ -92,17 +94,31 @@ public class MemberController
 			bankMembersDTO.setPhone("phone" + i);
 			ar.add(bankMembersDTO);
 		}
+		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/list");
-		model.addAttribute("list", ar);
+		mv.addObject("list", ar);
 
-		return "member/search";
+		return mv;
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list() throws Exception
 	{
 		System.out.println("List");
+
+		return "member/list";
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	public String list(String search) throws Exception
+	{
+		System.out.println("List Post");
+		BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
 		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/list");
+		mv.addObject("list", ar);
 		return "member/list";
 	}
 }

@@ -12,8 +12,8 @@
 ArrayList<BankMembersDTO> ar = (ArrayList<BankMembersDTO>) request.getAttribute("list");
 %>
 <body>
-	<h1>Member List Page</h1>
-	<form action="./list" method="post">
+	<table>
+		<h1>Member List Page</h1>
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -37,6 +37,6 @@ ArrayList<BankMembersDTO> ar = (ArrayList<BankMembersDTO>) request.getAttribute(
 			}
 			%>
 		</tbody>
-	</form>
+	</table>
 </body>
 </html>

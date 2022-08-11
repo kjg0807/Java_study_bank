@@ -70,15 +70,64 @@ public class BookController
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ModelAndView add(BankBookDTO bankBookDTO) throws Exception
 	{
+		System.out.println("Add Post Test");
 		ModelAndView mv = new ModelAndView();
+		System.out.println(bankBookDTO.getBookNum());
 		System.out.println(bankBookDTO.getBookName());
 		System.out.println(bankBookDTO.getBookRate());
+		System.out.println(bankBookDTO.getBookSale());
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		// int rs = bankBookDAO.setBankBook(bankBookDTO);
+		int rs = bankBookDAO.setBankBook(bankBookDTO);
+		System.out.println(rs == 1);
 
-		mv.setViewName("redirect:./list");
-		// ��� �� list page�� �̵�
+		// 등록후 list 페이지로 이동
+		mv.setViewName("redirect:../list");
 
 		return mv;
+	}
+
+	@RequestMapping(value = "modify", method = RequestMethod.GET)
+	public void modify(BankBookDTO bankBookDTO, Model model) throws Exception
+	{
+		System.out.println("Modify Get Test");
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		bankBookDTO = bankBookDAO.getDetail(bankBookDTO);
+		System.out.println(bankBookDTO.getBookNum());
+
+		model.addAttribute("dto", bankBookDTO);
+		// ModelAndView mv = new ModelAndView();
+		// mv.setViewName("book/modify");
+		// mv.addObject("dto", bankBookDTO);
+	}
+
+	@RequestMapping(value = "modify", method = RequestMethod.POST)
+	public String modify(BankBookDTO bankBookDTO) throws Exception
+	{
+		System.out.println("Modify Post Test");
+
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		int rs = bankBookDAO.setUpdate(bankBookDTO);
+		System.out.println(rs == 1);
+
+		return "redirect:../book/list";
+		// return "redirect:../detail?bookNum=" + bankBookDTO.getBookNum();
+	}
+
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public void delete(BankBookDTO bankBookDTO) throws Exception
+	{
+		System.out.println("Delete Get Test");
+		ModelAndView mv = new ModelAndView();
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		int rs = bankBookDAO.setDelete(bankBookDTO);
+		System.out.println(rs == 1);
+	}
+
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public String delete() throws Exception
+	{
+		System.out.println("Delete POST Test");
+
+		return "redirect:../book/list";
 	}
 }

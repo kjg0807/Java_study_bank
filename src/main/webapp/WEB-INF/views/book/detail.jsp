@@ -11,7 +11,7 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 --%>
 <body>
 	<h1>BankBook Detail</h1>
-	<table border="1" cellpadding="0" cellspacing="5">
+	<table border="1" cellpadding="5" cellspacing="0">
 		<tr>
 			<th>Num</th>
 			<th>Name</th>
@@ -30,16 +30,13 @@ BankBookDTO bankBookDTO = (BankBookDTO) request.getAttribute("dto");
 	</table>
 	<form action="/detail" method="post">
 		<h3>detail</h3>
-		<a href="./bankBook/list">BankBook List</a>
+		<a href="./list">List Page</a>
 		<br>
-		<a href="/test_index.html>">Index Page</a>
+		<a href="../">Home Page</a>
 		<br>
-		<!-- 상대경로 -->
-		<a href="./member/Login">Login</a>
-		<!-- 절대경로 -->
-		<a href="/member/Join">Join</a>
-		<br>
-		<a href="./list">리스트보기</a>
+		<a href="./modify?bookNum=${dto.bookNum }">Modify Page</a>
+		<a href="./delete?bookNum=${dto.bookNum }">Delete Page</a>
+		<br>		
 	</form>
 </body>
 </html>

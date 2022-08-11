@@ -28,12 +28,17 @@ public class MemberController
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
-	public String login(BankMembersDTO bankMembersDTO)
+	public String login(BankMembersDTO bankMembersDTO, Model model) throws Exception
 	{
 		System.out.println("DB Login Test");
+		BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		bankMembersDTO = bankMembersDAO.getLogin(bankMembersDTO);
+		System.out.println(bankMembersDTO);
+		model.addAttribute("member", bankMembersDTO);
 
 		// return "member/login";
-		return "redirect:../";
+		//return "redirect:../"; //
+		return "home";
 	}
 
 	// join /member/join Get
@@ -77,7 +82,7 @@ public class MemberController
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.POST)
-	public ModelAndView search(String search, Model model) throws Exception
+	public String search(String search, Model model) throws Exception
 	{
 		System.out.println("Search Submit Test");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
@@ -92,11 +97,10 @@ public class MemberController
 			bankMembersDTO.setPhone("phone" + i);
 			ar.add(bankMembersDTO);
 		}
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/list");
-		mv.addObject("list", ar);
 
-		return mv;
+		model.addAttribute("list", ar);
+
+		return "member/list";
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
@@ -113,7 +117,7 @@ public class MemberController
 		System.out.println("List Post");
 		BankMembersDAO bankMembersDAO = new BankMembersDAO();
 		ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/list");
 		mv.addObject("list", ar);

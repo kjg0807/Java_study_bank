@@ -17,4 +17,10 @@ public interface BookDAO
 
 	// bookNum 값으로 조회
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO) throws Exception;
+
+	// insert, update, delete는 1이나 0 반환 -> 정수형
+	public int setUpdate(BankBookDTO bankBookDTO) throws Exception;
+
+	// delete
+	public int setDelete(BankBookDTO bankBookDTO) throws Exception;
 }

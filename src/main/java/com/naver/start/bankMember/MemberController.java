@@ -20,7 +20,7 @@ public class MemberController
 
 	// url: /member/Login �씠 �떎�뻾�맆 �븣 Login 硫붿꽌�뱶 �떎�뻾
 	@RequestMapping(value = "login", method = RequestMethod.GET) // "" �븞�쑝濡� �씠�룞
-	public String Login()
+	public String login()
 	{
 		System.out.println("Login Test");
 
@@ -28,12 +28,12 @@ public class MemberController
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
-	public String Login(BankMembersDTO bankMembersDTO)
+	public String login(BankMembersDTO bankMembersDTO)
 	{
 		System.out.println("DB Login Test");
 
 		// return "member/login";
-		return "redirect:..";
+		return "redirect:../";
 	}
 
 	// join /member/join Get

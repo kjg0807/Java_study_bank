@@ -33,7 +33,7 @@
 		<a href="../">Home Page</a>
 		<br>
 		<a href="./modify.naver?bookNum=${dto.bookNum }">Modify Page</a>
-		<a href="./delete.naver?bookNum=${dto.bookNum }">Delete Page</a>
+		<a href="./delete.naver?bookNum=${dto.bookNum}">Delete Page</a>
 		<br>
 		<!-- 로그인 되있는 사람만 보이게 하기 -->
 		<c:if test="${member != null}">

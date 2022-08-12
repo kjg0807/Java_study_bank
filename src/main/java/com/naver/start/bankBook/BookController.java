@@ -117,17 +117,18 @@ public class BookController
 	public void delete(BankBookDTO bankBookDTO) throws Exception
 	{
 		System.out.println("Delete Get Test");
-		ModelAndView mv = new ModelAndView();
 		BankBookDAO bankBookDAO = new BankBookDAO();
 		int rs = bankBookDAO.setDelete(bankBookDTO);
 		System.out.println(rs == 1);
 	}
 
 	@RequestMapping(value = "delete.naver", method = RequestMethod.POST)
-	public String delete() throws Exception
+	public ModelAndView delete() throws Exception
 	{
 		System.out.println("Delete POST Test");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:../book/list.naver");
 
-		return "redirect:../book/list.naver";
+		return mv;
 	}
 }

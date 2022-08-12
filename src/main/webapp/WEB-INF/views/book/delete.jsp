@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Delete page</h1>
-	<form action="./delete" method="post">
+	<form action="./delete.naver" method="post">
 		<table>
 			<tr>
 				<td>삭제?</td>

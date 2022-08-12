@@ -16,7 +16,7 @@ public class BankMembersDAO implements MembersDAO
 		// SELECT USERNAME, NAME FROM BANKMEMBERS WHERE USERNAME = ?, PASSWORD = ?"
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, bankMembersDTO.getUserid());
-		st.setString(2, bankMembersDTO.getName());
+		st.setString(2, bankMembersDTO.getPwd());
 		ResultSet rs = st.executeQuery();
 
 		if (rs.next())

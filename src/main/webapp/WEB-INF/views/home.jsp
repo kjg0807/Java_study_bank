@@ -5,26 +5,29 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Hello world!</h1>	
+	<h1>Hello world!</h1>
 
 	<P>The time on the server is ${serverTime}.</P>
 </body>
 </html>
-Member:
+
 <c:if test="${member == null}">
 	<!-- empty member -->
-	<a href="./member/login">Login</a>
-	<a href="./member/join">Join</a>
+	Member:
+	<a href="./member/login.naver">Login</a>
+	<a href="./member/join.naver">Join</a>
 </c:if>
 <c:if test="${member != null }">
 	<!-- not empty member -->
-	<a href="#">Logout</a>
+	Member:
+	<h3>${member.name}님 안녕하세요!</h3>
+	<a href="./member/logout.naver">Logout</a>
 	<a href="#">My Page</a>
 </c:if>
 
-<a href="./member/search">Search</a>
+<a href="./member/search.naver">Search</a>
 <br>
 <br>
 Book:
-<a href="./book/list">List</a>
-<a href="./book/add">Add</a>
+<a href="./book/list.naver">List</a>
+<a href="./book/add.naver">Add</a>

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>BankBook Modify Page</h1>
-	<form action="./modify" method="post">
+	<form action="./modify.naver" method="post">
 		<table>
 			<div>
 				<tr>
@@ -47,7 +47,7 @@
 			</div>
 		</table>
 		<br>
-		<a href="./list">List Page</a>
+		<a href="./list.naver">List Page</a>
 		<br>
 		<a href="../">Home Page</a>
 	</form>

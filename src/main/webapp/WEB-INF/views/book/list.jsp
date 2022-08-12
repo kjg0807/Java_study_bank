@@ -25,16 +25,18 @@
 				<tr>
 					<td>${pageScope.dto.bookNum}</td>
 					<td>
-						<a href="./detail?bookNum=${pageScope.dto.bookNum}">${pageScope.dto.bookName}</a>
+						<a href="./detail.naver?bookNum=${pageScope.dto.bookNum}">${pageScope.dto.bookName}</a>
 					</td>
 					<td>${pageScope.dto.bookRate}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<form action="./list" method="post">
+	<form action="./list.naver" method="post">
 		<h3>list</h3>
 		<a href="../">Home Page</a>
+		<br>
+		<a href="../member/login.naver">Login</a>
 	</form>
 </body>
 </html>

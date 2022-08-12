@@ -15,7 +15,7 @@ public class BookController
 	// BankBookDTO bankBookDTO = new BankBookDTO();
 	// BankBookDAO bankBookDAO = new BankBookDAO();
 
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
 	public String list(Model model) throws Exception
 	{
 		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2���� ��ģ ��
@@ -38,7 +38,7 @@ public class BookController
 		return "book/list";
 	}
 
-	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	@RequestMapping(value = "detail.naver", method = RequestMethod.GET)
 	public ModelAndView detail(BankBookDTO bankBookDTO) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
@@ -57,7 +57,7 @@ public class BookController
 	}
 
 	// /book/add GET /WEB-INF/views/book/add.jsp
-	@RequestMapping(value = "add", method = RequestMethod.GET)
+	@RequestMapping(value = "add.naver", method = RequestMethod.GET)
 	public void add() throws Exception
 	{
 		System.out.println("Add Test");
@@ -67,7 +67,7 @@ public class BookController
 
 	// /book/add POST
 	// name, rate
-	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@RequestMapping(value = "add.naver", method = RequestMethod.POST)
 	public ModelAndView add(BankBookDTO bankBookDTO) throws Exception
 	{
 		System.out.println("Add Post Test");
@@ -81,12 +81,12 @@ public class BookController
 		System.out.println(rs == 1);
 
 		// 등록후 list 페이지로 이동
-		mv.setViewName("redirect:../list");
+		mv.setViewName("redirect:./list.naver");
 
 		return mv;
 	}
 
-	@RequestMapping(value = "modify", method = RequestMethod.GET)
+	@RequestMapping(value = "modify.naver", method = RequestMethod.GET)
 	public void modify(BankBookDTO bankBookDTO, Model model) throws Exception
 	{
 		System.out.println("Modify Get Test");
@@ -100,7 +100,7 @@ public class BookController
 		// mv.addObject("dto", bankBookDTO);
 	}
 
-	@RequestMapping(value = "modify", method = RequestMethod.POST)
+	@RequestMapping(value = "modify.naver", method = RequestMethod.POST)
 	public String modify(BankBookDTO bankBookDTO) throws Exception
 	{
 		System.out.println("Modify Post Test");
@@ -109,11 +109,11 @@ public class BookController
 		int rs = bankBookDAO.setUpdate(bankBookDTO);
 		System.out.println(rs == 1);
 
-		return "redirect:../book/list";
+		return "redirect:../book/list.naver";
 		// return "redirect:../detail?bookNum=" + bankBookDTO.getBookNum();
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	@RequestMapping(value = "delete.naver", method = RequestMethod.GET)
 	public void delete(BankBookDTO bankBookDTO) throws Exception
 	{
 		System.out.println("Delete Get Test");
@@ -123,11 +123,11 @@ public class BookController
 		System.out.println(rs == 1);
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = "delete.naver", method = RequestMethod.POST)
 	public String delete() throws Exception
 	{
 		System.out.println("Delete POST Test");
 
-		return "redirect:../book/list";
+		return "redirect:../book/list.naver";
 	}
 }

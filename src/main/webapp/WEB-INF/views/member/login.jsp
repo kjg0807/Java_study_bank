@@ -9,7 +9,7 @@
 <body>
 	<h1>Login Page</h1>
 	<!-- 로그인 - 아이디, 패스워드, 로그인 버튼 -->
-	<form action="./login" method="post">
+	<form action="./login.naver" method="post">
 		<!-- action-절대경로: /test/member/Login -->
 		아이디:
 		<input type="text" name="userid" placeholder="ID 입력" onfocus="this.placeholder=''" onblur="this.placeholder='ID 입력'">

@@ -9,6 +9,29 @@ import com.naver.start.util.DBConnector;
 
 public class BankMembersDAO implements MembersDAO
 {
+	public BankMembersDTO getLogin(BankMembersDTO bankMembersDTO) throws Exception
+	{
+		Connection con = DBConnector.getConnection();
+		String sql = "select userid, name from bankmembers where userid = ? and pwd = ?";
+		// SELECT USERNAME, NAME FROM BANKMEMBERS WHERE USERNAME = ?, PASSWORD = ?"
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, bankMembersDTO.getUserid());
+		st.setString(2, bankMembersDTO.getPwd());
+		ResultSet rs = st.executeQuery();
+
+		if (rs.next())
+		{
+			bankMembersDTO = new BankMembersDTO();
+			bankMembersDTO.setUserid(rs.getString("userid"));
+			bankMembersDTO.setName(rs.getString("name"));
+		}
+		else
+		{
+			bankMembersDTO = null;
+		}
+		return bankMembersDTO;
+	}
+
 	@Override
 	public int setJoin(BankMembersDTO bankMembersDTO) throws Exception
 	{
@@ -56,8 +79,8 @@ public class BankMembersDAO implements MembersDAO
 			bankMembersDTO.setName(rs.getString("name"));
 			bankMembersDTO.setEmail(rs.getString("email"));
 			bankMembersDTO.setPhone(rs.getString("phone"));
-			ar.add(bankMembersDTO);			
-			
+			ar.add(bankMembersDTO);
+
 			System.out.println("USERID: " + bankMembersDTO.getUserid() + ", PWD: " + bankMembersDTO.getPwd() + ", NAME: " + bankMembersDTO.getName()
 					+ ", Email: " + bankMembersDTO.getEmail() + ", PHONE: " + bankMembersDTO.getPhone());
 			// System.out.println("Name: " + bankMembersDTO.getName());

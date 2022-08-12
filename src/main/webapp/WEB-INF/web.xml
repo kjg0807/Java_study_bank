@@ -12,6 +12,10 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
+	<fliter-mapping>
+		<filter-name>encode</filter-name>
+		<url-pattern>/*</url-pattern>
+	</fliter-mapping>
 
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->

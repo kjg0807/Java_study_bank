@@ -18,7 +18,7 @@ BankMembersDTO bankMembersDTO = (BankMembersDTO) request.getAttribute("join");
 <body>
 	<h1>Join Page</h1>
 	<!-- 회원가입(DB에 넣는 것) - 아이디, 비밀번호, 이름, 이메일, 전화번호 -->
-	<form action="./join" method="post">
+	<form action="./join.naver" method="post">
 		<table align="center">
 			<caption>
 				<b>회원가입 창</b>

@@ -1,60 +1,42 @@
 <%@page import="com.naver.start.bankBook.BankBookDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- HTML반복문 사용하기 위한 선언 -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<%
-//스크립 틀릿 <% java code 작성 % >
-//html <%= % >
-ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>) request.getAttribute("list");
-%>
 <body>
 	<h1>BankBook List</h1>
 	<!-- /bankbook/list -->
 	<table border="1" cellpadding="5" cellspacing="0">
 		<thead>
 			<tr>
+				<th>Num</th>
 				<th>Name</th>
 				<th>Rate</th>
 			</tr>
-			<tr>
-				<td>Name1</td>
-				<td>0.012</td>
-			</tr>
-			<tr>
-				<td>Name2</td>
-				<td>3.14</td>
-			</tr>
 		</thead>
 		<tbody>
-			<%
-			for (BankBookDTO bankBookDTO : ar)
-			{
-			%>
-			<tr>
-				<td>
-					<a href="./detail?bookNum=<%=bankBookDTO.getBookNum()%>">
-						<%=bankBookDTO.getBookName()%>
-					</a>
-				</td>
-				<!-- name -->
-				<td><%=bankBookDTO.getBookRate()%></td>
-				<!-- rate -->
-			</tr>
-			<%
-			}
-			%>
+			<c:forEach items="${requestScope.list}" var="dto">
+				<tr>
+					<td>${pageScope.dto.bookNum}</td>
+					<td>
+						<a href="./detail.naver?bookNum=${pageScope.dto.bookNum}">${pageScope.dto.bookName}</a>
+					</td>
+					<td>${pageScope.dto.bookRate}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
-	<form action="/list" method="post">
+	<form action="./list.naver" method="post">
 		<h3>list</h3>
-		<a href="/test_index.html>">Index Page</a>
+		<a href="../">Home Page</a>
 		<br>
-		<a href="./detail">BankBook Detail</a>		
+		<a href="../member/login.naver">Login</a>
 	</form>
 </body>
 </html>

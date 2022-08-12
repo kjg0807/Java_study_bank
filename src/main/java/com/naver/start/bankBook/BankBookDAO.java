@@ -19,7 +19,7 @@ public class BankBookDAO implements BookDAO
 		// 1. DB연결 - 로그인
 		Connection DBConn = DBConnector.getConnection();
 		// 2. regions의 데이터 가져오기
-		String sql = "insert into bankbook values(?,?,?,?)";
+		String sql = "insert into bankbook values(?, ?, ?, ?)";
 		// 3. Query문 미리 전송
 		PreparedStatement st = DBConn.prepareStatement(sql);
 		// 4. ? 의 값 세팅
@@ -63,8 +63,8 @@ public class BankBookDAO implements BookDAO
 			bankBookDTO.setBookSale(rs.getInt("booksale"));
 			ar.add(bankBookDTO);
 
-			System.out.println("BookNum: " + bankBookDTO.getBookNum() + ", BookName: " + bankBookDTO.getBookName() + ", BookRate: "
-					+ bankBookDTO.getBookRate() + ", BookSale: " + bankBookDTO.getBookSale());
+			// System.out.println("BookNum: " + bankBookDTO.getBookNum() + ", BookName: " + bankBookDTO.getBookName() + ", BookRate: "
+			// + bankBookDTO.getBookRate() + ", BookSale: " + bankBookDTO.getBookSale());
 		}
 
 		DBConnector.disConnect(rs, st, DBConn);
@@ -83,7 +83,7 @@ public class BankBookDAO implements BookDAO
 		// 3. Query문 미리 전송
 		PreparedStatement st = DBConn.prepareStatement(sql);
 		// 4. ? 의 값 세팅
-		st.setLong(1, bankBookDTO.getBookNum());		
+		st.setLong(1, bankBookDTO.getBookNum());
 		// 5. 최종 전송 후 결과를 처리
 		int rs = st.executeUpdate();
 
@@ -120,12 +120,54 @@ public class BankBookDAO implements BookDAO
 			bankBookDTO.setBookSale(rs.getInt("booksale"));
 		}
 
-		System.out.println("BookNum: " + bankBookDTO.getBookNum() + ", BookName: " + bankBookDTO.getBookName() + ", BookRate: "
-				+ bankBookDTO.getBookRate() + ", BookSale: " + bankBookDTO.getBookSale());
+		// System.out.println("BookNum: " + bankBookDTO.getBookNum() + ", BookName: " + bankBookDTO.getBookName() + ", BookRate: "
+		// + bankBookDTO.getBookRate() + ", BookSale: " + bankBookDTO.getBookSale());
 
 		DBConnector.disConnect(rs, st, DBConn);
 
 		return bankBookDTO;
+	}
+
+	@Override
+	public int setUpdate(BankBookDTO bankBookDTO) throws Exception
+	{
+		// 1. DB연결 - 로그인
+		Connection DBConn = DBConnector.getConnection();
+		// 2. regions의 데이터 가져오기
+		String sql = "update bankbook set bookname = ?, bookrate = ? where booknum = ?";
+		// 3. Query문 미리 전송
+		PreparedStatement st = DBConn.prepareStatement(sql);
+		// 4. ? 의 값 세팅
+		st.setString(1, bankBookDTO.getBookName());
+		st.setDouble(2, bankBookDTO.getBookRate());
+		st.setLong(3, bankBookDTO.getBookNum());
+		// 5. 최종 전송 후 결과를 처리
+		int rs = st.executeUpdate();
+
+		// 6. 연결 해제
+		DBConnector.disConnect(st, DBConn);
+
+		return rs;
+	}
+
+	@Override
+	public int setDelete(BankBookDTO bankBookDTO) throws Exception
+	{
+		// 1. DB연결 - 로그인sss
+		Connection DBConn = DBConnector.getConnection();
+		// 2. regions의 데이터 가져오기
+		String sql = "delete bankbook where booknum = ?";
+		// 3. Query문 미리 전송
+		PreparedStatement st = DBConn.prepareStatement(sql);
+		// 4. ? 의 값 세팅
+		st.setLong(1, bankBookDTO.getBookNum());
+		// 5. 최종 전송 후 결과를 처리
+		int rs = st.executeUpdate();
+
+		// 6. 연결 해제
+		DBConnector.disConnect(st, DBConn);
+
+		return rs;
 	}
 
 }

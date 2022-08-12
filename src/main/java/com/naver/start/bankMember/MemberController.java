@@ -2,13 +2,14 @@ package com.naver.start.bankMember;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.naver.start.bankBook.BankBookDTO;
 
 @Controller
 @RequestMapping(value = "/member/*")
@@ -20,26 +21,42 @@ public class MemberController
 	// BankMembersDAO bankMembersDAO = new BankMembersDAO();
 	// annotation -> @: �꽕紐� + �떎�뻾
 
+	@RequestMapping(value = "logout.naver", method = RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception
+	{
+		// 1. session을 소멸시키기
+		session.invalidate();
+
+		return "redirect:../";
+	}
+
 	// url: /member/Login �씠 �떎�뻾�맆 �븣 Login 硫붿꽌�뱶 �떎�뻾
-	@RequestMapping(value = "login", method = RequestMethod.GET) // "" �븞�쑝濡� �씠�룞
-	public String Login()
+	@RequestMapping(value = "login.naver", method = RequestMethod.GET) // "" �븞�쑝濡� �씠�룞
+	public String login()
 	{
 		System.out.println("Login Test");
 
 		return "member/login";
 	}
 
-	@RequestMapping(value = "login", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
-	public String Login(BankMembersDTO bankMembersDTO)
+	@RequestMapping(value = "login.naver", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
+	public String login(HttpSession session, HttpServletRequest request, BankMembersDTO bankMembersDTO, Model model) throws Exception
 	{
 		System.out.println("DB Login Test");
+		BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		bankMembersDTO = bankMembersDAO.getLogin(bankMembersDTO);
+		System.out.println(bankMembersDTO);
+		// model.addAttribute("member", bankMembersDTO);
+		// HttpSession session = request.getSession();
+		session.setAttribute("member", bankMembersDTO); // DB에 값이 있냐 없냐 판단
 
 		// return "member/login";
 		return "redirect:../";
+		// return "home";
 	}
 
 	// join /member/join Get
-	@RequestMapping(value = "join", method = RequestMethod.GET)
+	@RequestMapping(value = "join.naver", method = RequestMethod.GET)
 	// member/join�뿉�꽌 get�쑝濡� �뱾�뼱�삤�뒗 method留� �궗�슜
 	public String join()
 	{
@@ -49,7 +66,7 @@ public class MemberController
 	}
 
 	// Post
-	@RequestMapping(value = "join", method = RequestMethod.POST)
+	@RequestMapping(value = "join.naver", method = RequestMethod.POST)
 	// member/join�뿉�꽌 post�쑝濡� �뱾�뼱�삤�뒗 method留� �궗�슜
 	public String join(BankMembersDTO bankMembersDTO) throws Exception
 	{
@@ -64,13 +81,13 @@ public class MemberController
 		// bankMembersDTO.setName(name);
 		// bankMembersDTO.setEmail(email);
 		// bankMembersDTO.setPhone(phone);
-		int rs = bankMembersDAO.setJoin(bankMembersDTO);
-		System.out.println(rs == 1);
+		// int rs = bankMembersDAO.setJoin(bankMembersDTO);
+		// System.out.println(rs == 1);
 
-		return "redirect:../member/login";
+		return "redirect:./login.naver";
 	}
 
-	@RequestMapping(value = "search", method = RequestMethod.GET)
+	@RequestMapping(value = "search.naver", method = RequestMethod.GET)
 	public String search() throws Exception
 	{
 		System.out.println("Search Test");
@@ -78,8 +95,8 @@ public class MemberController
 		return "member/search";
 	}
 
-	@RequestMapping(value = "search", method = RequestMethod.POST)
-	public ModelAndView search(String search, Model model) throws Exception
+	@RequestMapping(value = "search.naver", method = RequestMethod.POST)
+	public String search(String search, Model model) throws Exception
 	{
 		System.out.println("Search Submit Test");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
@@ -94,14 +111,13 @@ public class MemberController
 			bankMembersDTO.setPhone("phone" + i);
 			ar.add(bankMembersDTO);
 		}
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/list");
-		mv.addObject("list", ar);
 
-		return mv;
+		model.addAttribute("list", ar);
+
+		return "member/list";
 	}
 
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
 	public String list() throws Exception
 	{
 		System.out.println("List");
@@ -109,7 +125,7 @@ public class MemberController
 		return "member/list";
 	}
 
-	@RequestMapping(value = "list", method = RequestMethod.POST)
+	@RequestMapping(value = "list.naver", method = RequestMethod.POST)
 	public String list(String search) throws Exception
 	{
 		System.out.println("List Post");

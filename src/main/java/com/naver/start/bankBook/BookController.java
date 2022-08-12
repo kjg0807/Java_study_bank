@@ -15,40 +15,40 @@ public class BookController
 	// BankBookDTO bankBookDTO = new BankBookDTO();
 	// BankBookDAO bankBookDAO = new BankBookDAO();
 
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
 	public String list(Model model) throws Exception
 	{
-		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2∞°¡ˆ «’ƒ£ ∞Õ
+		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2ÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩƒ£ ÔøΩÔøΩ
 		System.out.println("List Test");
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		// DB æ¯¿ª∂ß
-		ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
-		for (int i = 0; i < 10; i++)
-		{
-			BankBookDTO bankBookDTO = new BankBookDTO();
-			bankBookDTO.setBookName("bookName" + i);
-			bankBookDTO.setBookNum((long) i);
-			bankBookDTO.setBookRate(Math.random());
-			bankBookDTO.setBookSale(1);
-			ar.add(bankBookDTO);
-		}
-		// ArrayList<BankBookDTO> ar = bankBookDAO.getList(); //DB¿÷¿∏∏È ¡÷ºÆ«ÿ¡¶
+		// DB ÏóÜÎäî ÏÇ¨Îûå Ï£ºÏÑùÌï¥Ï†ú
+		// ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
+		// for (int i = 0; i < 10; i++)
+		// {
+		// BankBookDTO bankBookDTO = new BankBookDTO();
+		// bankBookDTO.setBookName("bookName" + i);
+		// bankBookDTO.setBookNum((long) i);
+		// bankBookDTO.setBookRate(Math.random());
+		// bankBookDTO.setBookSale(1);
+		// ar.add(bankBookDTO);
+		// }
+		ArrayList<BankBookDTO> ar = bankBookDAO.getList(); // DB ÏóÜÎäî ÏÇ¨Îûå Ï£ºÏÑù
 		model.addAttribute("list", ar);
 
 		return "book/list";
 	}
 
-	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	@RequestMapping(value = "detail.naver", method = RequestMethod.GET)
 	public ModelAndView detail(BankBookDTO bankBookDTO) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Detail Test");
 		// System.out.println("bookNum: " + bookNum);
-		// BankBookDAO bankBookDAO = new BankBookDAO();
-		// bankBookDTO = bankBookDAO.getDetail(bankBookDTO); //DB ¿÷¿∏∏È ¡÷ºÆ «ÿ¡¶
-		bankBookDTO.setBookName("name");
-		bankBookDTO.setBookRate(3.14);
-		bankBookDTO.setBookSale(1);
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		bankBookDTO = bankBookDAO.getDetail(bankBookDTO); // DB ÏóÜÎäî ÏÇ¨Îûå Ï£ºÏÑù
+		// bankBookDTO.setBookName("name");
+		// bankBookDTO.setBookRate(3.14);
+		// bankBookDTO.setBookSale(1);
 		mv.setViewName("book/detail");
 		mv.addObject("dto", bankBookDTO);
 
@@ -57,7 +57,7 @@ public class BookController
 	}
 
 	// /book/add GET /WEB-INF/views/book/add.jsp
-	@RequestMapping(value = "add", method = RequestMethod.GET)
+	@RequestMapping(value = "add.naver", method = RequestMethod.GET)
 	public void add() throws Exception
 	{
 		System.out.println("Add Test");
@@ -67,18 +67,67 @@ public class BookController
 
 	// /book/add POST
 	// name, rate
-	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@RequestMapping(value = "add.naver", method = RequestMethod.POST)
 	public ModelAndView add(BankBookDTO bankBookDTO) throws Exception
 	{
+		System.out.println("Add Post Test");
 		ModelAndView mv = new ModelAndView();
+		System.out.println(bankBookDTO.getBookNum());
 		System.out.println(bankBookDTO.getBookName());
 		System.out.println(bankBookDTO.getBookRate());
+		System.out.println(bankBookDTO.getBookSale());
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		//int rs = bankBookDAO.setBankBook(bankBookDTO);
-		
-		mv.setViewName("redirect:./list");
-		//µÓ∑œ »ƒ list page∑Œ ¿Ãµø
+		int rs = bankBookDAO.setBankBook(bankBookDTO);
+		System.out.println(rs == 1);
+
+		// Îì±Î°ùÌõÑ list ÌéòÏù¥ÏßÄÎ°ú Ïù¥Îèô
+		mv.setViewName("redirect:./list.naver");
 
 		return mv;
+	}
+
+	@RequestMapping(value = "modify.naver", method = RequestMethod.GET)
+	public void modify(BankBookDTO bankBookDTO, Model model) throws Exception
+	{
+		System.out.println("Modify Get Test");
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		bankBookDTO = bankBookDAO.getDetail(bankBookDTO);
+		System.out.println(bankBookDTO.getBookNum());
+
+		model.addAttribute("dto", bankBookDTO);
+		// ModelAndView mv = new ModelAndView();
+		// mv.setViewName("book/modify");
+		// mv.addObject("dto", bankBookDTO);
+	}
+
+	@RequestMapping(value = "modify.naver", method = RequestMethod.POST)
+	public String modify(BankBookDTO bankBookDTO) throws Exception
+	{
+		System.out.println("Modify Post Test");
+
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		int rs = bankBookDAO.setUpdate(bankBookDTO);
+		System.out.println(rs == 1);
+
+		return "redirect:../book/list.naver";
+		// return "redirect:../detail?bookNum=" + bankBookDTO.getBookNum();
+	}
+
+	@RequestMapping(value = "delete.naver", method = RequestMethod.GET)
+	public void delete(BankBookDTO bankBookDTO) throws Exception
+	{
+		System.out.println("Delete Get Test");
+		ModelAndView mv = new ModelAndView();
+		BankBookDAO bankBookDAO = new BankBookDAO();
+		int rs = bankBookDAO.setDelete(bankBookDTO);
+		System.out.println(rs == 1);
+	}
+
+	@RequestMapping(value = "delete.naver", method = RequestMethod.POST)
+	public String delete() throws Exception
+	{
+		System.out.println("Delete POST Test");
+
+		return "redirect:../book/list.naver";
 	}
 }

@@ -37,7 +37,7 @@
 		<br>
 		<!-- 로그인 되있는 사람만 보이게 하기 -->
 		<c:if test="${member != null}">
-			<a href="../account/add.naver?bookNum=${dto.bookNum }">가입하기</a>
+			<a href="../account/add.naver?bookNum=${dto.bookNum }">Account Add</a>
 		</c:if>
 	</form>
 </body>

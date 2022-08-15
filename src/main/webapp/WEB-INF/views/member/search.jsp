@@ -13,6 +13,7 @@ BankMembersDTO bankMembersDTO = (BankMembersDTO) request.getAttribute("search");
 	<h1>Search Page</h1>
 	<form action="./search.naver" method="post">
 		<div>
+		Name 
 			<input type="text" name="search">
 		</div>
 		<div>

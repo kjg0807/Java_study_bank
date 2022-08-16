@@ -61,6 +61,8 @@ public class MemberController
 		// bankMembersDTO.setName(name);
 		// bankMembersDTO.setEmail(email);
 		// bankMembersDTO.setPhone(phone);
+		// int rs = bankMembersDAO.setJoin(bankMembersDTO);
+		// System.out.println(rs == 1);
 		int rs = bankMembersDAO.setJoin(bankMembersDTO);
 		System.out.println(rs == 1);
 
@@ -80,19 +82,19 @@ public class MemberController
 	{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Search Submit Test");
-		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		// ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
-		ArrayList<BankMembersDTO> ar = new ArrayList();
-		for (int i = 0; i < 10; i++)
-		{
-			BankMembersDTO bankMembersDTO = new BankMembersDTO();
-			bankMembersDTO.setUserid("id" + i);
-			bankMembersDTO.setName("name" + i);
-			bankMembersDTO.setEmail("email" + i);
-			bankMembersDTO.setPhone("phone" + i);
-			ar.add(bankMembersDTO);
-		}
-		mv.setViewName("member/list");
+		BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
+		// ArrayList<BankMembersDTO> ar = new ArrayList();
+		// for (int i = 0; i < 10; i++)
+		// {
+		// BankMembersDTO bankMembersDTO = new BankMembersDTO();
+		// bankMembersDTO.setUserid("id" + i);
+		// bankMembersDTO.setName("name" + i);
+		// bankMembersDTO.setEmail("email" + i);
+		// bankMembersDTO.setPhone("phone" + i);
+		// ar.add(bankMembersDTO);
+		// }
+
 		model.addAttribute("list", ar);
 
 		return "member/search";

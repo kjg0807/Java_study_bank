@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 // �깮�꽦 �쐞�엫
 public class MemberController
 {
-	// BankMembersDTO bankMembersDTO = new BankMembersDTO();
-	// BankMembersDAO bankMembersDAO = new BankMembersDAO();
-	// annotation -> @: �꽕紐� + �떎�뻾
+	@Autowired
+	@Qualifier("myservice")
+	private BankMemberSerive bankMemberSerive;
 
 	@RequestMapping(value = "logout.naver", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception
@@ -43,21 +45,16 @@ public class MemberController
 	public String login(HttpSession session, HttpServletRequest request, BankMembersDTO bankMembersDTO, Model model) throws Exception
 	{
 		System.out.println("DB Login Test");
-		BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		bankMembersDTO = bankMembersDAO.getLogin(bankMembersDTO);
+		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		bankMembersDTO = bankMemberSerive.getLogin(bankMembersDTO);
 		System.out.println(bankMembersDTO);
-		// model.addAttribute("member", bankMembersDTO);
-		// HttpSession session = request.getSession();
 		session.setAttribute("member", bankMembersDTO); // DB에 값이 있냐 없냐 판단
 
-		// return "member/login";
 		return "redirect:../";
-		// return "home";
 	}
 
 	// join /member/join Get
 	@RequestMapping(value = "join.naver", method = RequestMethod.GET)
-	// member/join�뿉�꽌 get�쑝濡� �뱾�뼱�삤�뒗 method留� �궗�슜
 	public String join()
 	{
 		System.out.println("Join get Test");
@@ -67,21 +64,11 @@ public class MemberController
 
 	// Post
 	@RequestMapping(value = "join.naver", method = RequestMethod.POST)
-	// member/join�뿉�꽌 post�쑝濡� �뱾�뼱�삤�뒗 method留� �궗�슜
 	public String join(BankMembersDTO bankMembersDTO) throws Exception
 	{
-		// (HttpServletRequest request, String pwd, String name, String email, String
-		// phone)
-		// -> DTO濡� 諛붽씀硫� 諛묒뿉 �꽑�뼵�쓣 �븞�빐�룄 �옄�룞諛붽퓭以�
 		System.out.println("Join post Test");
-		BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		// String a = request.getParameter("id");
-		// bankMembersDTO.setUserid(a);
-		// bankMembersDTO.setPwd(pwd);
-		// bankMembersDTO.setName(name);
-		// bankMembersDTO.setEmail(email);
-		// bankMembersDTO.setPhone(phone);
-		int rs = bankMembersDAO.setJoin(bankMembersDTO);
+		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		int rs = bankMemberSerive.setJoin(bankMembersDTO);
 		System.out.println(rs == 1);
 
 		return "redirect:./login.naver";
@@ -99,18 +86,8 @@ public class MemberController
 	public String search(String search, Model model) throws Exception
 	{
 		System.out.println("Search Submit Test");
-		BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
-		// ArrayList<BankMembersDTO> ar = new ArrayList();
-		// for (int i = 0; i < 10; i++)
-		// {
-		// BankMembersDTO bankMembersDTO = new BankMembersDTO();
-		// bankMembersDTO.setUserid("id" + i);
-		// bankMembersDTO.setName("name" + i);
-		// bankMembersDTO.setEmail("email" + i);
-		// bankMembersDTO.setPhone("phone" + i);
-		// ar.add(bankMembersDTO);
-		// }
+		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		ArrayList<BankMembersDTO> ar = bankMemberSerive.getSearchByID(search);
 
 		model.addAttribute("list", ar);
 
@@ -129,8 +106,8 @@ public class MemberController
 	public String list(String search) throws Exception
 	{
 		System.out.println("List Post");
-		BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		ArrayList<BankMembersDTO> ar = bankMembersDAO.getSearchByID(search);
+		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
+		ArrayList<BankMembersDTO> ar = bankMemberSerive.getSearchByID(search);
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/list");

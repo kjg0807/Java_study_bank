@@ -35,7 +35,7 @@
 		<a href="./book/add.naver">Add</a>
 		<br> <br>
 		<a href="https:youtube.com">
-			<img src="../resources/image/Youtube.PNG" width="250px" height="150px">
+			<img src="../resources/image/you.png" width="250px" height="200px">
 		</a>
 	</form>
 </body>

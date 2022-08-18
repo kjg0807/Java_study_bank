@@ -66,7 +66,7 @@ public class BankMembersDAO implements MembersDAO
 	}
 
 	@Override
-	public ArrayList<BankMembersDTO> getSearchByID(String search) throws Exception
+	public List<BankMembersDTO> getSearchByID(String search) throws Exception
 	{// 검색하려면 () 안에 -> String search
 		// 1. DB연결 - 로그인
 //		Connection DBConn = DBConnector.getConnection();
@@ -98,7 +98,7 @@ public class BankMembersDAO implements MembersDAO
 //		DBConnector.disConnect(rs, st, DBConn);
 //
 //		return ar;
-		return sqlSession.selectOne(NAMESPACE + "getSearchByID" + search);
+		return sqlSession.selectList(NAMESPACE + "getSearchByID" + search);
 		//(NAMESPACE + "getSearchByID" + search)
 	}
 }

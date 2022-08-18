@@ -1,6 +1,7 @@
 package com.naver.start.bankMember;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -87,7 +88,7 @@ public class MemberController
 	{
 		System.out.println("Search Submit Test");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		ArrayList<BankMembersDTO> ar = bankMemberSerive.getSearchByID(search);
+		List<BankMembersDTO> ar = bankMemberSerive.getSearchByID(search);
 
 		model.addAttribute("list", ar);
 
@@ -107,7 +108,7 @@ public class MemberController
 	{
 		System.out.println("List Post");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		ArrayList<BankMembersDTO> ar = bankMemberSerive.getSearchByID(search);
+		List<BankMembersDTO> ar = bankMemberSerive.getSearchByID(search);
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/list");

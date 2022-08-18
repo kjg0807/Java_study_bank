@@ -1,6 +1,7 @@
 package com.naver.start.bankMember;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +26,7 @@ public class BankMemberSerive
 		return bankMembersDAO.setJoin(bankMembersDTO);
 	}
 
-	public ArrayList<BankMembersDTO> getSearchByID(String search) throws Exception
+	public List<BankMembersDTO> getSearchByID(String search) throws Exception
 	{
 		return bankMembersDAO.getSearchByID(search);
 	}

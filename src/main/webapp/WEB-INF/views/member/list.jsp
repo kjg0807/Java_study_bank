@@ -12,52 +12,27 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<%
-//ArrayList<BankMembersDTO> ar = (ArrayList<BankMembersDTO>) request.getAttribute("list");
-%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <body>
-	<table>
-		<h1>Member List Page</h1>
-		<thead>
+	<table class="table table-hover">
+		<c:import url="../template/header.jsp"></c:import>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+		</tr>
+
+		<c:forEach items="${requestScope.list }" var="dto">
 			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Phone</th>
+				<td>${pageScope.dto.userid }</td>
+				<td>${pageScope.dto.name }</td>
+				<td>${pageScope.dto.email }</td>
+				<td>${pageScope.dto.phone }</td>
 			</tr>
-		</thead>
-		<tbody>
-			<c:forEach begin="0" end="10" var="i" step="2">
-				<!-- var: 변수명 step: 2개씩 건너뜀 -->
-				<!-- for(int i = 0; i<10; i++) -->
-				<!-- <h3>${pageScope.i }</h3>  -->
-			</c:forEach>
-			<!-- Scope 생략가능 -->
-			<c:forEach items="${requestScope.list }" var="dto">
-				<!-- items="${list }" - arrayList 꺼냄 -->
-				<!-- memberController의 list에서 하나 꺼냄 -->
-				<tr>
-					<td>${pageScope.dto.userid }</td>
-					<td>${pageScope.dto.name }</td>
-					<td>${pageScope.dto.email }</td>
-					<td>${pageScope.dto.phone }</td>
-					<!-- bankMembersDTO를 꺼냄 -->
-				</tr>
-			</c:forEach>
-			<%-- <%
-			for (BankMembersDTO bankMembersDTO : ar)
-			{
-			%>
-			<tr>
-				<td><%=bankMembersDTO.getUserid()%></td>
-				<td><%=bankMembersDTO.getName()%></td>
-				<td><%=bankMembersDTO.getEmail()%></td>
-				<td><%=bankMembersDTO.getPhone()%></td>
-			</tr>
-			<%
-			}
-			%> --%>
-		</tbody>
+		</c:forEach>
 	</table>
+	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

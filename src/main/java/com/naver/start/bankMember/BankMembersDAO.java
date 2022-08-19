@@ -70,57 +70,39 @@ public class BankMembersDAO implements MembersDAO
 	public List<BankMembersDTO> getSearchByID(String search) throws Exception
 	{// 검색하려면 () 안에 -> String search
 		// 1. DB연결 - 로그인
-		// Connection DBConn = DBConnector.getConnection();
-		// // 2. regions의 데이터 가져오기
-		// String sql = "select * from bankmembers where name like ? order by name desc";
-		// // 전체 출력 -> select * from bankmembers where userid = ? -> 검색
-		// // 3. Query문 미리 전송
-		// PreparedStatement st = DBConn.prepareStatement(sql);
-		// // 4. ? 의 값 세팅
-		// st.setString(1, "%" + search + "%"); // 검색하려면 주석 해제
-		// // 5. 최종 전송 후 결과를 처리
-		// ResultSet rs = st.executeQuery();
-		//
-		// ArrayList<BankMembersDTO> ar = new ArrayList();
-		// while (rs.next())
-		// {
-		// BankMembersDTO bankMembersDTO = new BankMembersDTO();
-		// bankMembersDTO.setUserid(rs.getString("userid"));
-		// bankMembersDTO.setPwd(rs.getString("pwd"));
-		// bankMembersDTO.setName(rs.getString("name"));
-		// bankMembersDTO.setEmail(rs.getString("email"));
-		// bankMembersDTO.setPhone(rs.getString("phone"));
-		// ar.add(bankMembersDTO);
-		//
-		// System.out.println("USERID: " + bankMembersDTO.getUserid() + ", PWD: " + bankMembersDTO.getPwd() + ", NAME: " + bankMembersDTO.getName()
-		// + ", Email: " + bankMembersDTO.getEmail() + ", PHONE: " + bankMembersDTO.getPhone());
-		// // System.out.println("Name: " + bankMembersDTO.getName());
-		// }
-		// DBConnector.disConnect(rs, st, DBConn);
-		//
-		// return ar;
-		
-		return sqlSession.selectList(NAMESPACE + "getSearchByID" + search);
-		// (NAMESPACE + "getSearchByID" + search)
-	}
+		Connection DBConn = DBConnector.getConnection();
+		// 2. regions의 데이터 가져오기
+		String sql = "select * from bankmembers where name like ? order by name desc";
+		// 전체 출력 -> select * from bankmembers where userid = ? -> 검색
+		// 3. Query문 미리 전송
+		PreparedStatement st = DBConn.prepareStatement(sql);
+		// 4. ? 의 값 세팅
+		st.setString(1, "%" + search + "%"); // 검색하려면 주석 해제
+		// 5. 최종 전송 후 결과를 처리
+		ResultSet rs = st.executeQuery();
 
-	// login
-	public BankMembersDTO getLoginTest(BankMembersDTO bankMembersDTO) throws Exception
-	{
-		return sqlSession.selectOne(NAMESPACE + "getLoginTest", bankMembersDTO);		
-	}
+		ArrayList<BankMembersDTO> ar = new ArrayList();
+		while (rs.next())
+		{
+			BankMembersDTO bankMembersDTO = new BankMembersDTO();
+			bankMembersDTO.setUserid(rs.getString("userid"));
+			bankMembersDTO.setPwd(rs.getString("pwd"));
+			bankMembersDTO.setName(rs.getString("name"));
+			bankMembersDTO.setEmail(rs.getString("email"));
+			bankMembersDTO.setPhone(rs.getString("phone"));
+			ar.add(bankMembersDTO);
 
-	// join
-	public int setJoinTest(BankMembersDTO bankMembersDTO) throws Exception
-	{
-		return sqlSession.insert(NAMESPACE + "setJoinTest", bankMembersDTO);
-	}
-
-	// search
-	public List<BankMembersDTO> getSearchTest(String string)
-	{
-		ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
+			// System.out.println("USERID: " + bankMembersDTO.getUserid() + ", PWD: " + bankMembersDTO.getPwd() + ", NAME: " +
+			// bankMembersDTO.getName()
+			// + ", Email: " + bankMembersDTO.getEmail() + ", PHONE: " + bankMembersDTO.getPhone());
+			// System.out.println("Name: " + bankMembersDTO.getName());
+		}
+		DBConnector.disConnect(rs, st, DBConn);
 
 		return ar;
+
+		// ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
+		//
+		// return sqlSession.selectList(NAMESPACE + "getSearchByID" + search);
 	}
 }

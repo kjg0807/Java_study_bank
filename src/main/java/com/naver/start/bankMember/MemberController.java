@@ -1,7 +1,7 @@
 package com.naver.start.bankMember;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -114,5 +114,21 @@ public class MemberController
 		mv.setViewName("member/list");
 		mv.addObject("list", ar);
 		return "member/list";
+	}
+
+	@RequestMapping(value = "myPage.do", method = RequestMethod.GET)
+	public ModelAndView myPage(HttpSession session) throws Exception
+	{
+		ModelAndView mv = new ModelAndView();
+
+		System.out.println("MyPage Get 실행");
+
+		BankMembersDTO bankMembersDTO = (BankMembersDTO) session.getAttribute("member");
+		Map<String, Object> map = bankMemberSerive.getMyPage(bankMembersDTO);
+		mv.addObject("map", map);
+
+		mv.setViewName("member/myPage");
+
+		return mv;
 	}
 }

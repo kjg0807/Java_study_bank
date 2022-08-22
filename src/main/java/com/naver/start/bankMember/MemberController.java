@@ -2,6 +2,7 @@ package com.naver.start.bankMember;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.naver.start.bankAccount.BankAccountDTO;
+import com.naver.start.bankAccount.BankAccountService;
+import com.naver.start.bankBook.BankBookDAO;
+import com.naver.start.bankBook.BankBookDTO;
+
 @Controller
 @RequestMapping(value = "/member/*")
 // �씠 �겢�옒�뒪�뒗 Controller �뿭�븷, Container(媛앹껜 �깮�꽦, �냼硫�) �뿉寃� �씠 �겢�옒�뒪�쓽 媛앹껜
@@ -21,8 +27,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController
 {
 	@Autowired
-	@Qualifier("myservice")
+	
 	private BankMemberSerive bankMemberSerive;
+
+	@Autowired
+	private BankAccountService bankAccountService;
 
 	@RequestMapping(value = "logout.naver", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception
@@ -43,7 +52,7 @@ public class MemberController
 	}
 
 	@RequestMapping(value = "login.naver", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
-	public String login(HttpSession session, HttpServletRequest request, BankMembersDTO bankMembersDTO, Model model) throws Exception
+	public String login(HttpSession session, BankMembersDTO bankMembersDTO, Model model) throws Exception
 	{
 		System.out.println("DB Login Test");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
@@ -114,5 +123,25 @@ public class MemberController
 		mv.setViewName("member/list");
 		mv.addObject("list", ar);
 		return "member/list";
+	}
+
+	@RequestMapping(value = "mypage.naver", method = RequestMethod.GET)
+	public ModelAndView myPage(HttpSession session) throws Exception
+	{
+		System.out.println("myPage GET");
+
+		ModelAndView mv = new ModelAndView();
+
+		BankMembersDTO bankMembersDTO = (BankMembersDTO) session.getAttribute("member");
+		// Map<String, Object> map = bankMemberSerive.getMyPage(bankMembersDTO);
+		// mv.addObject("map", map);
+		bankMembersDTO = bankMemberSerive.getMyPage(bankMembersDTO);
+		// List<BankAccountDTO> ar = bankAccountService.getListByUserName(bankMembersDTO);
+		// mv.addObject("list", ar);
+
+		mv.addObject("dto", bankMembersDTO);
+		mv.setViewName("member/mypage");
+
+		return mv;
 	}
 }

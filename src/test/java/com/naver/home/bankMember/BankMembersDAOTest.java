@@ -22,28 +22,37 @@ public class BankMembersDAOTest extends MyAbstractTest
 	private BankMembersDTO bankMembersDTO;
 	private BankMemberSerive bankMemberSerive;
 
-//	// login
+	// // login
+	// @Test
+	// public void getLoginTest() throws Exception
+	// {
+	// // bankMembersDTO = bankMembersDAO.getLogin(bankMembersDTO);
+	// // assertNotNull(bankMembersDTO);
+	// }
+	//
+	// // join
+	// @Test
+	// public void setJoinTest() throws Exception
+	// {
+	// int rs = bankMembersDAO.setJoin(bankMembersDTO);
+	// assertEquals(bankMembersDAO, rs);
+	// // throw new Exception();
+	// }
+	//
+	// @Test
+	// public void getSearch() throws Exception
+	// {
+	// List<BankMembersDTO> ar = bankMembersDAO.getSearchTest("ad");
+	//
+	// assertEquals(0, ar.size());
+	// }
+
 //	@Test
-//	public void getLoginTest() throws Exception
+//	public void getMyPageTest() throws Exception
 //	{
-//		// bankMembersDTO = bankMembersDAO.getLogin(bankMembersDTO);
-//		// assertNotNull(bankMembersDTO);
-//	}
-//
-//	// join
-//	@Test
-//	public void setJoinTest() throws Exception
-//	{
-//		int rs = bankMembersDAO.setJoin(bankMembersDTO);
-//		assertEquals(bankMembersDAO, rs);
-//		// throw new Exception();
-//	}
-//
-//	@Test
-//	public void getSearch() throws Exception
-//	{
-//		List<BankMembersDTO> ar = bankMembersDAO.getSearchTest("ad");
-//
-//		assertEquals(0, ar.size());
+//		bankMembersDAO.getMyPage(bankMembersDTO);
+//		bankMembersDTO.setName("a");
+//		bankMembersDTO = bankMembersDAO.getMyPage(bankMembersDTO);
+//		assertNotNull(bankMembersDTO);
 //	}
 }

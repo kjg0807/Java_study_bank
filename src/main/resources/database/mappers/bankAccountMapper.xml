@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace가 비어있으면 예외발생 -->
+<mapper namespace="com.naver.start.bankAccount.BankAccountsDAO">
+	<select id="getListByUserName" parameterType="BankMembersDTO" resultMap="getListByUserNameResult">
+		select ba.accountnum, bb.bookname, ba.accountdate
+		from bankaccounts ba
+		inner join
+		bankbook bb
+		<!-- using(booknum) -->
+		on ba.booknum = bb.booknum
+		where ba.userID = #{userID}
+		<!-- on ba.booknum = bb.booknum -->
+	</select>
+	<resultMap type="BankAccountDTO" id="getListByUserNameResult">
+		<id column="accountnum" property="accountNum" />
+		<result column="accountdate" property="accountDate" />
+		<association property="bankBookDTO" javaType="BankBookDTO">
+			<result column="bookname" property="bookName" />
+		</association>
+	</resultMap>
+</mapper>

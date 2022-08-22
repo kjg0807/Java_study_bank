@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 
 import com.naver.start.util.DBConnector;
 
-@Repository("mydao") // 객체 생성
+@Repository("aa") // 객체 생성
 public class BankMembersDAO implements MembersDAO
 {
 	@Autowired // 만들어진 객체를 주입
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.naver.start.bankMember.BankMembersDAO."; // final - 상수처럼 사용 - 값 변경x
+	private final String NAMESPACE = "com.naver.start.bankMember.BankMembersDAO"; // final - 상수처럼 사용 - 값 변경x
 
 	@Override
 	public BankMembersDTO getLogin(BankMembersDTO bankMembersDTO) throws Exception
@@ -104,5 +104,29 @@ public class BankMembersDAO implements MembersDAO
 		// ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
 		//
 		// return sqlSession.selectList(NAMESPACE + "getSearchByID" + search);
+	}
+	
+	@Override
+	public BankMembersDTO getMyPage(BankMembersDTO bankMembersDTO) throws Exception
+	{
+		// Connection con = DBConnector.getConnection();
+		// String sql = "select userid, name from bankmembers where userid = ? and pwd = ?";
+		// PreparedStatement st = con.prepareStatement(sql);
+		// st.setString(1, bankMembersDTO.getUserid());
+		// st.setString(2, bankMembersDTO.getPwd());
+		// ResultSet rs = st.executeQuery();
+
+		// if (rs.next())
+		// {
+		// bankMembersDTO = new BankMembersDTO();
+		// bankMembersDTO.setUserid(rs.getString("userid"));
+		// bankMembersDTO.setName(rs.getString("name"));
+		// }
+		// else
+		// {
+		// bankMembersDTO = null;
+		// }
+
+		return sqlSession.selectOne(NAMESPACE + "getMyPage", bankMembersDTO);
 	}
 }

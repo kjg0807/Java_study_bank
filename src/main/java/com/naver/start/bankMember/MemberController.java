@@ -116,7 +116,7 @@ public class MemberController
 		return "member/list";
 	}
 
-	@RequestMapping(value = "myPage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mypage.do", method = RequestMethod.GET)
 	public ModelAndView myPage(HttpSession session) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();

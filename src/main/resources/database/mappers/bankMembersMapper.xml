@@ -23,6 +23,6 @@
 		/> <result column="email" property="email" /> <result column="phone" property="phone" /> <collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO"> <id column="accountnum" property="accountNum" /> <result column="accountdate" property="accountDate" /> <association property="bankBookDTO" 
 		javaType="BankBookDTO"> <result column="bookname" property="bookName" /> </association> </collection> </resultMap> -->
 	<select id="getMyPage" parameterType="BankMembersDTO" resultType="BankMembersDTO">
-		SELECT USERNAME, NAME, EMAIL, PHONE FROM BANKMEMBERS WHERE USERid = #{userID}
+		SELECT USERid, NAME, EMAIL, PHONE FROM BANKMEMBERS WHERE USERid = #{userID}
 	</select>
 </mapper>

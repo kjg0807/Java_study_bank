@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.naver.start.bankMember.BankMembersDTO;
 import com.naver.start.util.DBConnector;
 
+@Repository
 public class BankAccountsDAO
 {
 	@Autowired

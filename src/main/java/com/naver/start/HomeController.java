@@ -31,8 +31,8 @@ public class HomeController
 		Cookie cookie = new Cookie("hi", "Hello");
 		cookie.setMaxAge(600);
 		response.addCookie(cookie);
-		System.out.println(sqlSession);		
+		System.out.println(sqlSession);
 
-		return "home";
+		return "index";
 	}
 }

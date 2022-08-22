@@ -1,79 +1,62 @@
 <%@page import="com.naver.start.bankMember.BankMembersDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </head>
 <style>
-* {
-	margin-left: 12%;
-	margin-top: 5%;
+form {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.a {
+	margin-left: 170px;
 }
 </style>
-<%
-BankMembersDTO bankMembersDTO = (BankMembersDTO) request.getAttribute("join");
-%>
 <body>
-	<h1>Join Page</h1>
-	<!-- 회원가입(DB에 넣는 것) - 아이디, 비밀번호, 이름, 이메일, 전화번호 -->
+	<c:import url="../template/header.jsp"></c:import>
+
 	<form action="./join.naver" method="post">
-		<table align="center">
-			<caption>
-				<b>회원가입 창</b>
-			</caption>
-			<tr>
-				<td>아이디</td>
-				<td>
-					<input type="text" name="userid" placeholder="ID입력" onfocus="this.placeholder=''" onblur="this.placeholder='ID 입력'"
-						style="width: 100px;"
-					>
-				</td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td>
-					<input type="text" name="pwd" placeholder="PWD입력" onfocus="this.placeholder=''" onblur="this.placeholder='PWD 입력'"
-						style="width: 100px;"
-					>
-				</td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td>
-					<input type="text" name="name" placeholder="이름 입력" onfocus="this.placeholder=''" onblur="this.placeholder='이름 입력'"
-						style="width: 100px;"
-					>
-				</td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td>
-					<input type="text" name="email" placeholder="이메일 입력" onfocus="this.placeholder=''" onblur="this.placeholder='이메일 입력'"
-						style="width: 100px;"
-					>
-				</td>
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td>
-					<input type="text" name="phone" placeholder="전화번호 입력" onfocus="this.placeholder=''" onblur="this.placeholder='전화번호 입력'"
-						style="width: 100px;"
-					>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="회원가입">
-				</td>
-				<td>
-					<input type="reset" value="초기화">
-				</td>
-			</tr>
-		</table>
-		<a href="/study_index.html">Index Page</a> <br> <a href="https://youtube.com"> <img src="/image/youtube.jpg">
-		</a>
+
+		<section class="col-lg-6 container-fluid mt-4">
+			<div class="row">
+				<div class="mb-3">
+					<label class="form-label">ID</label>
+					<input type="text" class="form-control" name="userid" aria-describedby="emailHelp" placeholder="ID Input" onfocus="this.placeholder=''" onblur="this.placeholder='ID Input'">
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Password</label>
+					<input type="password" class="form-control" name="pwd" placeholder="Password Input" onfocus="this.placeholder=''" onblur="this.placeholder='Password Input'">
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Name</label>
+					<input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="Name Input" onfocus="this.placeholder=''" onblur="this.placeholder='Name Input'">
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Email</label>
+					<input type="text" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Eamil Input" onfocus="this.placeholder=''" onblur="this.placeholder='Eamil Input'">
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Phone</label>
+					<input type="text" class="form-control" name="phone" aria-describedby="emailHelp" placeholder="Phone Input" onfocus="this.placeholder=''" onblur="this.placeholder='Phone Input'">
+				</div>
+				<button type="submit" class="btn btn-primary">Sign Up</button>
+			</div>
+			<div class="row">
+				<div class="mb-3 a">
+					<a href="https://youtube.com">
+						<img src="/resources/image/you.png">
+					</a>
+				</div>
+			</div>
+		</section>
 	</form>
+	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

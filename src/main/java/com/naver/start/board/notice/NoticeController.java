@@ -33,17 +33,17 @@ public class NoticeController
 
 	// 글 상세
 	@RequestMapping(value = "detail.naver", method = RequestMethod.GET)
-	public ModelAndView getDetail(BoardDTO boardDTO, Model model) throws Exception
+	public String getDetail(BoardDTO boardDTO, Model model) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 		boardDTO = noticeService.getDetail(boardDTO);
 
-		// model.addAttribute("boardDTO", boardDTO);
+		model.addAttribute("boardDTO", boardDTO);
 
-		mv.addObject("boardDTO", boardDTO);
-		mv.setViewName("notice/detail");
+		// mv.addObject("boardDTO", boardDTO);
+		// mv.setViewName("notice/detail");
 
-		return mv;
+		return "notice/detail";
 	}
 
 	// 글 작성

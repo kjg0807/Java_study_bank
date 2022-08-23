@@ -1,4 +1,4 @@
-package com.naver.start.board.notice;
+package com.naver.start.board.qna;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import com.naver.start.board.impl.BoardDAO;
 import com.naver.start.board.impl.BoardDTO;
 
 @Repository
-public class NoticeDAO implements BoardDAO
+public class QnaDAO implements BoardDAO
 {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.naver.start.board.notice.NoticeDAO.";
+	private final String NAMESPACE = "com.naver.start.board.qna.QnaDAO.";
 
 	@Override
 	public List<BoardDTO> getList() throws Exception

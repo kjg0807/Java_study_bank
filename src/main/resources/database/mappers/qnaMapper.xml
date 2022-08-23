@@ -2,30 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace가 비어있으면 예외발생 -->
-<mapper namespace="com.naver.start.board.notice.NoticeDAO">
+<mapper namespace="com.naver.start.board.qna.QnaDAO">
 
-	<select id="getList" resultType="NoticeDTO">
-		select num, title, writer, regdate, hit from notice
+	<select id="getList" resultType="QnaDTO">
+		select num, title, regdate, hit from qna
 		order by num desc
 	</select>
 
-	<select id="getDetail" parameterType="BoardDTO" resultType="NoticeDTO">
-		select * from notice where num = #{num}
+	<select id="getDetail" parameterType="BoardDTO" resultType="QnaDTO">
+		select * from qna where num = #{num}
 	</select>
 
 	<insert id="setAdd" parameterType="BoardDTO">
-		insert into notice values
-		(board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0)
+		insert into qna values
+		(board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0, 0, 0, 0)
 	</insert>
 
 	<update id="setUpdate" parameterType="BoardDTO">
-		update notice set
+		update qna set
 		title = #{title}, contents = #{contents}
 		where num = #{num}
 	</update>
 
 	<delete id="setDelete" parameterType="BoardDTO">
-		delete notice where num = #{num}
+		delete qna where num = #{num}
 	</delete>
 
 </mapper>

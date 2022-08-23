@@ -4,21 +4,21 @@ import java.sql.Date;
 
 public class BoardDTO
 {
-	private Long boardNum;
+	private Long num;
 	private String title;
 	private String contents;
 	private String writer;
 	private Date regDate;
 	private Long hit;
 
-	public Long getBoardNum()
+	public Long getNum()
 	{
-		return boardNum;
+		return num;
 	}
 
-	public void setBoardNum(Long boardNum)
+	public void setNum(Long num)
 	{
-		this.boardNum = boardNum;
+		this.num = num;
 	}
 
 	public String getTitle()

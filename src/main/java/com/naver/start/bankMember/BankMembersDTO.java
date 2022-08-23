@@ -2,6 +2,8 @@ package com.naver.start.bankMember;
 
 import java.util.List;
 
+import com.naver.start.bankAccount.BankAccountDTO;
+
 public class BankMembersDTO
 {
 	private String userid;
@@ -9,16 +11,16 @@ public class BankMembersDTO
 	private String name;
 	private String email;
 	private String phone;
-	private List<BankMembersDTO> bankMembersDTO;
+	private List<BankAccountDTO> bankAccountDTOs;
 
-	public List<BankMembersDTO> getBankMembersDTO()
+	public List<BankAccountDTO> getBankAccountDTOs()
 	{
-		return bankMembersDTO;
+		return bankAccountDTOs;
 	}
 
-	public void setBankMembersDTO(List<BankMembersDTO> bankMembersDTO)
+	public void setBankAccountDTOs(List<BankAccountDTO> bankAccountDTOs)
 	{
-		this.bankMembersDTO = bankMembersDTO;
+		this.bankAccountDTOs = bankAccountDTOs;
 	}
 
 	public String getUserid()

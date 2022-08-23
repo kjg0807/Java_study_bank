@@ -34,11 +34,11 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<!-- jdbc -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>19.3.0.0</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc10 -->
 		<dependency>

@@ -12,23 +12,40 @@
 	<c:import url="../template/header.jsp"></c:import>
 
 	<form action="./mypage.naver" method="post">
-		<p>ID: ${dto.userid }</p>
-		<p>Name: ${dto.name }</p>
-		<p>Email: ${dto.email }</p>
-		<p>Phone: ${dto.phone }</p>
-
-		<table class="table table-hover">
-			<tr>
-				<th>Account Num</th>
-				<th>BookName</th>
-				<th>Date</th>
-			</tr>
-			<c:forEach items="${dto.bankAccountDTOs }" var="dto">
-				<p>${dto.accountNum }</p>
-				<p>${dto.bankBookDTO.bookName }</p>
-				<p>${dto.accountDate }</p>
-			</c:forEach>
-		</table>
+		<section class="container-fluid col-lg-6">
+			<div class="row mt-3">
+				<table class="table table-hover">
+					<tr>
+						<td>ID</td>
+						<td>Name</td>
+						<td>Email</td>
+						<td>Phone</td>
+					</tr>
+					<tr>
+						<td>${map.dto.userid }</td>
+						<td>${map.dto.name }</td>
+						<td>${map.dto.email }</td>
+						<td>${map.dto.phone }</td>
+					</tr>
+				</table>
+			</div>
+			<div class="row mt-3">
+				<table class="table table-hover">
+					<tr>
+						<th>AccountNum</th>
+						<th>Title</th>
+						<th>Date</th>
+					</tr>
+					<tr>
+						<c:forEach items="${map.list}" var="dto">
+							<td>${pageScope.dto.accountNum}</td>
+							<td>${dto.bankBookDTO.bookName}</td>
+							<td>${dto.accountDate}</td>
+						</c:forEach>
+					</tr>
+				</table>
+			</div>
+		</section>
 	</form>
 
 	<c:import url="../template/footer.jsp"></c:import>

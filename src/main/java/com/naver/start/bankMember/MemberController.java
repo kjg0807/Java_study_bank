@@ -116,8 +116,8 @@ public class MemberController
 		return "member/list";
 	}
 
-	@RequestMapping(value = "mypage.do", method = RequestMethod.GET)
-	public ModelAndView myPage(HttpSession session) throws Exception
+	@RequestMapping(value = "mypage.naver", method = RequestMethod.GET)
+	public ModelAndView mypage(HttpSession session) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 
@@ -127,7 +127,7 @@ public class MemberController
 		Map<String, Object> map = bankMemberSerive.getMyPage(bankMembersDTO);
 		mv.addObject("map", map);
 
-		mv.setViewName("member/myPage");
+		mv.setViewName("member/mypage");
 
 		return mv;
 	}

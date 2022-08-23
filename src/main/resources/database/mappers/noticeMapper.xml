@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace가 비어있으면 예외발생 -->
+<mapper namespace="com.naver.start.board.notice.NoticeDAO">
+
+	<!-- <select id="noticeGetList" parameterType="NoticeDTO" resultType="NoticeDTO">
+		select noticenum, title, writer, regdate, hit from notice
+		where noticenum = #{noticeNum}
+	</select> -->
+</mapper>

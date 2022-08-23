@@ -16,7 +16,7 @@ public class BankAccountsDAO
 {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.naver.start.bankAccount.BankAccountsDAO";
+	private final String NAMESPACE = "com.naver.start.bankAccount.BankAccountsDAO.";
 
 	public int add(BankAccountDTO bankAccountDTO) throws Exception
 	{
@@ -35,6 +35,11 @@ public class BankAccountsDAO
 
 		return rs;
 	}
+
+	// public List<BankAccountDTO> getListByUserName(BankMembersDTO bankMembersDTO) throws Exception
+	// {
+	// return sqlSession.selectList(NAMESPACE + "getListByUserName", bankMembersDTO);
+	// }
 
 	public List<BankAccountDTO> getListByUserName(BankMembersDTO bankMembersDTO) throws Exception
 	{

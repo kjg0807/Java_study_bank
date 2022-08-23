@@ -6,19 +6,19 @@
 <mapper namespace="com.naver.start.bankAccount.BankAccountsDAO">
 
 	<select id="getListByUserName" parameterType="BankMembersDTO" resultMap="getListByUserNameResult">
-		SELECT BA.ACCOUNTNUM, BB.BOOKNAME, BA.ACCOUNTDATE
-		FROM BANKACCOUNTs BA
-		INNER JOIN
-		BANKBOOK BB
-		USING(BOOKNUM)
-		WHERE BA.USERid = #{userID}
+		select ba.accountNum, bb.bookName, ba.accountDate
+		from bankaccounts ba
+		inner join
+		bankbook bb
+		on ba.bookNum = bb.bookNum
+		where ba.userid = #{userid}
 	</select>
 
 	<resultMap type="BankAccountDTO" id="getListByUserNameResult">
-		<id column="ACCOUNTNUM" property="accountNum" />
-		<result column="ACCOUNTDATE" property="accountDate" />
+		<id column="accountNum" property="accountNum" />
+		<result column="accountDate" property="accountDate" />
 		<association property="bankBookDTO" javaType="BankBookDTO">
-			<result column="BOOKNAME" property="bookName" />
+			<result column="bookName" property="bookName" />
 		</association>
 	</resultMap>
 

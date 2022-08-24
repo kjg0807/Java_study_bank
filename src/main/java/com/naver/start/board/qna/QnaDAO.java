@@ -1,6 +1,7 @@
 package com.naver.start.board.qna;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ public class QnaDAO implements BoardDAO
 	private final String NAMESPACE = "com.naver.start.board.qna.QnaDAO.";
 
 	@Override
-	public List<BoardDTO> getList() throws Exception
+	public List<BoardDTO> getList(Map<String, Long> map) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + "getList");
+		return sqlSession.selectList(NAMESPACE + "getList", map);
 	}
 
 	@Override
@@ -51,4 +52,10 @@ public class QnaDAO implements BoardDAO
 		return sqlSession.delete(NAMESPACE + "setDelete", boardDTO);
 	}
 
+	@Override
+	public Long getCount() throws Exception
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

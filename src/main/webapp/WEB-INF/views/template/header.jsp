@@ -16,7 +16,8 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active" aria-current="page" href="../">Home</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/book/list.naver">Book List</a></li>
-					<li class="nav-item"><a class="nav-link active" href="/notice/list.naver">Board</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/notice/list.naver">Notice</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/qna/list.naver">QnA</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/member/search.naver">Search</a></li>
 
 					<c:choose>

@@ -1,11 +1,5 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.naver.start.bankMember.BankMembersDTO"%>
-<%@page import="com.naver.start.bankBook.BankBookDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- HTML반복문 사용하기 위한 선언 -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,24 +11,22 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-6">
-		<table class="table table-hover">
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Phone</th>
-			</tr>
-
-			<c:forEach items="${requestScope.list }" var="dto">
-				<tr>
-					<td>${pageScope.dto.userid }</td>
-					<td>${pageScope.dto.name }</td>
-					<td>${pageScope.dto.email }</td>
-					<td>${pageScope.dto.phone }</td>
-				</tr>
-			</c:forEach>
-		</table>
+		<h1>${board} Add Page</h1>
+		<form action="./add.naver" method="post">
+			<table class="table table-hover">
+				<div class="mb-3">
+					<label>Title</label>
+					<input type="text" class="form-control" name="title" aria-describedby="emailHelp">
+					<div class="form-text">Input Title</div>
+				</div>
+				<div class="mb-3">
+					<label>Contents</label>
+					<input type="text" class="form-control" name="contents" aria-describedby="emailHelp">
+					<div class="form-text">Input Contents</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Writing</button>
+			</table>
+		</form>
 	</section>
-	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

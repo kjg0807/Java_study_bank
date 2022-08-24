@@ -11,19 +11,17 @@
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-
 	<form action="./search.naver" method="post">
-	
+
 		<section class="col-lg-6 container-fluid mt-4">
 			<div class="mb-3">
 				<label>Search Name</label>
 				<input type="text" class="form-control" name="search" aria-describedby="emailHelp">
 				<div id="emailHelp" class="form-text">Input Name</div>
-			</div>			
+			</div>
 			<button type="submit" class="btn btn-primary">Search</button>
 		</section>
 	</form>
-
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

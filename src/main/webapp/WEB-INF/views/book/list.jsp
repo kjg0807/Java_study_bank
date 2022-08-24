@@ -18,28 +18,29 @@ form {
 </style>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th scope="col">Num</th>
-				<th scope="col">Name</th>
-				<th scope="col">Rate</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${requestScope.list}" var="dto">
+	<section class="container-fluid col-lg-6">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td>${pageScope.dto.bookNum}</td>
-					<td>
-						<a href="./detail.naver?bookNum=${pageScope.dto.bookNum}">${pageScope.dto.bookName}</a>
-					</td>
-					<td>${pageScope.dto.bookRate}</td>
+					<th scope="col">Num</th>
+					<th scope="col">Name</th>
+					<th scope="col">Rate</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<form action="./list.naver" method="post" align="center">
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.list}" var="dto">
+					<tr>
+						<td>${pageScope.dto.bookNum}</td>
+						<td>
+							<a href="./detail.naver?bookNum=${pageScope.dto.bookNum}">${pageScope.dto.bookName}</a>
+						</td>
+						<td>${pageScope.dto.bookRate}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</section>
+	<!-- <form action="./list.naver" method="post" align="center">
 		<h4>
 			<a href="../">Home Page</a>
 		</h4>
@@ -47,7 +48,7 @@ form {
 		<h4>
 			<a href="../member/login.naver">Login Page</a>
 		</h4>
-	</form>
+	</form> -->
 
 	<c:import url="../template/footer.jsp"></c:import>
 </body>

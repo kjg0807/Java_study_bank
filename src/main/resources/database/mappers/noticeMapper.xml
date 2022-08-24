@@ -4,9 +4,12 @@
 <!-- namespace가 비어있으면 예외발생 -->
 <mapper namespace="com.naver.start.board.notice.NoticeDAO">
 
-	<select id="getList" resultType="NoticeDTO">
-		select num, title, writer, regdate, hit from notice
-		order by num desc
+	<select id="getList" resultType="NoticeDTO" parameterType="java.util.Map">
+		<!-- select num, title, writer, regdate, hit from notice order by num desc -->
+		select * from
+		(select rownum r, n.* from
+		(select * from notice order by num desc) n)
+		where r between #{startRow} and #{lastRow}
 	</select>
 
 	<select id="getDetail" parameterType="BoardDTO" resultType="NoticeDTO">
@@ -27,5 +30,9 @@
 	<delete id="setDelete" parameterType="BoardDTO">
 		delete notice where num = #{num}
 	</delete>
+
+	<select id="getCount" resultType="Long">
+		select count(num) from notice
+	</select>
 
 </mapper>

@@ -13,6 +13,7 @@
 	<section class="container-fluid col-lg-6">
 		<form action="./list.naver" method="post">
 			<table class="table table-hover">
+				<h1>${board} List Page</h1>
 				<thead>
 					<tr>
 						<th>Num</th>
@@ -36,6 +37,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<button type="submit" class="btn btn-primary">Writing Page</button>
 		</form>
 	</section>
 

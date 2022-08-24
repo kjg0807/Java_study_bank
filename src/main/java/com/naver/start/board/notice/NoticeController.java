@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.start.board.impl.BoardDTO;
+import com.naver.start.util.Pager;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -28,13 +28,16 @@ public class NoticeController
 
 	// 글 목록
 	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(defaultValue = "1") Long page) throws Exception
+	public ModelAndView getList(Pager pager) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("Page: " + page);
-		List<BoardDTO> ar = noticeService.getList(page);
+
+		System.out.println(pager.getPage());
+		// System.out.println("Page: " + page);
+		List<BoardDTO> ar = noticeService.getList(pager);
 
 		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
 		mv.setViewName("board/list");
 
 		return mv;

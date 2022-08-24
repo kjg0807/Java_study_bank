@@ -14,10 +14,6 @@ form {
 	margin-top: 50px;
 	text-align: center;
 }
-
-.a {
-	margin-left: 170px;
-}
 </style>
 <body>
 	<c:import url="../template/header.jsp"></c:import>

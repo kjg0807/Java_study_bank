@@ -13,7 +13,7 @@
 	<section class="container-fluid col-lg-6">
 		<form action="./list.naver" method="post">
 			<table class="table table-hover">
-				<h1>${board} List Page</h1>
+				<h1>${board}_List_Page</h1>
 				<thead>
 					<tr>
 						<th>Num</th>
@@ -37,10 +37,40 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<button type="submit" class="btn btn-primary">Writing Page</button>
+
+			<style>
+.a {
+	float: right;
+}
+
+.b {
+	margin-top: 10px;
+}
+</style>
+			<nav class="a">
+				<button type="submit" class="btn btn-primary">Writing Page</button>
+			</nav>
 		</form>
 	</section>
+	<section class="container-fluid col-lg-6">
+		<form align="center" class="col-lg-6 container-fluid">
+			<nav aria-label="Page navigation example" class="col-lg-6 b">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a></li>
 
+					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						<li class="page-item"><a class="page-link" href="./list.naver?page=${i}">${i}</a></li>
+					</c:forEach>
+
+					<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a></li>
+				</ul>
+			</nav>
+		</form>
+	</section>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

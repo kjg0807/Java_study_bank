@@ -11,7 +11,7 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-6">
-		<h1>${board} Add Page</h1>
+		<h1>${board}_Add_Page</h1>
 		<form action="./add.naver" method="post">
 			<table class="table table-hover">
 				<div class="mb-3">

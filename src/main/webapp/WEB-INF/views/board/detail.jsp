@@ -12,7 +12,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-6">
 		<table class="table table-hover">
-			<h1>${board} Detail Page</h1>
+			<h1>${board}_Detail_Page</h1>
 			<thead>
 				<tr>
 					<th>Num</th>

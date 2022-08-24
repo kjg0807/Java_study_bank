@@ -2,9 +2,11 @@ package com.naver.start.board.impl;
 
 import java.util.List;
 
+import com.naver.start.util.Pager;
+
 public interface BoardService
 {
-	public List<BoardDTO> getList(Long page) throws Exception;
+	public List<BoardDTO> getList(Pager pager) throws Exception;
 
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception;
 

@@ -1,12 +1,16 @@
 package com.naver.start.board.impl;
 
 import java.util.List;
-import java.util.Map;
+
+import com.naver.start.util.Pager;
 
 public interface BoardDAO
 {
+	// 글 총 갯수
+	public Long getCount() throws Exception;
+
 	// 글 목록
-	public List<BoardDTO> getList(Map<String, Long> map) throws Exception;
+	public List<BoardDTO> getList(Pager pager) throws Exception;
 
 	// 글 상세보기
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception;
@@ -20,6 +24,4 @@ public interface BoardDAO
 	// 글 삭제
 	public int setDelete(BoardDTO boardDTO) throws Exception;
 
-	// 글 총 갯수
-	public Long getCount() throws Exception;
 }

@@ -4,7 +4,7 @@
 <!-- namespace가 비어있으면 예외발생 -->
 <mapper namespace="com.naver.start.board.notice.NoticeDAO">
 
-	<select id="getList" resultType="NoticeDTO" parameterType="java.util.Map">
+	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
 		<!-- select num, title, writer, regdate, hit from notice order by num desc -->
 		select * from
 		(select rownum r, n.* from

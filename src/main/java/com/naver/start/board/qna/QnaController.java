@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.start.board.impl.BoardDTO;
+import com.naver.start.util.Pager;
 
 @Controller
 @RequestMapping("/qna/*")
@@ -26,22 +28,16 @@ public class QnaController
 	}
 
 	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(defaultValue = "1") Long page) throws Exception
+	public ModelAndView getList(Pager pager) throws Exception
 	{
-		List<BoardDTO> ar = qnaService.getList(page);
 		ModelAndView mv = new ModelAndView();
+		List<BoardDTO> ar = qnaService.getList(pager);
 
 		mv.addObject("list", ar);
-		// mv.addObject("board", "QnA");
+		mv.addObject("pager", pager);
 		mv.setViewName("board/list");
 
 		return mv;
-	}
-
-	@RequestMapping(value = "list.naver", method = RequestMethod.POST)
-	public String getList(BoardDTO boardDTO) throws Exception
-	{
-		return "board/add";
 	}
 
 	@RequestMapping(value = "detail.naver", method = RequestMethod.GET)
@@ -106,20 +102,23 @@ public class QnaController
 		return "redirect:./list.naver";
 	}
 
-	@RequestMapping(value = "reply.naver", method = RequestMethod.GET)
-	public String setReply() throws Exception
+	@GetMapping("reply")
+	public ModelAndView setReply(BoardDTO boardDTO, ModelAndView mv) throws Exception
 	{
-		return "qna/reply";
-	}
-
-	@RequestMapping(value = "reply.naver", method = RequestMethod.POST)
-	public ModelAndView setReply(BoardDTO boardDTO) throws Exception
-	{
-		ModelAndView mv = new ModelAndView();
-		int rs = qnaService.setAdd(boardDTO);
-
-		mv.setViewName("redirect:../list.naver");
+		mv.addObject("boardDTO", boardDTO);
+		mv.setViewName("board/reply");
 
 		return mv;
 	}
+
+	@PostMapping("reply")
+	public String setReply(QnaDTO qnaDTO) throws Exception
+	{
+		int rs = qnaService.setReply(qnaDTO);
+		
+		return "redirect:./list.naver";
+	}
+
+	
+	
 }

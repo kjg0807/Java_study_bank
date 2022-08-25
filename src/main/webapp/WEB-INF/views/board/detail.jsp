@@ -34,6 +34,9 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="row">
+			<a class="btn btn-danger" href="./reply.naver?num=${boardDTO.num}">Reply</a>
+		</div>
 	</section>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>

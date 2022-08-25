@@ -21,6 +21,35 @@ public class Pager
 	// next block exist true, not exist false
 	private boolean next;
 
+	// 검색 컬럼의 종류
+	private String kind;
+	// 검색어
+	private String search;
+
+	public String getKind()
+	{
+		return kind;
+	}
+
+	public void setKind(String kind)
+	{
+		this.kind = kind;
+	}
+
+	public String getSearch()
+	{
+		if (this.search == null)
+		{
+			this.search = "";
+		}
+		return search;
+	}
+
+	public void setSearch(String search)
+	{
+		this.search = search;
+	}
+
 	public boolean isPre()
 	{
 		return pre;
@@ -64,9 +93,9 @@ public class Pager
 			totalPage++;
 		}
 		// 2-1. totalPage보다 page가 더 클 경우
-		System.out.println("TotalPage: " + totalPage);
-		System.out.println("getPage: " + this.getPage());
-		if (totalPage < getPage())
+		// System.out.println("TotalPage: " + totalPage);
+		// System.out.println("getPage: " + this.getPage());
+		if (totalPage < this.getPage())
 		{
 			this.setPage(totalPage);
 		}
@@ -94,12 +123,12 @@ public class Pager
 		}
 		// 7. 이전, 다음 블럭의 유무
 		if (curBlock > 1) // 현재 블럭이 1보다 클때
-			// 현재 블럭이 2보다 작을때 이전 버튼이 없어짐
+		// 현재 블럭이 2보다 작을때 이전 버튼이 없어짐
 		{
 			pre = true;
 		}
 		if (curBlock < totalBlock) // 현재 블럭이 전체 블럭보다 작을 때
-			// 현재 블럭이 전체 블럭과 같거나 클때 다음 버튼이 없어짐
+		// 현재 블럭이 전체 블럭과 같거나 클때 다음 버튼이 없어짐
 		{
 			next = true;
 		}

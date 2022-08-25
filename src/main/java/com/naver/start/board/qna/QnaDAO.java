@@ -1,7 +1,6 @@
 package com.naver.start.board.qna;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.naver.start.board.impl.BoardDAO;
 import com.naver.start.board.impl.BoardDTO;
+import com.naver.start.util.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO
@@ -18,10 +18,17 @@ public class QnaDAO implements BoardDAO
 	private final String NAMESPACE = "com.naver.start.board.qna.QnaDAO.";
 
 	@Override
-	public List<BoardDTO> getList(Map<String, Long> map) throws Exception
+	public Long getCount(Pager pager) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + "getList", map);
+		return sqlSession.selectOne(NAMESPACE + "getCount", pager);
+	}
+
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception
+	{
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + "getList", pager);
 	}
 
 	@Override
@@ -52,10 +59,19 @@ public class QnaDAO implements BoardDAO
 		return sqlSession.delete(NAMESPACE + "setDelete", boardDTO);
 	}
 
-	@Override
-	public Long getCount() throws Exception
+	public int setStepUpdate(QnaDTO qnaDTO) throws Exception
+	{
+		return sqlSession.update(NAMESPACE + "setStepUpdate", qnaDTO);
+	}
+
+	public int setReplyAdd(BoardDTO boardDTO) throws Exception
+	{
+		return sqlSession.insert(NAMESPACE + "setReplyAdd", boardDTO);
+	}
+
+	public int setReply(QnaDTO qnaDTO) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.insert(NAMESPACE + "setReply", qnaDTO);
 	}
 }

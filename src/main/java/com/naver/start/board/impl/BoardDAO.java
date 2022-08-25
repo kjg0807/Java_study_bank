@@ -7,7 +7,7 @@ import com.naver.start.util.Pager;
 public interface BoardDAO
 {
 	// 글 총 갯수
-	public Long getCount() throws Exception;
+	public Long getCount(Pager pager) throws Exception;
 
 	// 글 목록
 	public List<BoardDTO> getList(Pager pager) throws Exception;

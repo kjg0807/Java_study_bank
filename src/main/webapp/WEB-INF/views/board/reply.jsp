@@ -11,8 +11,9 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-6">
-		<h1>${board}_Add_Page</h1>
-		<form action="./add.naver" method="post">
+		<h1>${board}_Reply_Page</h1>
+		<form action="./reply.naver" method="post">
+			<input type="hidden" name="num" value="${boardDTO.num}">
 			<table class="table table-hover">
 				<div class="mb-3">
 					<label>Title</label>

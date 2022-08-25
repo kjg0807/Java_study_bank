@@ -19,6 +19,13 @@ public class NoticeDAO implements BoardDAO
 	private final String NAMESPACE = "com.naver.start.board.notice.NoticeDAO.";
 
 	@Override
+	public Long getCount(Pager pager) throws Exception
+	{
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + "getCount", pager);
+	}
+
+	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -51,13 +58,6 @@ public class NoticeDAO implements BoardDAO
 	{
 		// TODO Auto-generated method stub
 		return sqlSession.delete(NAMESPACE + "setDelete", boardDTO);
-	}
-
-	@Override
-	public Long getCount() throws Exception
-	{
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + "getCount");
 	}
 
 }

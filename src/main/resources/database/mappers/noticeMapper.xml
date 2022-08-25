@@ -4,11 +4,31 @@
 <!-- namespace가 비어있으면 예외발생 -->
 <mapper namespace="com.naver.start.board.notice.NoticeDAO">
 
+	<select id="getCount" resultType="Long" parameterType="Pager">
+		select count(num) from notice
+		where
+		<choose>
+			<when test="kind == title">title</when>
+			<when test="kind == contents">contents</when>
+			<otherwise>contents</otherwise>
+		</choose>
+		like '%'||#{search}||'%'
+	</select>
+
 	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
 		<!-- select num, title, writer, regdate, hit from notice order by num desc -->
 		select * from
 		(select rownum r, n.* from
-		(select * from notice order by num desc) n)
+		(select * from notice
+		where
+		<choose>
+			<when test="kind == 'title'">title</when>
+			<when test="kind == 'writer'">writer</when>
+			<otherwise>contents</otherwise>
+		</choose>
+		like '%'||#{search}||'%'
+
+		order by num desc) n)
 		where r between #{startRow} and #{lastRow}
 	</select>
 
@@ -18,7 +38,7 @@
 
 	<insert id="setAdd" parameterType="BoardDTO">
 		insert into notice values
-		(board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0)
+		(board_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0)
 	</insert>
 
 	<update id="setUpdate" parameterType="BoardDTO">
@@ -31,8 +51,5 @@
 		delete notice where num = #{num}
 	</delete>
 
-	<select id="getCount" resultType="Long">
-		select count(num) from notice
-	</select>
 
 </mapper>

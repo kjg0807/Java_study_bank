@@ -17,22 +17,29 @@ public class QnaTest extends MyAbstractTest
 	@Autowired
 	private QnaDAO qnaDAO;
 
-	@Test
-	public void getListTest() throws Exception
-	{
-		List<BoardDTO> ar = qnaDAO.getList();
-		assertEquals(0, ar.size());
-	}
-
 	// @Test
-	// public void setAddTest() throws Exception
+	// public void getListTest() throws Exception
 	// {
-	// QnaDTO qnaDTO = new QnaDTO();
-	// qnaDTO.setTitle("qna test1");
-	// qnaDTO.setWriter("writer1");
-	// qnaDTO.setContents("contents1");
-	//
-	// int rs = qnaDAO.setAdd(qnaDTO);
-	// assertEquals(1, rs);
+	// List<BoardDTO> ar = qnaDAO.getList();
+	// assertEquals(0, ar.size());
 	// }
+
+	@Test
+	public void setAddTest() throws Exception
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			QnaDTO qnaDTO = new QnaDTO();
+			qnaDTO.setTitle("Title" + i);
+			qnaDTO.setContents("Contents" + i);
+			qnaDTO.setWriter("Writer" + i);
+			int rs = qnaDAO.setAdd(qnaDTO);
+
+			if (i % 10 == 0)
+			{
+				Thread.sleep(500);
+			}
+		}
+		System.out.println("Qna Finish");
+	}
 }

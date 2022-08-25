@@ -33,7 +33,8 @@ public class NoticeController
 		ModelAndView mv = new ModelAndView();
 
 		System.out.println(pager.getPage());
-		// System.out.println("Page: " + page);
+		System.out.println(pager.getKind());
+		System.out.println(pager.getSearch());
 		List<BoardDTO> ar = noticeService.getList(pager);
 
 		mv.addObject("list", ar);
@@ -41,12 +42,6 @@ public class NoticeController
 		mv.setViewName("board/list");
 
 		return mv;
-	}
-
-	@RequestMapping(value = "list.naver", method = RequestMethod.POST)
-	public String getList() throws Exception
-	{
-		return "board/add";
 	}
 
 	// 글 상세

@@ -25,29 +25,30 @@ public class NoticeTest extends MyAbstractTest
 	// assertEquals(0, ar.size());
 	// }
 
-	// @Test
-	// public void setAddTest() throws Exception
-	// {
-	// for (int i = 0; i < 100; i++)
-	// {
-	// NoticeDTO noticeDTO = new NoticeDTO();
-	// noticeDTO.setTitle("Title" + i);
-	// noticeDTO.setWriter("Writer" + i);
-	// noticeDTO.setContents("Contents" + i);
-	//
-	// int rs = noticeDAO.setAdd(noticeDTO);
-	//
-	// if (i % 10 == 0)
-	// {
-	// Thread.sleep(500);
-	// }
-	// }
-	// System.out.println("Finish!");
-	// }
 	@Test
-	public void getCountTest() throws Exception
+	public void setAddTest() throws Exception
 	{
-		long count = noticeDAO.getCount();
-		assertEquals(101L, count);
+		for (int i = 0; i < 100; i++)
+		{
+			NoticeDTO noticeDTO = new NoticeDTO();
+			noticeDTO.setTitle("Title" + i);
+			noticeDTO.setWriter("Writer" + i);
+			noticeDTO.setContents("Contents" + i);
+
+			int rs = noticeDAO.setAdd(noticeDTO);
+
+			if (i % 10 == 0)
+			{
+				Thread.sleep(500);
+			}
+		}
+		System.out.println("Finish!");
 	}
+
+	// @Test
+	// public void getCountTest() throws Exception
+	// {
+	// long count = noticeDAO.getCount();
+	// assertEquals(101L, count);
+	// }
 }

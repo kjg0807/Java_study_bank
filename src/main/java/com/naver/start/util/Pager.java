@@ -16,6 +16,30 @@ public class Pager
 	private Long lastRow;
 	private Long perPage;
 	private Long perBlock;
+	// privous block exist true, not exist false
+	private boolean pre;
+	// next block exist true, not exist false
+	private boolean next;
+
+	public boolean isPre()
+	{
+		return pre;
+	}
+
+	public void setPre(boolean pre)
+	{
+		this.pre = pre;
+	}
+
+	public boolean isNext()
+	{
+		return next;
+	}
+
+	public void setNext(boolean next)
+	{
+		this.next = next;
+	}
 
 	public Pager()
 	{
@@ -39,6 +63,14 @@ public class Pager
 		{
 			totalPage++;
 		}
+		// 2-1. totalPage보다 page가 더 클 경우
+		System.out.println("TotalPage: " + totalPage);
+		System.out.println("getPage: " + this.getPage());
+		if (totalPage < getPage())
+		{
+			this.setPage(totalPage);
+		}
+
 		// 3. totalPage로 totalBlock 구하기
 		Long totalBlock = totalPage / this.getPerBlock();
 		if (totalPage % this.getPerBlock() != 0)
@@ -55,6 +87,22 @@ public class Pager
 		this.startNum = (curBlock - 1) * this.getPerBlock() + 1;
 		this.lastNum = curBlock * this.getPerBlock();
 
+		// 6. cutBlock이 마지막block(totalBlock과 같을 때)
+		if (curBlock == totalBlock)
+		{
+			this.lastNum = totalPage;
+		}
+		// 7. 이전, 다음 블럭의 유무
+		if (curBlock > 1) // 현재 블럭이 1보다 클때
+			// 현재 블럭이 2보다 작을때 이전 버튼이 없어짐
+		{
+			pre = true;
+		}
+		if (curBlock < totalBlock) // 현재 블럭이 전체 블럭보다 작을 때
+			// 현재 블럭이 전체 블럭과 같거나 클때 다음 버튼이 없어짐
+		{
+			next = true;
+		}
 	}
 
 	public Long getPerPage()
@@ -82,9 +130,9 @@ public class Pager
 		this.perBlock = perBlock;
 	}
 
-	public Long getPage()
+	public Long getPage() // page number control < 0
 	{
-		if (this.page == null)
+		if (this.page == null || this.page < 1)
 		{
 			this.page = 1L;
 		}

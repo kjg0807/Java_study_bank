@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
-	<section class="container-fluid col-lg-6">
+	<section class="container-fluid col-lg-6 b">
 		<form action="./list.naver" method="post">
 			<table class="table table-hover">
 				<h1>${board}_List_Page</h1>
@@ -56,17 +56,36 @@
 		<form align="center" class="col-lg-6 container-fluid">
 			<nav aria-label="Page navigation example" class="col-lg-6 b">
 				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+
+					<!-- page가 1번일때 이전 버튼을 없앰 -->
+					<li class="page-item ${pager.pre?'':'disabled'}">
+						<a class="page-link" href="./list.naver?page=${pager.startNum - 1}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
-						</a></li>
+						</a>
+					</li>
 
 					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-						<li class="page-item"><a class="page-link" href="./list.naver?page=${i}">${i}</a></li>
+						<li class="page-item">
+							<a class="page-link" href="./list.naver?page=${i}">${i}</a>
+						</li>
 					</c:forEach>
 
-					<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a></li>
+					<c:choose>
+						<c:when test="${pager.next}">
+							<li class="page-item">
+								<a class="page-link" href="./list.naver?page=${pager.lastNum + 1}" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item disabled">
+								<a class="page-link" href="./list.naver?page=${pager.lastNum + 1}" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</nav>
 		</form>

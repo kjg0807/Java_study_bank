@@ -6,13 +6,14 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.naver.start.bankMember.BankMembersDTO" alias="BankMembersDTO" />
+		<typeAlias type="com.naver.start.bankMember.BankMembersFileDTO" alias="BankMembersFileDTO" />
 		<typeAlias type="com.naver.start.bankAccount.BankAccountDTO" alias="BankAccountDTO" />
 		<typeAlias type="com.naver.start.bankBook.BankBookDTO" alias="BankBookDTO" />
 		<typeAlias type="com.naver.start.board.impl.BoardDTO" alias="BoardDTO" />
 		<typeAlias type="com.naver.start.board.notice.NoticeDTO" alias="NoticeDTO" />
 		<typeAlias type="com.naver.start.board.qna.QnaDTO" alias="QnaDTO" />
 		<typeAlias type="com.naver.start.util.Pager" alias="Pager" />
-		
+
 		<typeAlias type="java.lang.String" alias="String" />
 		<typeAlias type="java.lang.Long" alias="Long" />
 		<typeAlias type="java.util.List" alias="List" />

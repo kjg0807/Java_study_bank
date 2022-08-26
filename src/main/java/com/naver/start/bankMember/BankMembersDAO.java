@@ -19,27 +19,14 @@ public class BankMembersDAO implements MembersDAO
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.naver.start.bankMember.BankMembersDAO."; // final - 상수처럼 사용 - 값 변경x
 
+	public int setAddFile(BankMembersFileDTO bankMembersFileDTO) throws Exception
+	{
+		return sqlSession.insert(NAMESPACE + "setAddFile", bankMembersFileDTO);
+	}
+
 	@Override
 	public BankMembersDTO getLogin(BankMembersDTO bankMembersDTO) throws Exception
 	{
-		// Connection con = DBConnector.getConnection();
-		// String sql = "select userid, name from bankmembers where userid = ? and pwd = ?";
-		// PreparedStatement st = con.prepareStatement(sql);
-		// st.setString(1, bankMembersDTO.getUserid());
-		// st.setString(2, bankMembersDTO.getPwd());
-		// ResultSet rs = st.executeQuery();
-
-		// if (rs.next())
-		// {
-		// bankMembersDTO = new BankMembersDTO();
-		// bankMembersDTO.setUserid(rs.getString("userid"));
-		// bankMembersDTO.setName(rs.getString("name"));
-		// }
-		// else
-		// {
-		// bankMembersDTO = null;
-		// }
-
 		return sqlSession.selectOne(NAMESPACE + "getLogin", bankMembersDTO);
 	}
 
@@ -122,41 +109,6 @@ public class BankMembersDAO implements MembersDAO
 		ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
 
 		return ar;
-
-		// Connection DBConn = DBConnector.getConnection();
-		// // 2. regions의 데이터 가져오기
-		// String sql = "select * from bankmembers where name like ? order by name desc";
-		// // 전체 출력 -> select * from bankmembers where userid = ? -> 검색
-		// // 3. Query문 미리 전송
-		// PreparedStatement st = DBConn.prepareStatement(sql);
-		// // 4. ? 의 값 세팅
-		// st.setString(1, "%" + search + "%"); // 검색하려면 주석 해제
-		// // 5. 최종 전송 후 결과를 처리
-		// ResultSet rs = st.executeQuery();
-		//
-		// ArrayList<BankMembersDTO> ar = new ArrayList();
-		// while (rs.next())
-		// {
-		// BankMembersDTO bankMembersDTO = new BankMembersDTO();
-		// bankMembersDTO.setUserid(rs.getString("userid"));
-		// bankMembersDTO.setPwd(rs.getString("pwd"));
-		// bankMembersDTO.setName(rs.getString("name"));
-		// bankMembersDTO.setEmail(rs.getString("email"));
-		// bankMembersDTO.setPhone(rs.getString("phone"));
-		// ar.add(bankMembersDTO);
-		//
-		// // System.out.println("USERID: " + bankMembersDTO.getUserid() + ", PWD: " + bankMembersDTO.getPwd() + ", NAME: " +
-		// // bankMembersDTO.getName()
-		// // + ", Email: " + bankMembersDTO.getEmail() + ", PHONE: " + bankMembersDTO.getPhone());
-		// // System.out.println("Name: " + bankMembersDTO.getName());
-		// }
-		// DBConnector.disConnect(rs, st, DBConn);
-		//
-		// return ar;
-
-		// ArrayList<BankMembersDTO> ar = new ArrayList<BankMembersDTO>();
-		//
-		// return sqlSession.selectList(NAMESPACE + "getSearchByID" + search);
 	}
 
 	public BankMembersDTO getMyPage(BankMembersDTO bankMembersDTO) throws Exception

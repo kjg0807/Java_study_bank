@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -65,12 +66,16 @@ public class MemberController
 
 	// Post
 	@RequestMapping(value = "join.naver", method = RequestMethod.POST)
-	public String join(BankMembersDTO bankMembersDTO) throws Exception
+	public String join(BankMembersDTO bankMembersDTO, MultipartFile photo) throws Exception
 	{
 		System.out.println("Join post Test");
-		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
-		int rs = bankMemberSerive.setJoin(bankMembersDTO);
-		System.out.println(rs == 1);
+
+		System.out.println(photo);
+		System.out.println("Upload Name: " + photo.getOriginalFilename());
+		System.out.println("Upload Parameter Name: " + photo.getName());
+		System.out.println("File Size: " + photo.getSize() + " Byte");
+
+		int rs = bankMemberSerive.setJoin(bankMembersDTO, photo);
 
 		return "redirect:./login.naver";
 	}
@@ -124,8 +129,11 @@ public class MemberController
 		System.out.println("MyPage Get 실행");
 
 		BankMembersDTO bankMembersDTO = (BankMembersDTO) session.getAttribute("member");
-		Map<String, Object> map = bankMemberSerive.getMyPage(bankMembersDTO);
-		mv.addObject("map", map);
+		// Map<String, Object> map = bankMemberSerive.getMyPage(bankMembersDTO);
+		// mv.addObject("map", map);
+
+		bankMembersDTO = bankMemberSerive.getMyPage(bankMembersDTO);
+		mv.addObject("dto", bankMembersDTO);
 
 		mv.setViewName("member/mypage");
 

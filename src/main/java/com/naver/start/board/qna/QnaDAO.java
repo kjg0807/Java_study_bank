@@ -18,13 +18,6 @@ public class QnaDAO implements BoardDAO
 	private final String NAMESPACE = "com.naver.start.board.qna.QnaDAO.";
 
 	@Override
-	public Long getCount(Pager pager) throws Exception
-	{
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE + "getCount", pager);
-	}
-
-	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -64,9 +57,21 @@ public class QnaDAO implements BoardDAO
 		return sqlSession.update(NAMESPACE + "setStepUpdate", qnaDTO);
 	}
 
-	public int setReplyAdd(QnaDTO qnaDTO) throws Exception
+	public int setReplyAdd(BoardDTO boardDTO) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return sqlSession.insert(NAMESPACE + "setReplyAdd", qnaDTO);
+		return sqlSession.insert(NAMESPACE + "setReplyAdd", boardDTO);
+	}
+
+	public int setReply(BoardDTO boardDTO) throws Exception
+	{
+		return sqlSession.insert(NAMESPACE + "setReply", boardDTO);
+	}
+
+	@Override
+	public Long getCount(Pager pager) throws Exception
+	{
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE + "getCount", pager);
 	}
 }

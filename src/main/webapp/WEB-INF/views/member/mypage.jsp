@@ -22,10 +22,10 @@
 						<td>Phone</td>
 					</tr>
 					<tr>
-						<td>${map.dto.userid }</td>
-						<td>${map.dto.name }</td>
-						<td>${map.dto.email }</td>
-						<td>${map.dto.phone }</td>
+						<td>${dto.userid }</td>
+						<td>${dto.name }</td>
+						<td>${dto.email }</td>
+						<td>${dto.phone }</td>
 					</tr>
 				</table>
 			</div>
@@ -36,14 +36,17 @@
 						<th>Title</th>
 						<th>Date</th>
 					</tr>
-					<tr>
-						<c:forEach items="${map.list}" var="dto">
+					<c:forEach items="${dto.bankAccountDTOs}" var="dto">
+						<tr>
 							<td>${pageScope.dto.accountNum}</td>
 							<td>${dto.bankBookDTO.bookName}</td>
 							<td>${dto.accountDate}</td>
-						</c:forEach>
-					</tr>
+						</tr>
+					</c:forEach>
 				</table>
+			</div>
+			<div class="row mt-3">
+				<img alt="이미지안떠" src="../resources/upload/member/${dto.bankMembersFileDTO.fileName}">
 			</div>
 		</section>
 	</form>

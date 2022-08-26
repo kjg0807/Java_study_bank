@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.start.board.impl.BoardDTO;
@@ -69,10 +70,10 @@ public class NoticeController
 	}
 
 	@RequestMapping(value = "add.naver", method = RequestMethod.POST)
-	public ModelAndView setAdd(BoardDTO boardDTO) throws Exception
+	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile [] files) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
-		int rs = noticeService.setAdd(boardDTO);
+		int rs = noticeService.setAdd(boardDTO, files);
 
 		mv.setViewName("redirect:./list.naver");
 

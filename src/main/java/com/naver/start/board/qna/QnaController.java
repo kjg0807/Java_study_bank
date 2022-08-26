@@ -81,7 +81,7 @@ public class QnaController
 		boardDTO = qnaService.getDetail(boardDTO);
 
 		mv.addObject("boardDTO", boardDTO);
-		mv.setViewName("./qna/update.naver");
+		mv.setViewName("board/update");
 
 		return mv;
 	}
@@ -112,13 +112,11 @@ public class QnaController
 	}
 
 	@PostMapping("reply")
-	public String setReplyAdd(QnaDTO qnaDTO) throws Exception
+	public String setReply(QnaDTO qnaDTO) throws Exception
 	{
-		int rs = qnaService.setReplyAdd(qnaDTO);
-		
+		int rs = qnaService.setReply(qnaDTO);
+
 		return "redirect:./list.naver";
 	}
 
-	
-	
 }

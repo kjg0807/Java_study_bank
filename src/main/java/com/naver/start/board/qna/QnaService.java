@@ -15,14 +15,14 @@ public class QnaService implements BoardService
 	@Autowired
 	private QnaDAO qnaDAO;
 
-	public int setReplyAdd(QnaDTO qnaDTO) throws Exception
+	public int setReply(QnaDTO qnaDTO) throws Exception
 	{
 		BoardDTO boardDTO = qnaDAO.getDetail(qnaDTO);
 		QnaDTO parent = (QnaDTO) boardDTO;
 
 		qnaDTO.setRef(parent.getRef());
-		qnaDTO.setRef(parent.getStep() + 1);
-		qnaDTO.setRef(parent.getDepth() + 1);
+		qnaDTO.setStep(parent.getStep() + 1);
+		qnaDTO.setDepth(parent.getDepth() + 1);
 
 		qnaDAO.setStepUpdate(parent);
 		int rs = qnaDAO.setReplyAdd(qnaDTO);

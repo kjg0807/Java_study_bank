@@ -21,6 +21,40 @@ public class Pager
 	// next block exist true, not exist false
 	private boolean next;
 
+	private String title;
+	private String contents;
+	private String writer;
+
+	public String getContents()
+	{
+		return contents;
+	}
+
+	public void setContents(String contents)
+	{
+		this.contents = contents;
+	}
+
+	public String getWriter()
+	{
+		return writer;
+	}
+
+	public void setWriter(String writer)
+	{
+		this.writer = writer;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
 	// 검색 컬럼의 종류
 	private String kind;
 	// 검색어

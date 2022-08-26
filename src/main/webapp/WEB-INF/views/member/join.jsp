@@ -18,7 +18,7 @@ form {
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 
-	<form action="./join.naver" method="post">
+	<form action="./join.naver" method="post" enctype="multipart/form-data">
 
 		<section class="col-lg-6 container-fluid mt-4">
 			<div class="row">
@@ -41,6 +41,10 @@ form {
 				<div class="mb-3">
 					<label class="form-label">Phone</label>
 					<input type="text" class="form-control" name="phone" aria-describedby="emailHelp" placeholder="Phone Input" onfocus="this.placeholder=''" onblur="this.placeholder='Phone Input'">
+				</div>
+				<div class="mb-3">
+					<label for="files" class="form-label">Image</label>
+					<input type="file" class="form-control" id="files" name="photo" aria-describedby="emailHelp" placeholder="Phone Input" onfocus="this.placeholder=''" onblur="this.placeholder='Phone Input'">
 				</div>
 				<button type="submit" class="btn btn-primary">Sign Up</button>
 			</div>

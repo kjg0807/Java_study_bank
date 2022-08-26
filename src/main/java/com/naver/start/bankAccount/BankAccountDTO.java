@@ -3,6 +3,7 @@ package com.naver.start.bankAccount;
 import java.sql.Date;
 
 import com.naver.start.bankBook.BankBookDTO;
+import com.naver.start.bankMember.BankMembersFileDTO;
 
 public class BankAccountDTO
 {
@@ -11,6 +12,17 @@ public class BankAccountDTO
 	private long bookNum;
 	private Date accountDate;
 	private BankBookDTO bankBookDTO;
+	private BankMembersFileDTO bankMembersFileDTO;
+
+	public BankMembersFileDTO getBankMembersFileDTO()
+	{
+		return bankMembersFileDTO;
+	}
+
+	public void setBankMembersFileDTO(BankMembersFileDTO bankMembersFileDTO)
+	{
+		this.bankMembersFileDTO = bankMembersFileDTO;
+	}
 
 	public BankBookDTO getBankBookDTO()
 	{

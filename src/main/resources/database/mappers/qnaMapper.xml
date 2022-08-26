@@ -13,12 +13,12 @@
 		</choose>
 		like '%'||#{search}||'%'
 	</sql>
-	
+
 	<insert id="setReplyAdd" parameterType="QnaDTO">
 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
 			select board_seq.nextval from dual
 		</selectKey>
-		insert into qna values
+		insert into qna(NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT, REF, STEP, DEPTH) values
 		(#{num}, #{title}, #{contents}, #{writer}, sysdate, 0, #{ref}, #{step}, #{depth}) <!-- hit, ref, step, depth -->
 
 	</insert>
@@ -51,7 +51,8 @@
 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
 			select board_seq.nextval from dual
 		</selectKey>
-		insert into qna values
+		insert into qna (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT, REF, STEP, DEPTH)
+		values
 		(#{num}, #{title}, #{contents}, #{writer}, sysdate, 0, #{num}, 0, 0) <!-- hit, ref, step, depth -->
 	</insert>
 

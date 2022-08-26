@@ -112,9 +112,9 @@ public class QnaController
 	}
 
 	@PostMapping("reply")
-	public String setReply(QnaDTO qnaDTO) throws Exception
+	public String setReplyAdd(QnaDTO qnaDTO) throws Exception
 	{
-		int rs = qnaService.setReply(qnaDTO);
+		int rs = qnaService.setReplyAdd(qnaDTO);
 		
 		return "redirect:./list.naver";
 	}

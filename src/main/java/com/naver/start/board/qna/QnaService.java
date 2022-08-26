@@ -15,7 +15,7 @@ public class QnaService implements BoardService
 	@Autowired
 	private QnaDAO qnaDAO;
 
-	public int setReply(QnaDTO qnaDTO) throws Exception
+	public int setReplyAdd(QnaDTO qnaDTO) throws Exception
 	{
 		BoardDTO boardDTO = qnaDAO.getDetail(qnaDTO);
 		QnaDTO parent = (QnaDTO) boardDTO;

@@ -6,6 +6,9 @@ import com.naver.start.util.Pager;
 
 public interface BoardDAO
 {
+	// file
+	public int setAddFile(BoardFileDTO boardFileDTO) throws Exception;
+
 	// 글 총 갯수
 	public Long getCount(Pager pager) throws Exception;
 

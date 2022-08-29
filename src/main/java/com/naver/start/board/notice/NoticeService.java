@@ -3,6 +3,7 @@ package com.naver.start.board.notice;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -12,6 +13,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.naver.start.board.impl.BoardDTO;
+import com.naver.start.board.impl.BoardFileDTO;
 import com.naver.start.board.qna.QnaDTO;
 import com.naver.start.util.Pager;
 
@@ -43,7 +45,7 @@ public class NoticeService
 	// 글 쓰기
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception
 	{
-		// int rs = noticeDAO.setAdd(boardDTO);
+		int rs = noticeDAO.setAdd(boardDTO);
 
 		// 파일 경로
 		String realPath = servletContext.getRealPath("resources/upload/notice");
@@ -63,18 +65,19 @@ public class NoticeService
 			{
 				continue;
 			}
+			// file = new File(realPath); //사진을 저장할 폴더를 새로 만들어야 함 - 파일 초기화
 			// 저장하는 코드
-			Calendar ca = Calendar.getInstance();
-			Long l = ca.getTimeInMillis();
-			String oriName = mf.getOriginalFilename();
-			String fileName = l + "_" + oriName;
-			System.out.println("fileName: " + fileName);
-
-			file = new File(file, fileName);
+			String fileName = UUID.randomUUID().toString();
+			fileName = fileName + "_" + mf.getOriginalFilename();
+			// file = new File(file, fileName); //쓰려면 file = new File 주석 해제
+			File dest = new File(file, fileName); // 폴더(resources/upload/notice), 파일명
 			mf.transferTo(file);
 
-			file = new File(file, fileName);
-			FileCopyUtils.copy(mf.getBytes(), file);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(mf.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+			noticeDAO.setAddFile(boardFileDTO);
 		}
 
 		// return rs;

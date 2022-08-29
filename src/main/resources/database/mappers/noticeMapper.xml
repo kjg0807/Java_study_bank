@@ -4,6 +4,11 @@
 <!-- namespace가 비어있으면 예외발생 -->
 <mapper namespace="com.naver.start.board.notice.NoticeDAO">
 
+	<insert id="setAddFile" parameterType="BoardFileDTO">
+		insert int noticefile
+		values(file_seq.nextval, #{num}, #{filename}, #{oriName})
+	</insert>
+
 	<select id="getCount" resultType="Long" parameterType="Pager">
 		select count(num) from notice
 		where
@@ -37,8 +42,11 @@
 	</select>
 
 	<insert id="setAdd" parameterType="BoardDTO">
+		<selectKey order="BEFORE" keyProperty="num" resultType="Long">
+			select board_seq.nextval from dual
+		</selectKey>
 		insert into notice values
-		(board_seq.nextval, #{title}, #{contents}, #{writer}, sysdate, 0)
+		(#{num}, #{title}, #{contents}, #{writer}, sysdate, 0)
 	</insert>
 
 	<update id="setUpdate" parameterType="BoardDTO">

@@ -5,8 +5,8 @@
 <mapper namespace="com.naver.start.board.qna.QnaDAO">
 
 	<insert id="setAddFile" parameterType="BoardFileDTO">
-		insert int qnafile
-		values(file_seq.nextval, #{num}, #{filename}, #{oriName})
+		INSERT INTO qnafile(num, filename, oriname)
+		VALUES(#{num}, #{fileName}, #{oriName})
 	</insert>
 
 	<sql id="search">

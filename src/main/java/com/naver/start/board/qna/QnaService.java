@@ -72,6 +72,7 @@ public class QnaService implements BoardService
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
 			boardFileDTO.setNum(boardDTO.getNum());
+			qnaDAO.setAddFile(boardFileDTO);
 		}
 
 		return rs;

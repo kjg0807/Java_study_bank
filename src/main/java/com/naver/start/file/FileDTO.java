@@ -9,12 +9,12 @@ public class FileDTO extends BankMembersDTO
 	private String fileName;
 	private String oriName;
 
-	public Long getFileNum()
+	public Long getNum()
 	{
 		return fileNum;
 	}
 
-	public void setFileNum(Long fileNum)
+	public void setNum(Long fileNum)
 	{
 		this.fileNum = fileNum;
 	}

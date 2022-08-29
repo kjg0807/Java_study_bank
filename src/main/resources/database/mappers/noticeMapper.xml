@@ -5,8 +5,8 @@
 <mapper namespace="com.naver.start.board.notice.NoticeDAO">
 
 	<insert id="setAddFile" parameterType="BoardFileDTO">
-		insert int noticefile
-		values(file_seq.nextval, #{num}, #{filename}, #{oriName})
+		INSERT INTO noticefile(num, filename, oriname)
+		VALUES(#{num}, #{fileName}, #{oriName})
 	</insert>
 
 	<select id="getCount" resultType="Long" parameterType="Pager">

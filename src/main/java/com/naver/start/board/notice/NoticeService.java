@@ -47,7 +47,7 @@ public class NoticeService
 	}
 
 	// 글 쓰기
-	public int setAddFile(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception
 	{
 		int rs = noticeDAO.setAdd(boardDTO);
 
@@ -63,7 +63,7 @@ public class NoticeService
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
-			boardFileDTO.setNum(boardFileDTO.getNum());
+			boardFileDTO.setNum(boardDTO.getNum());
 			noticeDAO.setAddFile(boardFileDTO);
 		}
 

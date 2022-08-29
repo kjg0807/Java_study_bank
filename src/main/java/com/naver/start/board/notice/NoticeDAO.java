@@ -40,12 +40,12 @@ public class NoticeDAO implements BoardDAO
 		return sqlSession.selectOne(NAMESPACE + "getDetail", boardDTO);
 	}
 
-	// @Override
-	// public int setAdd(BoardDTO boardDTO) throws Exception
-	// {
-	// // TODO Auto-generated method stub
-	// return sqlSession.insert(NAMESPACE + "setAdd", boardDTO);
-	// }
+	@Override
+	public int setAdd(BoardDTO boardDTO) throws Exception
+	{
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE + "setAdd", boardDTO);
+	}
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception
@@ -66,12 +66,4 @@ public class NoticeDAO implements BoardDAO
 	{
 		return sqlSession.insert(NAMESPACE + "setAddFile", boardFileDTO);
 	}
-
-	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

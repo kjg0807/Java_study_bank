@@ -27,7 +27,7 @@ public class NoticeController
 	@ModelAttribute("board")
 	public String getBoard()
 	{
-		return "Notice";
+		return "notice";
 	}
 
 	// 글 목록
@@ -76,7 +76,7 @@ public class NoticeController
 	public ModelAndView setAddFile(BoardDTO boardDTO, MultipartFile [] files, HttpSession session) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
-		int rs = noticeService.setAddFile(boardDTO, files, session.getServletContext());
+		int rs = noticeService.setAdd(boardDTO, files, session.getServletContext());
 
 		mv.setViewName("redirect:./list.naver");
 

@@ -37,9 +37,28 @@
 		where r between #{startRow} and #{lastRow}
 	</select>
 
-	<select id="getDetail" parameterType="BoardDTO" resultType="NoticeDTO">
-		select * from notice where num = #{num}
+	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+		select n.*, nf.*
+		from notice n
+		left join
+		noticefile nf
+		on n.num = nf.num
+		where n.num = #{num}
 	</select>
+
+	<resultMap type="NoticeDTO" id="getDetailResult">
+		<id column="num" property="num" />
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="contents" property="contents" />
+		<result column="regdate" property="regDate" />
+		<result column="hit" property="hit" />
+		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+			<id column="fileNum" property="fileNum" />
+			<result column="fileName" property="fileName" />
+			<result column="oriName" property="oriName" />
+		</collection>
+	</resultMap>
 
 	<insert id="setAdd" parameterType="BoardDTO">
 		<selectKey order="BEFORE" keyProperty="num" resultType="Long">

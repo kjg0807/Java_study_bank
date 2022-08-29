@@ -45,6 +45,13 @@
 			</tbody>
 		</table>
 		<div class="row">
+			<c:forEach items="${boardDTO.boardFileDTOs}" var="file">
+				<p>
+					<a href="../resources/upload/${board}/${file.fileName}">${file.oriName} + 11</a>
+				</p>
+			</c:forEach>
+		</div>
+		<div class="row">
 			<a class="btn btn-danger" href="./reply.naver?num=${boardDTO.num}">Reply</a>
 		</div>
 	</section>

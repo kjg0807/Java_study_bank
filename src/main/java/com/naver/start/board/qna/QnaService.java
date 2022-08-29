@@ -2,11 +2,16 @@ package com.naver.start.board.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.naver.start.board.impl.BoardDTO;
+import com.naver.start.board.impl.BoardFileDTO;
 import com.naver.start.board.impl.BoardService;
+import com.naver.start.util.FileManager;
 import com.naver.start.util.Pager;
 
 @Service
@@ -14,6 +19,8 @@ public class QnaService implements BoardService
 {
 	@Autowired
 	private QnaDAO qnaDAO;
+	@Autowired
+	private FileManager fileManager;
 
 	public int setReply(QnaDTO qnaDTO) throws Exception
 	{
@@ -46,11 +53,27 @@ public class QnaService implements BoardService
 		return qnaDAO.getDetail(boardDTO);
 	}
 
-	public int setAdd(BoardDTO boardDTO) throws Exception
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception
 	{
 		System.out.println("Insert 전: " + boardDTO.getNum());
 		int rs = qnaDAO.setAdd(boardDTO);
 		System.out.println("Insert 후: " + boardDTO.getNum());
+
+		String path = "resources/upload/qna";
+
+		for (MultipartFile multipartFile : files)
+		{
+			if (multipartFile.isEmpty())
+			{
+				continue;
+			}
+			String fileName = fileManager.saveFile(servletContext, path, multipartFile);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+		}
+
 		return rs;
 	}
 
@@ -65,5 +88,4 @@ public class QnaService implements BoardService
 	{
 		return qnaDAO.setDelete(boardDTO);
 	}
-
 }

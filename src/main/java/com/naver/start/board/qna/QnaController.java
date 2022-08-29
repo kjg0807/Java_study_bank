@@ -2,6 +2,9 @@ package com.naver.start.board.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.start.board.impl.BoardDTO;
@@ -65,10 +69,10 @@ public class QnaController
 	}
 
 	@RequestMapping(value = "add.naver", method = RequestMethod.POST)
-	public ModelAndView setAdd(BoardDTO boardDTO) throws Exception
+	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
-		int rs = qnaService.setAdd(boardDTO);
+		int rs = qnaService.setAdd(boardDTO, files, session.getServletContext());
 
 		mv.setViewName("redirect:./list.naver");
 

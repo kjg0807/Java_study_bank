@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.naver.start.board.impl.BoardDTO;
 import com.naver.start.board.impl.BoardFileDTO;
 import com.naver.start.board.qna.QnaDTO;
+import com.naver.start.util.FileManager;
 import com.naver.start.util.Pager;
 
 @Service
@@ -23,8 +24,11 @@ public class NoticeService
 	@Autowired
 	private NoticeDAO noticeDAO;
 
+	// @Autowired
+	// private ServletContext servletContext;
+
 	@Autowired
-	private ServletContext servletContext;
+	private FileManager fileManager;
 
 	// 글 목록
 	public List<BoardDTO> getList(Pager pager) throws Exception
@@ -43,45 +47,28 @@ public class NoticeService
 	}
 
 	// 글 쓰기
-	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception
+	public int setAddFile(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception
 	{
 		int rs = noticeDAO.setAdd(boardDTO);
 
-		// 파일 경로
-		String realPath = servletContext.getRealPath("resources/upload/notice");
-		System.out.println("RealPath: " + realPath);
-		// 폴더 확인
-		File file = new File(realPath);
+		String path = "resources/upload/notice";
 
-		if (!file.exists())
+		for (MultipartFile multipartFile : files)
 		{
-			file.mkdirs();
-		}
-
-		// 파일 중복 체크 - file 배열이므로 반복문
-		for (MultipartFile mf : files)
-		{
-			if (mf.isEmpty()) // mf가 존재하지 않을 때
+			if (multipartFile.isEmpty())
 			{
 				continue;
 			}
-			// file = new File(realPath); //사진을 저장할 폴더를 새로 만들어야 함 - 파일 초기화
-			// 저장하는 코드
-			String fileName = UUID.randomUUID().toString();
-			fileName = fileName + "_" + mf.getOriginalFilename();
-			// file = new File(file, fileName); //쓰려면 file = new File 주석 해제
-			File dest = new File(file, fileName); // 폴더(resources/upload/notice), 파일명
-			mf.transferTo(file);
-
+			String fileName = fileManager.saveFile(servletContext, path, multipartFile);
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			boardFileDTO.setFileName(fileName);
-			boardFileDTO.setOriName(mf.getOriginalFilename());
-			boardFileDTO.setNum(boardDTO.getNum());
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setNum(boardFileDTO.getNum());
 			noticeDAO.setAddFile(boardFileDTO);
 		}
 
-		// return rs;
-		return 0;
+		return rs;
+		// return 0;
 	}
 
 	// 글 수정

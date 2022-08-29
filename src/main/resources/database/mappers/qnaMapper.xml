@@ -4,6 +4,11 @@
 <!-- namespace가 비어있으면 예외발생 -->
 <mapper namespace="com.naver.start.board.qna.QnaDAO">
 
+	<insert id="setAddFile" parameterType="BoardFileDTO">
+		insert int qnafile
+		values(file_seq.nextval, #{num}, #{filename}, #{oriName})
+	</insert>
+
 	<sql id="search">
 		where
 		<choose>

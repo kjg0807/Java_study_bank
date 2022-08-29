@@ -2,6 +2,9 @@ package com.naver.start.board.notice;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,10 +73,10 @@ public class NoticeController
 	}
 
 	@RequestMapping(value = "add.naver", method = RequestMethod.POST)
-	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile [] files) throws Exception
+	public ModelAndView setAddFile(BoardDTO boardDTO, MultipartFile [] files, HttpSession session) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
-		int rs = noticeService.setAdd(boardDTO, files);
+		int rs = noticeService.setAddFile(boardDTO, files, session.getServletContext());
 
 		mv.setViewName("redirect:./list.naver");
 

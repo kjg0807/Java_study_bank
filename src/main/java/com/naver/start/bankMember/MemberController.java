@@ -3,6 +3,7 @@ package com.naver.start.bankMember;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -66,7 +67,7 @@ public class MemberController
 
 	// Post
 	@RequestMapping(value = "join.naver", method = RequestMethod.POST)
-	public String join(BankMembersDTO bankMembersDTO, MultipartFile photo) throws Exception
+	public String join(BankMembersDTO bankMembersDTO, MultipartFile photo, HttpSession session) throws Exception
 	{
 		System.out.println("Join post Test");
 
@@ -75,7 +76,7 @@ public class MemberController
 		System.out.println("Upload Parameter Name: " + photo.getName());
 		System.out.println("File Size: " + photo.getSize() + " Byte");
 
-		int rs = bankMemberSerive.setJoin(bankMembersDTO, photo);
+		int rs = bankMemberSerive.setJoin(bankMembersDTO, photo, session.getServletContext());
 
 		return "redirect:./login.naver";
 	}

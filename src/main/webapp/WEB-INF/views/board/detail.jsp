@@ -18,10 +18,8 @@
 	<section class="container-fluid col-lg-6">
 		<table class="table table-hover">
 			<h1>${board}_Detail_Page</h1>
-			<nav class="a">
-				<button type="submit" class="btn btn-primary">
-					<a href="./update.naver?num=${boardDTO.num}" color="white">Update Page</a>
-				</button>
+			<nav class="a">				
+				<button onclick="location='update.naver?num=${boardDTO.num}'" type="submit" class="btn btn-primary">Update Page</button>
 			</nav>
 			<thead>
 				<tr>
@@ -52,7 +50,7 @@
 			</c:forEach>
 		</div>
 		<div class="row">
-			<a class="btn btn-danger" href="./reply.naver?num=${boardDTO.num}">Reply</a>
+			<a class="btn btn-danger" href="./reply.naver?num=${boardDTO.num}">Reply</a>			
 		</div>
 	</section>
 	<c:import url="../template/footer.jsp"></c:import>

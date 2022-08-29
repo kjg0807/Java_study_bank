@@ -68,8 +68,8 @@ form {
 			</div>
 		</form>
 	</section>
+	<script src="/resources/js/test.js"></script>
 	<!-- footer import -->
-	<c:import url="./template/footer.jsp"></c:import>
+	<c:import url="./template/footer.jsp"></c:import>	
 </body>
-
 </html>

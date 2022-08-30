@@ -47,5 +47,4 @@ btn4.addEventListener("click", function () {
         console.log(c1[i].selected);
     }
     c1[0].selected = true;
-
 })

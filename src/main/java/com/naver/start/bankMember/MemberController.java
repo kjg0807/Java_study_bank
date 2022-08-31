@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +56,23 @@ public class MemberController
 		session.setAttribute("member", bankMembersDTO); // DB에 값이 있냐 없냐 판단
 
 		return "redirect:../";
+	}
+
+	@GetMapping("accept")
+	public ModelAndView accept(ModelAndView mv)
+	{
+		System.out.println("accept get Test");
+		mv.setViewName("member/accept");
+
+		return mv;
+	}
+
+	@PostMapping("accept")
+	public String accept()
+	{
+		System.out.println("accept Post Test");
+
+		return "redirect:./join.naver";
 	}
 
 	// join /member/join Get

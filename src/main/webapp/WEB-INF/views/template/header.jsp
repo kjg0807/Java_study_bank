@@ -28,7 +28,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="c"><a class="nav-link active" href="/member/login.naver">Login</a></li>
-							<li class="c"><a class="nav-link active" href="/member/join.naver">Join</a></li>
+							<li class="c"><a class="nav-link active" href="/member/accept">Join</a></li>
 						</c:otherwise>
 					</c:choose>
 

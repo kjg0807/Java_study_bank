@@ -55,9 +55,7 @@ public class QnaService implements BoardService
 
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception
 	{
-		System.out.println("Insert 전: " + boardDTO.getNum());
-		int rs = qnaDAO.setAdd(boardDTO);
-		System.out.println("Insert 후: " + boardDTO.getNum());
+		int rs = qnaDAO.setAdd(boardDTO);		
 
 		String path = "resources/upload/qna";
 

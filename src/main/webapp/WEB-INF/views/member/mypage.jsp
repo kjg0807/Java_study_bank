@@ -46,7 +46,7 @@
 				</table>
 			</div>
 			<div class="row mt-3">
-				<img alt="이미지안떠" src="../resources/upload/member/${dto.bankMembersFileDTO.fileName}">
+				<img alt="이미지안떠" src="../../../resources/image/${dto.bankMembersFileDTO.fileName}">
 			</div>
 		</section>
 	</form>

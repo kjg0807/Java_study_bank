@@ -53,7 +53,7 @@
 		</form>
 	</section>
 	<script type="text/javascript">
-		$("contents").summernote();
+		$("#contents").summernote();
 	</script>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>

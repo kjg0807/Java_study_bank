@@ -6,7 +6,8 @@
 
 	<insert id="setAddFile" parameterType="BankMembersFileDTO">
 		<!-- file_seq, userid, filename, oriname -->
-		insert into memberfile values(file_seq.nextval, #{userid}, #{fileName}, #{oriName})
+		insert into memberfile(fileNum, userid, filename, oriname)
+		values(file_seq.nextval, #{userid}, #{fileName}, #{oriName})
 	</insert>
 
 	<!-- id == DAO.method name -->
@@ -29,7 +30,7 @@
 		/> <result column="email" property="email" /> <result column="phone" property="phone" /> <collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO"> <id column="accountnum" property="accountNum" /> <result column="accountdate" property="accountDate" /> <association property="bankBookDTO" 
 		javaType="BankBookDTO"> <result column="bookname" property="bookName" /> </association> </collection> </resultMap> -->
 	<select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult">
-		SELECT BM.USERID, NAME, EMAIL, PHONE, ACCOUNTNUM, BOOKNAME, ACCOUNTDATE
+		SELECT BM.USERID, NAME, EMAIL, PHONE,FILENUM, FILENAME, ACCOUNTNUM, BOOKNAME, ACCOUNTDATE
 		FROM
 		BANKMEMBERS BM
 		LEFT JOIN

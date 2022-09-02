@@ -153,7 +153,7 @@ public class MemberController
 		// mv.addObject("map", map);
 
 		bankMembersDTO = bankMemberSerive.getMyPage(bankMembersDTO);
-		System.out.println(bankMembersDTO.getBankMembersFileDTO().getFileName());
+		System.out.println("getMyPage111: " + bankMembersDTO);
 		mv.addObject("dto", bankMembersDTO);
 
 		mv.setViewName("member/mypage");

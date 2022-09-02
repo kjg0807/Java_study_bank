@@ -72,20 +72,22 @@ fileAdd.addEventListener("click", function () {
     div.appendChild(br);
     div.appendChild(button);
 
-    // 삭제 버튼시 파일 입력칸 안보이게 하기
-    button.addEventListener("click", function(){
-        addFiles.removeChild(div);
-        count = 0;
-    })
-
-    count++;
-
-    if (count > 5) {
+    
+    if (count > 4) {
         alert("파일은 최대 5개까지만 가능합니다.");
         return;
     }
-
+    count++;
+    console.log("count+ : "+ count);
+    
     addFiles.append(div);
+
+    // 삭제 버튼시 파일 입력칸 안보이게 하기
+    button.addEventListener("click", function(){
+        addFiles.removeChild(div);
+        count--;
+        console.log("count- : "+ count);
+    })
 })
 
 // 삭제 버튼시 파일 입력칸 안보이게 하기
@@ -96,8 +98,9 @@ fileAdd.addEventListener("click", function () {
 //     c.value = "mb-3";
 //     div.setAttributeNode("");
 
-//     if (event.target.classList[0] == "del") {
-//         addFiles.removeChild(div);
+//     let btnn = event.target;
+//     if (btnn.classList[0] == "del") {
+//         document.getElementById("file"+ btnn.title).remove();
 //     }
 //     count = 0;
 // })

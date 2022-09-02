@@ -47,8 +47,8 @@
 							</div>
 							<!-- password 2 -->
 							<div class="mb-3">
-								<label class="form-label">Password</label>
-								<input type="password" class="form-control" name="pwd" placeholder="Password Input"
+								<label class="form-label">Password</label> <!-- name="pwd"-->
+								<input type="password" class="form-control" placeholder="Password Input"
 									id="pwd2" onfocus="this.placeholder=''" onblur="this.placeholder='Password Input'">
 								<!-- pwd를 입력하고 나왔을 때 첫번째 pwd와 값 비교 후 메세지 출력 : 같다, 다르다 -->
 								<div id="pwdText2" style="display: none; color: red;">PWD가 일치하지 않습니다.</div>

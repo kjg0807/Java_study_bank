@@ -21,14 +21,14 @@ public class BankAccountsDAO
 	public int add(BankAccountDTO bankAccountDTO) throws Exception
 	{
 		Connection con = DBConnector.getConnection();
-		// 2. regions�쓽 �뜲�씠�꽣 媛��졇�삤湲�
+		// 2. regions占쎌벥 占쎈쑓占쎌뵠占쎄숲 揶쏉옙占쎌죬占쎌궎疫뀐옙
 		String sql = "insert into bankaccount values(account_seq.nextval, ?, ?, sysdate)";
-		// 3. Query臾� 誘몃━ �쟾�넚
+		// 3. Query�눧占� 沃섎챶�봺 占쎌읈占쎈꽊
 		PreparedStatement st = con.prepareStatement(sql);
-		// 4. ? �쓽 媛� �꽭�똿
+		// 4. ? 占쎌벥 揶쏉옙 占쎄쉭占쎈샒
 		st.setString(1, bankAccountDTO.getUserID());
 		st.setLong(2, bankAccountDTO.getBookNum());
-		// 5. 理쒖쥌 �쟾�넚 �썑 寃곌낵瑜� 泥섎━
+		// 5. 筌ㅼ뮇伊� 占쎌읈占쎈꽊 占쎌뜎 野껉퀗�궢�몴占� 筌ｌ꼶�봺
 		int rs = st.executeUpdate();
 
 		DBConnector.disConnect(st, con);

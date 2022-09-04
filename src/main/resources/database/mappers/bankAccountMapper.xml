@@ -7,7 +7,7 @@
 
 	<select id="getListByUserName" parameterType="BankMembersDTO" resultMap="getListByUserNameResult">
 		select ba.accountNum, bb.bookName, ba.accountDate
-		from bankaccounts ba
+		from bankaccount ba
 		inner join
 		bankbook bb
 		on ba.bookNum = bb.bookNum

@@ -65,6 +65,7 @@ public class NoticeService
 			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
 			boardFileDTO.setNum(boardDTO.getNum());
 			noticeDAO.setAddFile(boardFileDTO);
+			System.out.println(fileName);
 		}
 
 		return rs;

@@ -20,38 +20,38 @@
 		<h1>${board}_Add_Page</h1>
 		<form action="./add.naver" method="post" enctype="multipart/form-data">
 			<table class="table table-hover">
+				<!-- title -->
 				<div class="mb-3">
 					<label>Title</label>
 					<input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Title Input">
 					<div class="form-text">Input Title</div>
 				</div>
+				<!-- writer -->
 				<div class="mb-3">
 					<label>Writer</label>
 					<input type="text" class="form-control" name="writer" id="writer" aria-describedby="emailHelp" placeholder="Writer Input">
 					<div class="form-text">Input Writer</div>
 				</div>
+				<!-- contents -->
 				<div class="mb-3">
 					<label for="contents">Contents</label>
 					<textarea rows="5" cols="20" class="form-control" id="contents" name="contents" placeholder="Contents Input"></textarea>
 					<!-- <input type="text" class="form-control" name="writer" aria-describedby="emailHelp"> -->
 					<div class="form-text">Input Contents</div>
 				</div>
-				<div class="mb-3">
+				<!-- files -->
+				<!-- <div class="mb-3">
 					<label for="files">File1</label>
 					<input type="file" class="form-control" name="files" id="files">
-				</div>
-				<div class="mb-3">
-					<label for="files">File2</label>
-					<input type="file" class="form-control" name="files" id="files">
-				</div>
-				<div class="mb-3">
-					<label for="files">File3</label>
-					<input type="file" class="form-control" name="files" id="files">
+				</div> -->
+				<div id="addFiles" name="divName">
+					<button type="button" class="btn btn-primary" id="fileAdd">File Add</button>
 				</div>
 			</table>
 			<button type="submit" class="btn btn-primary">Writing</button>
 		</form>
 	</section>
+	<script src="/resources/js/boardAdd.js"></script>
 	<script type="text/javascript">
 		$("contents").summernote();
 	</script>

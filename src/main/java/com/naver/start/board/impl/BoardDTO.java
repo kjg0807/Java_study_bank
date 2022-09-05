@@ -3,35 +3,11 @@ package com.naver.start.board.impl;
 import java.sql.Date;
 import java.util.List;
 
-public class BoardDTO
+public class BoardDTO extends CommentDTO
 {
-	private Long num;
 	private String title;
-	private String contents;
-	private String writer;
-	private Date regDate;
 	private Long hit;
 	private List<BoardFileDTO> boardFileDTOs;
-
-	public List<BoardFileDTO> getBoardFileDTOs()
-	{
-		return boardFileDTOs;
-	}
-
-	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs)
-	{
-		this.boardFileDTOs = boardFileDTOs;
-	}
-
-	public Long getNum()
-	{
-		return num;
-	}
-
-	public void setNum(Long num)
-	{
-		this.num = num;
-	}
 
 	public String getTitle()
 	{
@@ -43,36 +19,6 @@ public class BoardDTO
 		this.title = title;
 	}
 
-	public String getContents()
-	{
-		return contents;
-	}
-
-	public void setContents(String contents)
-	{
-		this.contents = contents;
-	}
-
-	public String getWriter()
-	{
-		return writer;
-	}
-
-	public void setWriter(String writer)
-	{
-		this.writer = writer;
-	}
-
-	public Date getRegDate()
-	{
-		return regDate;
-	}
-
-	public void setRegDate(Date regDate)
-	{
-		this.regDate = regDate;
-	}
-
 	public Long getHit()
 	{
 		return hit;
@@ -82,4 +28,15 @@ public class BoardDTO
 	{
 		this.hit = hit;
 	}
+
+	public List<BoardFileDTO> getBoardFileDTOs()
+	{
+		return boardFileDTOs;
+	}
+
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs)
+	{
+		this.boardFileDTOs = boardFileDTOs;
+	}
+
 }

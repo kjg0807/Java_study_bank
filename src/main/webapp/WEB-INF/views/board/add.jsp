@@ -39,11 +39,7 @@
 					<!-- <input type="text" class="form-control" name="writer" aria-describedby="emailHelp"> -->
 					<div class="form-text">Input Contents</div>
 				</div>
-				<!-- files -->
-				<!-- <div class="mb-3">
-					<label for="files">File1</label>
-					<input type="file" class="form-control" name="files" id="files">
-				</div> -->
+				<!-- file -->
 				<div id="addFiles" name="divName">
 					<button type="button" class="btn btn-primary" id="fileAdd">File Add</button>
 				</div>

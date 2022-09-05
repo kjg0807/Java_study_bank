@@ -30,7 +30,7 @@ public class NoticeController
 		return "notice";
 	}
 
-	// 글 목록
+	// 湲� 紐⑸줉
 	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
 	public ModelAndView getList(Pager pager) throws Exception
 	{
@@ -48,7 +48,7 @@ public class NoticeController
 		return mv;
 	}
 
-	// 글 상세
+	// 湲� �긽�꽭
 	@RequestMapping(value = "detail.naver", method = RequestMethod.GET)
 	public ModelAndView getDetail(BoardDTO boardDTO, Model model) throws Exception
 	{
@@ -61,7 +61,7 @@ public class NoticeController
 		return mv;
 	}
 
-	// 글 작성
+	// 湲� �옉�꽦
 	@RequestMapping(value = "add.naver", method = RequestMethod.GET)
 	public ModelAndView setAdd() throws Exception
 	{
@@ -78,12 +78,19 @@ public class NoticeController
 		ModelAndView mv = new ModelAndView();
 		int rs = noticeService.setAdd(boardDTO, files, session.getServletContext());
 
-		mv.setViewName("redirect:./list.naver");
+		String message = "Writing Fail";
+		//String url = "../board/list.naver";
+		if(rs > 0) {
+			message = "Writing succeed";
+		}
+		mv.addObject("message", message);
+		mv.addObject("url", "list.naver");
+		mv.setViewName("common/rs");
 
 		return mv;
 	}
 
-	// 글 수정
+	// 湲� �닔�젙
 	@RequestMapping(value = "update.naver", method = RequestMethod.GET)
 	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception
 	{
@@ -104,7 +111,7 @@ public class NoticeController
 		// return "redirect:./detail.naver?num=" + boardDTO.getNum();
 	}
 
-	// 글 삭제
+	// 湲� �궘�젣
 	@RequestMapping(value = "delete.naver", method = RequestMethod.GET)
 	public String setDelete(BoardDTO boardDTO) throws Exception
 	{

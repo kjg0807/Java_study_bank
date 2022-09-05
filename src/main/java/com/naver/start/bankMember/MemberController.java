@@ -20,8 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/member/*")
-// �씠 �겢�옒�뒪�뒗 Controller �뿭�븷, Container(媛앹껜 �깮�꽦, �냼硫�) �뿉寃� �씠 �겢�옒�뒪�쓽 媛앹껜
-// �깮�꽦 �쐞�엫
+// 占쎌뵠 占쎄깻占쎌삋占쎈뮞占쎈뮉 Controller 占쎈열占쎈막, Container(揶쏆빘猿� 占쎄문占쎄쉐, 占쎈꺖筌롳옙) 占쎈퓠野껓옙
+// 占쎌뵠 占쎄깻占쎌삋占쎈뮞占쎌벥 揶쏆빘猿�
+// 占쎄문占쎄쉐 占쎌맄占쎌뿫
 public class MemberController
 {
 	@Autowired
@@ -31,14 +32,14 @@ public class MemberController
 	@RequestMapping(value = "logout.naver", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception
 	{
-		// 1. session을 소멸시키기
+		// 1. session�쓣 �냼硫몄떆�궎湲�
 		session.invalidate();
 
 		return "redirect:../";
 	}
 
-	// url: /member/Login �씠 �떎�뻾�맆 �븣 Login 硫붿꽌�뱶 �떎�뻾
-	@RequestMapping(value = "login.naver", method = RequestMethod.GET) // "" �븞�쑝濡� �씠�룞
+	// url: /member/Login 占쎌뵠 占쎈뼄占쎈뻬占쎈쭍 占쎈르 Login 筌롫뗄苑뚳옙諭� 占쎈뼄占쎈뻬
+	@RequestMapping(value = "login.naver", method = RequestMethod.GET) // "" 占쎈툧占쎌몵嚥∽옙 占쎌뵠占쎈짗
 	public String login()
 	{
 		System.out.println("Login Test");
@@ -46,16 +47,28 @@ public class MemberController
 		return "member/login";
 	}
 
-	@RequestMapping(value = "login.naver", method = RequestMethod.POST) // "" �븞�쑝濡� �씠�룞
-	public String login(HttpSession session, HttpServletRequest request, BankMembersDTO bankMembersDTO, Model model) throws Exception
+	@RequestMapping(value = "login.naver", method = RequestMethod.POST) // "" 占쎈툧占쎌몵嚥∽옙 占쎌뵠占쎈짗
+	public ModelAndView login(HttpSession session, HttpServletRequest request, BankMembersDTO bankMembersDTO, Model model) throws Exception
 	{
+		ModelAndView mv = new ModelAndView();
 		System.out.println("DB Login Test");
 		// BankMembersDAO bankMembersDAO = new BankMembersDAO();
 		bankMembersDTO = bankMemberSerive.getLogin(bankMembersDTO);
 		System.out.println(bankMembersDTO);
-		session.setAttribute("member", bankMembersDTO); // DB에 값이 있냐 없냐 판단
+		session.setAttribute("member", bankMembersDTO); // DB�뿉 媛믪씠 �엳�깘 �뾾�깘 �뙋�떒
+		
+		String message = "로그인 실패";
+		String url = "../member/login.naver";
+		if (bankMembersDTO != null)
+		{ // login succeed
+			message = "로그인 성공";
+			url = "../";
+		}
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/rs");
 
-		return "redirect:../";
+		return mv;
 	}
 
 	@GetMapping("accept")
@@ -146,7 +159,7 @@ public class MemberController
 	{
 		ModelAndView mv = new ModelAndView();
 
-		System.out.println("MyPage Get 실행");
+		System.out.println("MyPage Get �떎�뻾");
 
 		BankMembersDTO bankMembersDTO = (BankMembersDTO) session.getAttribute("member");
 		// Map<String, Object> map = bankMemberSerive.getMyPage(bankMembersDTO);

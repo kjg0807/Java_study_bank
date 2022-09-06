@@ -4,8 +4,16 @@
 <!-- namespace가 비어있으면 예외발생 -->
 <mapper namespace="com.naver.start.bankBook.BankBookCommentDAO">
 	<insert id="setCommentAdd" parameterType="BankBookCommentDTO">
-		insert into bb_comment(num, booknum, writer, contents, regdate)
+		insert into
+		bb_comment(num, booknum, writer, contents, regdate)
 		values(board_seq.nextval, #{bookNum}, #{writer}, #{contents}, sysdate)
-		<!-- booknum -> bankbookDTO에 있음 -->
 	</insert>
+	<select id="getCommentList" parameterType="CommentPager" resultType="BankBookCommentDTO">
+		select * from
+		(select rownum r, c.* from
+		(select * from bb_comment 
+		where booknum = #{bookNum}
+		order by #{num} desc) c)
+		where r between #{startRow} and #{lastRow}
+	</select>
 </mapper>

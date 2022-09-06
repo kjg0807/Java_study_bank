@@ -1,6 +1,7 @@
 package com.naver.start.bankBook;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.naver.start.util.CommentPager;
 
 @Controller
 @RequestMapping(value = "/book/*")
@@ -22,11 +26,37 @@ public class BankBookController
 
 	// ------------------------------ Comment ------------------------------
 	@PostMapping("commentAdd")
-	public int setCommentAdd(BankBookCommentDTO bankBookCommentDTO) throws Exception
+	@ResponseBody // return 하는 데이터를 body에 담아서 바로 응답한다(jsp안거침)
+	public String setCommentAdd(BankBookCommentDTO bankBookCommentDTO) throws Exception
 	{
+		ModelAndView mv = new ModelAndView();
 		int rs = bankBookService.setCommentAdd(bankBookCommentDTO);
-		
-		return rs;
+		// mv.addObject("rs", rs);
+		// mv.setViewName("common/ajaxResult");
+		// jsp를 사용하지 않고 바로 데이터 넘기기
+		String jsonRs = "{\"result\":\"" + rs + "\"}"; // json 형식
+
+		// return mv;
+		return jsonRs;
+	}
+
+	// ------------------------------ Comment List ------------------------------
+	@Autowired
+	private BankBookCommentDAO bankBookCommentDAO;
+
+	// 1. jsp에 출력하고 결과물을 응답으로 전송
+	@GetMapping("commentList")
+	@ResponseBody
+	public List<BankBookCommentDTO> getCommentList(BankBookCommentDTO bankBookCommentDTO, CommentPager commentPager) throws Exception
+	{
+		ModelAndView mv = new ModelAndView();
+		List<BankBookCommentDTO> ar = bankBookService.getCommentList(bankBookCommentDTO);
+		System.out.println("CommentList");
+		System.out.println(ar.size());
+		// mv.addObject("commentList", ar);
+		// mv.setViewName("common/commentList");
+
+		return ar;
 	}
 
 	@RequestMapping(value = "list.naver", method = RequestMethod.GET)

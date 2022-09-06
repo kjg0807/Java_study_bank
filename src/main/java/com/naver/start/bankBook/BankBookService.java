@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.naver.start.util.CommentPager;
+
 @Service
 public class BankBookService
 {
@@ -16,8 +18,8 @@ public class BankBookService
 		return bankBookCommentDAO.setCommentAdd(bankBookCommentDTO);
 	}
 
-	public List<BankBookCommentDTO> getCommentList(BankBookCommentDTO bankBookCommentDTO) throws Exception
+	public List<BankBookCommentDTO> getCommentList(CommentPager commentPager) throws Exception
 	{
-		return bankBookCommentDAO.getCommentList(bankBookCommentDTO);
+		return bankBookCommentDAO.getCommentList(commentPager);
 	}
 }

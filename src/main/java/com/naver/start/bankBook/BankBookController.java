@@ -50,7 +50,7 @@ public class BankBookController
 	public List<BankBookCommentDTO> getCommentList(BankBookCommentDTO bankBookCommentDTO, CommentPager commentPager) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
-		List<BankBookCommentDTO> ar = bankBookService.getCommentList(bankBookCommentDTO);
+		List<BankBookCommentDTO> ar = bankBookService.getCommentList(commentPager);
 		System.out.println("CommentList");
 		System.out.println(ar.size());
 		// mv.addObject("commentList", ar);

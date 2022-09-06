@@ -4,7 +4,7 @@ const writer = document.querySelector("#writer");
 const contents = document.getElementById("contents");
 const commentList = document.querySelector("#commentList");
 
-//getCommentList();
+getCommentList();
 
 commentAdd.addEventListener("click", function () {
     let bookNum = commentAdd.getAttribute("data-booknum");
@@ -47,7 +47,7 @@ function getCommentList() {
     // 1. xmlHTTPRequest 생성
     const xhttp = new XMLHttpRequest();
     // 2. method, url
-    xhttp.open("GET", "./commentList?page=1");
+    xhttp.open("GET", "./commentList?page=1&bookNum=" + commentAdd.getAttribute("data-booknum"));
     // 3. enctype 요청 전송 - get 안씀
     // 4. 전송 - get 내용 안씀
     xhttp.send();
@@ -63,9 +63,13 @@ function getCommentList() {
             let result = document.createElement("table");
             let resultAttr = document.createAttribute("class");
             resultAttr.value("table table-hover");
-            //result.setAttributeNode(resultAttr); // table class=table table-hover
+            result.setAttributeNode(resultAttr); // table class=table table-hover
+            resultAttr.value("table-hover");
+            result.setAttributeNode(resultAttr); // table class=table table-hover
+
             for (let i = 0; i < ar.length; i++) {
                 let tr = document.createElement("tr");
+
                 let td = document.createElement("td");
                 let tdText = document.createTextNode(ar[i].contents);
                 td.appendChild(tdText);
@@ -76,10 +80,10 @@ function getCommentList() {
                 td.appendChild(tdText);
                 tr.appendChild(td);
 
-                // td = document.createElement("td");
-                // tdText = document.createTextNode(ar[i].regDate);
-                // td.appendChild(tdText);
-                // tr.appendChild(td);
+                td = document.createElement("td");
+                tdText = document.createTextNode(ar[i].regDate);
+                td.appendChild(tdText);
+                tr.appendChild(td);
 
                 result.appendChild(tr);
             }

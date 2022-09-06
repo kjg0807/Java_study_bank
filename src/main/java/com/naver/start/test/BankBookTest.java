@@ -63,17 +63,21 @@ public class BankBookTest
 		// }
 
 		// setUpadte
-		bankBookDTO.setBookName("zz");
-		bankBookDTO.setBookRate(2.5);
-		try
-		{
-			bankBookDAO.setUpdate(bankBookDTO);
-		}
-		catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(bankBookDTO.getBookName() + " " + bankBookDTO.getBookRate());
+		// bankBookDTO.setBookName("zz");
+		// bankBookDTO.setBookRate(2.5);
+		// try
+		// {
+		// bankBookDAO.setUpdate(bankBookDTO);
+		// }
+		// catch (Exception e)
+		// {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// System.out.println(bankBookDTO.getBookName() + " " +
+		// bankBookDTO.getBookRate());
+		
+		//bankComment
+		
 	}
 }

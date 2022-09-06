@@ -9,7 +9,10 @@ public class BankBookCommentDAO
 {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.naver.start.bankBook.BankbookCommentDAO.";
-	
-	
+	private final String NAMESPACE = "com.naver.start.bankBook.BankBookCommentDAO.";
+
+	public int setCommentAdd(BankBookCommentDTO bankBookCommentDTO)
+	{
+		return sqlSession.insert(NAMESPACE + "setCommentAdd", bankBookCommentDTO);
+	}
 }

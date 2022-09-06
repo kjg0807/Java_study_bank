@@ -2,26 +2,41 @@ package com.naver.start.bankBook;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/book/*")
-public class BookController
+public class BankBookController
 {
 	// BankBookDTO bankBookDTO = new BankBookDTO();
 	// BankBookDAO bankBookDAO = new BankBookDAO();
+	@Autowired
+	private BankBookService bankBookService;
+
+	// ------------------------------ Comment ------------------------------
+	@PostMapping("commentAdd")
+	public int setCommentAdd(BankBookCommentDTO bankBookCommentDTO) throws Exception
+	{
+		int rs = bankBookService.setCommentAdd(bankBookCommentDTO);
+		
+		return rs;
+	}
 
 	@RequestMapping(value = "list.naver", method = RequestMethod.GET)
 	public String list(Model model) throws Exception
 	{
-		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä£ ï¿½ï¿½
+		// ModelAndView mv = new ModelAndView(); //Model model + "book/list" : 2ï¿½ï¿½ï¿½ï¿½
+		// ï¿½ï¿½Ä£ ï¿½ï¿½
 		System.out.println("List Test");
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		// DB ì—†ëŠ” ì‚¬ëŒ ì£¼ì„í•´ì œ
+		// DB ?—†?Š” ?‚¬?Œ ì£¼ì„?•´? œ
 		// ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
 		// for (int i = 0; i < 10; i++)
 		// {
@@ -32,7 +47,7 @@ public class BookController
 		// bankBookDTO.setBookSale(1);
 		// ar.add(bankBookDTO);
 		// }
-		ArrayList<BankBookDTO> ar = bankBookDAO.getList(); // DB ì—†ëŠ” ì‚¬ëŒ ì£¼ì„
+		ArrayList<BankBookDTO> ar = bankBookDAO.getList(); // DB ?—†?Š” ?‚¬?Œ ì£¼ì„
 		model.addAttribute("list", ar);
 
 		return "book/list";
@@ -45,7 +60,7 @@ public class BookController
 		System.out.println("Detail Test");
 		// System.out.println("bookNum: " + bookNum);
 		BankBookDAO bankBookDAO = new BankBookDAO();
-		bankBookDTO = bankBookDAO.getDetail(bankBookDTO); // DB ì—†ëŠ” ì‚¬ëŒ ì£¼ì„
+		bankBookDTO = bankBookDAO.getDetail(bankBookDTO); // DB ?—†?Š” ?‚¬?Œ ì£¼ì„
 		// bankBookDTO.setBookName("name");
 		// bankBookDTO.setBookRate(3.14);
 		// bankBookDTO.setBookSale(1);
@@ -80,7 +95,7 @@ public class BookController
 		int rs = bankBookDAO.setBankBook(bankBookDTO);
 		System.out.println(rs == 1);
 
-		// ë“±ë¡í›„ list í˜ì´ì§€ë¡œ ì´ë™
+		// ?“±ë¡í›„ list ?˜?´ì§?ë¡? ?´?™
 		mv.setViewName("redirect:./list.naver");
 
 		return mv;

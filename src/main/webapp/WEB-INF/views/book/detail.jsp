@@ -3,9 +3,12 @@
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 			<!DOCTYPE html>
 			<html>
-<style>
-	.align-center{text-align: center;}
-</style>
+			<style>
+				.align-center {
+					text-align: center;
+				}
+			</style>
+
 			<head>
 				<meta charset="UTF-8">
 				<title>Insert title here</title>
@@ -50,12 +53,56 @@
 					</div>
 					<!-- Comment -->
 					<!-- Comment List DB에서 값 가져오기 -->
-					<div id="commentList">
-
+					<div>
+						<section class="container-fluid col-lg-12">
+							<table class="table table-hover" id="commentList">
+								<tr>
+									<th>contents</th>
+									<th>writer</th>
+									<th>regDate</th>
+									<th>update click</th>
+									<th>delete click</th>
+								</tr>
+							</table>
+						</section>
 					</div>
+					<button class="btn btn-danger" id="more">More</button>
 					<!-- Comment List -->
 				</section>
+				<!-- --------------------- modal --------------------- -->
+				<button type="button" style="display: none;" id="up" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+					data-bs-whatever="@getbootstrap">Update Click</button>
 
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Update</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="mb-3">
+										<label for="recipient-name" class="col-form-label">Writer:</label>
+										<input type="text" class="form-control" id="recipient-name">
+									</div>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label">Comment:</label>
+										<textarea class="form-control" id="message-text"></textarea>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Send message</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ------------------------------------------------------------------------------------------------------ -->
 				<form action="" method="post" align="center">
 					<div class="align-center">
 						<a href="./list.naver">List Page</a>

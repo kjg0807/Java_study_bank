@@ -1,7 +1,9 @@
 package com.naver.start.bankBook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,27 @@ public class BankBookController
 	private BankBookService bankBookService;
 
 	// ------------------------------ Comment ------------------------------
+	@PostMapping
+	@ResponseBody
+	public int setCommentUpdate(BankBookCommentDTO bankBookCommentDTO) throws Exception
+	{
+		//ModelAndView mv = new ModelAndView();
+		int rs = bankBookService.setCommentUpdate(bankBookCommentDTO);
+		
+		//mv.addObject("rs", mv);
+		
+		return rs;
+	}
+
+	@PostMapping("commentDelete")
+	@ResponseBody
+	public int setCommentDelete(BankBookCommentDTO bankBookCommentDTO) throws Exception
+	{
+		int rs = bankBookService.setCommentDelete(bankBookCommentDTO);
+
+		return rs;
+	}
+
 	@PostMapping("commentAdd")
 	@ResponseBody // return 하는 데이터를 body에 담아서 바로 응답한다(jsp안거침)
 	public String setCommentAdd(BankBookCommentDTO bankBookCommentDTO) throws Exception
@@ -47,7 +70,7 @@ public class BankBookController
 	// 1. jsp에 출력하고 결과물을 응답으로 전송
 	@GetMapping("commentList")
 	@ResponseBody
-	public List<BankBookCommentDTO> getCommentList(BankBookCommentDTO bankBookCommentDTO, CommentPager commentPager) throws Exception
+	public Map<String, Object> getCommentList(CommentPager commentPager) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 		List<BankBookCommentDTO> ar = bankBookService.getCommentList(commentPager);
@@ -56,7 +79,13 @@ public class BankBookController
 		// mv.addObject("commentList", ar);
 		// mv.setViewName("common/commentList");
 
-		return ar;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", ar);
+		map.put("pager", commentPager);
+
+		// return mv;
+		// return ar;
+		return map;
 	}
 
 	@RequestMapping(value = "list.naver", method = RequestMethod.GET)

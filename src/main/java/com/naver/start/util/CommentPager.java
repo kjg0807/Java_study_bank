@@ -10,6 +10,20 @@ public class CommentPager
 	private Long page;
 	private Long perPage;
 
+	private Long totalPage;
+	
+	
+
+	// 전체 페이지 갯수 계산
+	public void makePage(Long totalCount)
+	{
+		this.totalPage = totalCount / this.getPerPage(); // get 쓰는 이유: 값이 0이거나 null일때 대비
+		if (totalCount % this.getPerPage() != 0)
+		{
+			this.totalPage++;
+		}
+	}
+
 	// startRow
 	public void getRowNum() throws Exception
 	{
@@ -74,6 +88,16 @@ public class CommentPager
 	public void setPerPage(Long perPage)
 	{
 		this.perPage = perPage;
+	}
+
+	public Long getTotalPage()
+	{
+		return totalPage;
+	}
+
+	public void setTotalPage(Long totalPage)
+	{
+		this.totalPage = totalPage;
 	}
 
 }

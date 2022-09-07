@@ -8,12 +8,29 @@
 		bb_comment(num, booknum, writer, contents, regdate)
 		values(board_seq.nextval, #{bookNum}, #{writer}, #{contents}, sysdate)
 	</insert>
-	<select id="getCommentList" parameterType="CommentPager" resultType="BankBookCommentDTO">
+	
+	<select id="getCommentList" parameterType="CommentPager"
+		resultType="BankBookCommentDTO">
 		select * from
 		(select rownum r, c.* from
-		(select * from bb_comment 
+		(select * from
+		bb_comment
 		where booknum = #{bookNum}
-		order by #{num} desc) c)
-		where r between #{startRow} and #{lastRow}
+		order by num desc) c)
+		where r between #{startRow}
+		and #{lastRow}
 	</select>
+	
+	<select id="getCommentListTotalCount"
+		parameterType="CommentPager" resultType="Long">
+		select count(num) from bb_comment where booknum = #{bookNum}
+	</select>
+	
+	<delete id="setCommentDelete" parameterType="BankBookCommentDTO">
+		delete bb_comment where num = #{num}
+	</delete>
+	
+	<update id="setCommentUpdate" parameterType="BankBookCommentDTO">
+	update bb_comment set writer=#{writer}, contents=#{contents} where num = #{num};
+	</update>
 </mapper>

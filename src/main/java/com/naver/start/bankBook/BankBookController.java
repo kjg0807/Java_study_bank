@@ -27,15 +27,12 @@ public class BankBookController
 	private BankBookService bankBookService;
 
 	// ------------------------------ Comment ------------------------------
-	@PostMapping
+	@PostMapping("commentUpdate")
 	@ResponseBody
 	public int setCommentUpdate(BankBookCommentDTO bankBookCommentDTO) throws Exception
 	{
-		//ModelAndView mv = new ModelAndView();
 		int rs = bankBookService.setCommentUpdate(bankBookCommentDTO);
-		
-		//mv.addObject("rs", mv);
-		
+
 		return rs;
 	}
 

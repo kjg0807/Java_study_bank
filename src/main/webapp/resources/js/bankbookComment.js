@@ -89,16 +89,26 @@ function getCommentList(p, bn) { // p - page, bn - booknum
                 let tdText = document.createTextNode(ar[i].contents);
                 td.appendChild(tdText);
                 tr.appendChild(td);
-
+                // ---------------------------------------------------------------------
                 td = document.createElement("td");
                 tdText = document.createTextNode(ar[i].writer);
                 td.appendChild(tdText);
                 tr.appendChild(td);
-
+                // ---------------------------------------------------------------------
                 td = document.createElement("td");
-                tdText = document.createTextNode(ar[i].regDate);
+                // 날짜 format 변경
+                let date = new Date(ar[i].regDate);
+                //console.log(date);
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+                //console.log(year + "/" + month + "/" + day);
+                //year + "/" + month + "/" + day
+                //tdText = document.createTextNode(ar[i].regDate);
+                tdText = document.createTextNode(year + "/" + month + "/" + day);
                 td.appendChild(tdText);
                 tr.appendChild(td);
+                // ---------------------------------------------------------------------
 
                 td = document.createElement("td");
                 tdText = document.createTextNode("update");
@@ -107,22 +117,26 @@ function getCommentList(p, bn) { // p - page, bn - booknum
                 td.setAttributeNode(tdAttr);
                 td.appendChild(tdText);
                 tr.appendChild(td);
+                tdAttr = document.createAttribute("data-commentnum");
+                tdAttr.value = ar[i].num;
+                td.setAttributeNode(tdAttr);
+                // ---------------------------------------------------------------------
 
                 td = document.createElement("td");
                 tdText = document.createTextNode("delete");
                 tdAttr = document.createAttribute("class");
                 tdAttr.value = "delete"; // class="update"
                 td.setAttributeNode(tdAttr);
+                td.appendChild(tdText);
+
                 tdAttr = document.createAttribute("data-commentnum");
                 tdAttr.value = ar[i].num;
-                console.log(tdAttr.value = ar[i].num);
                 td.setAttributeNode(tdAttr);
-
-                td.appendChild(tdText);
                 tr.appendChild(td);
+                // ---------------------------------------------------------------------
 
-                //result.appendChild(tr);
                 commentList.append(tr);
+                //tb.appendChild(tr); tb 선언
 
                 if (page >= pager.totalPage) {
                     more.classList.add("disabled");
@@ -131,6 +145,9 @@ function getCommentList(p, bn) { // p - page, bn - booknum
                     more.classList.remove("disabled");
                 }
             }
+            //commentList.append(tb); tb 선언
+
+
             //console.log(commentList.children);
 
             // try {
@@ -194,14 +211,60 @@ commentList.addEventListener("click", function (event) {
             });
         }
     }
-    if (event.target.className == "update") {
+    if (event.target.className == "update") { //event.target -> form(update)
         // let content = event.target.previousSibling.previousSibling.previousSibling;
         // let a = content.innerHTML;
         // prompt("내용 수정", a);
         // console.log(a);
 
         //content.innerHTML = "<textarea>"+a+"</textarea>";
+        let content = event.target.previousSibling.previousSibling.previousSibling.innerHTML;
+        let wri = event.target.previousSibling.previousSibling.innerHTML;
+        let num = event.target.getAttribute("data-commentnum");
+
+        console.log("content--: " + content);
+        console.log("writer--: " + wri);
+
+        document.querySelector("#updateContents").values = content;
+        document.querySelector("#updateWriter").value = wri;
+        document.querySelector("#num").value = num;
+
         document.querySelector("#up").click();
-        
     }
+})
+
+// ----------------------------- Modal Update button Click ----------------------------------------
+const update = document.querySelector("#update");
+
+update.addEventListener("click", function (event) {
+    // modal에서 num, contents
+    let num = document.querySelector("#num").value;
+    let contents = document.querySelector("#updateContents").value;
+    // 1. xmlHTTPRequest 생성
+    const xhttp = new XMLHttpRequest();
+    // 2. method, url
+    xhttp.open("POST", "commentUpdate");
+    // 3. enctype 요청 전송 - get 안씀
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // 4. 전송 - get 내용 안씀
+    xhttp.send("num=" + num + "&contents=" + contents);
+    // 5. 응답 처리
+    xhttp.addEventListener("readystatechange", function () {
+        if (xhttp.readyState == 4 && this.status == 200) {
+            console.log(xhttp.responseText.trim())
+            let result = xhttp.responseText.trim();
+            if (result > 0) {
+                alert("Update Succeed");
+                for (let i = 0; i < commentList.children.length;) {
+                    commentList.children[0].remove();
+                }
+                page = 1;
+                getCommentList(page, bookNum);
+                // 수정 성공했을때만 수정창 끄기                
+            }
+            else {
+                alert("Update Fail");
+            }
+        }
+    });
 })

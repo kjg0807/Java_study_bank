@@ -31,6 +31,6 @@
 	</delete>
 	
 	<update id="setCommentUpdate" parameterType="BankBookCommentDTO">
-	update bb_comment set writer=#{writer}, contents=#{contents} where num = #{num};
+	update bb_comment set contents = #{contents} where num = #{num}
 	</update>
 </mapper>

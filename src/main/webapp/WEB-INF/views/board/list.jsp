@@ -10,10 +10,6 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
 			integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 		<style>
-			.a {
-				float: right;
-			}
-
 			.b {
 				margin-top: 10px;
 			}
@@ -81,9 +77,9 @@
 						</tbody>
 					</table>
 				</form>
-				<nav class="a">
-					<button onclick="location='add.naver'" type="submit" class="btn btn-primary">Writing Page</button>
-				</nav>
+
+				<button onclick="location='add.naver'" type="submit" class="btn btn-primary">Writing Page</button>
+
 			</section>
 			<section class="container-fluid col-lg-6">
 				<form class="col-lg-6 container-fluid page">

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.naver.start.bankBook.BankBookCommentDTO;
 import com.naver.start.board.impl.BoardDTO;
 import com.naver.start.util.Pager;
 
@@ -63,24 +64,29 @@ public class NoticeController
 
 	// 湲� �옉�꽦
 	@RequestMapping(value = "add.naver", method = RequestMethod.GET)
-	public ModelAndView setAdd() throws Exception
+	public String setAdd(HttpSession session) throws Exception
 	{
-		ModelAndView mv = new ModelAndView();
+		BankBookCommentDTO bankBookCommentDTO = (BankBookCommentDTO) session.getAttribute("BankMembersDTO");
 
-		mv.setViewName("board/add");
-
-		return mv;
+		if (bankBookCommentDTO != null)
+		{ // 로그인 한사람
+			return "board/add";
+		} else
+		{ // 로그인 안한사람
+			return "redirect:../member/login.naver";
+		}
 	}
 
 	@RequestMapping(value = "add.naver", method = RequestMethod.POST)
-	public ModelAndView setAddFile(BoardDTO boardDTO, MultipartFile [] files, HttpSession session) throws Exception
+	public ModelAndView setAddFile(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 		int rs = noticeService.setAdd(boardDTO, files, session.getServletContext());
 
 		String message = "Writing Fail";
-		//String url = "../board/list.naver";
-		if(rs > 0) {
+		// String url = "../board/list.naver";
+		if (rs > 0)
+		{
 			message = "Writing succeed";
 		}
 		mv.addObject("message", message);

@@ -56,13 +56,15 @@
 					<div>
 						<section class="container-fluid col-lg-12">
 							<table class="table table-hover" id="commentList">
-								<tr>
-									<th>contents</th>
-									<th>writer</th>
-									<th>regDate</th>
-									<th>update click</th>
-									<th>delete click</th>
-								</tr>
+								<thead>
+									<tr>
+										<th>contents</th>
+										<th>writer</th>
+										<th>regDate</th>
+										<th>update click</th>
+										<th>delete click</th>
+									</tr>
+								</thead>
 							</table>
 						</section>
 					</div>
@@ -70,8 +72,8 @@
 					<!-- Comment List -->
 				</section>
 				<!-- --------------------- modal --------------------- -->
-				<button type="button" style="display: none;" id="up" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-					data-bs-whatever="@getbootstrap">Update Click</button>
+				<button type="button" style="display: none;" id="up" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Update Click</button>
 
 				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -84,19 +86,20 @@
 							</div>
 							<div class="modal-body">
 								<form>
+									<input type="hidden" id="num">
 									<div class="mb-3">
 										<label for="recipient-name" class="col-form-label">Writer:</label>
-										<input type="text" class="form-control" id="recipient-name">
+										<input type="text" class="form-control" id="updateWriter" disabled>
 									</div>
 									<div class="mb-3">
 										<label for="message-text" class="col-form-label">Comment:</label>
-										<textarea class="form-control" id="message-text"></textarea>
+										<textarea class="form-control" id="updateContents"></textarea>
 									</div>
 								</form>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Send message</button>
+								<button type="button" id="update" class="btn btn-primary" data-bs-dismiss="modal">Update Contents</button>
 							</div>
 						</div>
 					</div>

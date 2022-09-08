@@ -26,14 +26,7 @@ public class HomeController
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model)
 	{
-		try
-		{
-			Thread.sleep(1000);
-		} catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("Controller Start");
 
 		return "index";
 	}

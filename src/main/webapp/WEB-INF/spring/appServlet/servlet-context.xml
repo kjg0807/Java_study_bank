@@ -34,6 +34,7 @@
 
 	<!-- URL - Interceptor mapping -->
 	<interceptors>
+
 		<interceptor>
 			<!-- url 경로(path) -->
 			<mapping path="/**" />
@@ -42,16 +43,14 @@
 
 		<interceptor>
 			<mapping path="/qna/*" />
+			<mapping path="/notice/*" />
 			<mapping path="/member/mypage.naver" />
-			<exclude-mapping path="/qna/list.naver"/>
+			<exclude-mapping path="/qna/list.naver" />
+			<exclude-mapping path="/notice/list.naver" />
+			<exclude-mapping path="/notice/detail.naver" />
 			<beans:bean
 				class="com.naver.start.interceptor.MemberInterceptor"
 				id="memberInterceptor"></beans:bean>
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/notice3/*" />
-			<beans:ref bean="testInterceptor" />
 		</interceptor>
 
 	</interceptors>

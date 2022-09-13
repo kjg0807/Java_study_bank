@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +47,12 @@ public class NoticeController
 		mv.addObject("board", "Notice");
 		mv.setViewName("board/list");
 
+		// error 500 occur
+		// if (ar.size() != 0)
+		// {
+		// throw new Exception();
+		// }
+
 		return mv;
 	}
 
@@ -56,8 +63,8 @@ public class NoticeController
 		ModelAndView mv = new ModelAndView();
 		boardDTO = noticeService.getDetail(boardDTO);
 
-		//mv.addObject("boardDTO", boardDTO);
-		//mv.setViewName("board/detail");
+		// mv.addObject("boardDTO", boardDTO);
+		// mv.setViewName("board/detail");
 		model.addAttribute("boardDTO", boardDTO);
 
 		return "board/detail";
@@ -67,7 +74,7 @@ public class NoticeController
 	@RequestMapping(value = "add.naver", method = RequestMethod.GET)
 	public String setAdd(HttpSession session) throws Exception
 	{
-		BankMembersDTO bankMembersDTO = (BankMembersDTO)session.getAttribute("member");
+		BankMembersDTO bankMembersDTO = (BankMembersDTO) session.getAttribute("member");
 
 		if (bankMembersDTO != null)
 		{ // 로그인 한사람
@@ -125,5 +132,30 @@ public class NoticeController
 		int rs = noticeService.setDelete(boardDTO);
 
 		return "redirect:./list.naver";
+	}
+
+	// simular to catch
+	// NullPonterException receive in controller
+	@ExceptionHandler(NullPointerException.class)
+	public ModelAndView exceptionTest()
+	{
+		ModelAndView mv = new ModelAndView();
+
+		System.out.println("NullPointerException Error");
+		mv.setViewName("errors/error_404");
+
+		return mv;
+	}
+
+	// Exception receive in controller
+	@ExceptionHandler(Exception.class)
+	public ModelAndView exceptionTest2()
+	{
+		ModelAndView mv = new ModelAndView();
+
+		System.out.println("Exception Error");
+		mv.setViewName("errors/error_404");
+
+		return mv;
 	}
 }

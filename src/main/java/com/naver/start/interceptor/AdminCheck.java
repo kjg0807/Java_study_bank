@@ -34,7 +34,6 @@ public class AdminCheck extends HandlerInterceptorAdapter
 		if (!ch)
 		{
 			request.setAttribute("message", "권한이 없습니다.");
-			request.setAttribute("url", "../../../../../../../");
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/rs.jsp"); // "" -> jsp path
 			view.forward(request, response);
 		}

@@ -6,7 +6,7 @@
 	<insert id="setCommentAdd" parameterType="BankBookCommentDTO">
 		insert into
 		bb_comment(num, booknum, writer, contents, regdate)
-		values(board_seq.nextval, #{bookNum}, #{writer}, #{contents}, sysdate)
+		values(board_seq.nextval, #{BookNum}, #{writer}, #{contents}, sysdate)
 	</insert>
 	
 	<select id="getCommentList" parameterType="CommentPager"
@@ -15,7 +15,7 @@
 		(select rownum r, c.* from
 		(select * from
 		bb_comment
-		where booknum = #{bookNum}
+		where booknum = #{BookNum}
 		order by num desc) c)
 		where r between #{startRow}
 		and #{lastRow}
@@ -23,7 +23,7 @@
 	
 	<select id="getCommentListTotalCount"
 		parameterType="CommentPager" resultType="Long">
-		select count(num) from bb_comment where booknum = #{bookNum}
+		select count(num) from bb_comment where booknum = #{BookNum}
 	</select>
 	
 	<delete id="setCommentDelete" parameterType="BankBookCommentDTO">

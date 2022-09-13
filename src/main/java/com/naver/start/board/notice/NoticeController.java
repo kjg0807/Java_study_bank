@@ -2,7 +2,6 @@ package com.naver.start.board.notice;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.naver.start.bankBook.BankBookCommentDTO;
+import com.naver.start.bankMember.BankMembersDTO;
 import com.naver.start.board.impl.BoardDTO;
 import com.naver.start.util.Pager;
 
@@ -44,6 +43,7 @@ public class NoticeController
 
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
+		mv.addObject("board", "Notice");
 		mv.setViewName("board/list");
 
 		return mv;
@@ -51,24 +51,25 @@ public class NoticeController
 
 	// 湲� �긽�꽭
 	@RequestMapping(value = "detail.naver", method = RequestMethod.GET)
-	public ModelAndView getDetail(BoardDTO boardDTO, Model model) throws Exception
+	public String getDetail(BoardDTO boardDTO, Model model) throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 		boardDTO = noticeService.getDetail(boardDTO);
 
-		mv.addObject("boardDTO", boardDTO);
-		mv.setViewName("board/detail");
+		//mv.addObject("boardDTO", boardDTO);
+		//mv.setViewName("board/detail");
+		model.addAttribute("boardDTO", boardDTO);
 
-		return mv;
+		return "board/detail";
 	}
 
 	// 湲� �옉�꽦
 	@RequestMapping(value = "add.naver", method = RequestMethod.GET)
 	public String setAdd(HttpSession session) throws Exception
 	{
-		BankBookCommentDTO bankBookCommentDTO = (BankBookCommentDTO) session.getAttribute("BankMembersDTO");
+		BankMembersDTO bankMembersDTO = (BankMembersDTO)session.getAttribute("member");
 
-		if (bankBookCommentDTO != null)
+		if (bankMembersDTO != null)
 		{ // 로그인 한사람
 			return "board/add";
 		} else

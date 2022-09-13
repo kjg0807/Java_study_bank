@@ -18,11 +18,11 @@ public class MemberInterceptor extends HandlerInterceptorAdapter
 
 		if (obj != null)
 		{
-			System.out.println("로그인 함");
+			System.out.println("Login on");
 			return true;
 		}
 		else {
-			System.out.println("로그인 안함");
+			System.out.println("Login Off");
 			response.sendRedirect("../../../../../member/login.naver");
 			return false;
 		}

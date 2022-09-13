@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.naver.start.bankMember.BankMembersDTO" alias="BankMembersDTO" />
 		<typeAlias type="com.naver.start.bankMember.BankMembersFileDTO" alias="BankMembersFileDTO" />
+		<typeAlias type="com.naver.start.bankMember.RoleDTO" alias="RoleDTO" />
 		<typeAlias type="com.naver.start.bankAccount.BankAccountDTO" alias="BankAccountDTO" />
 		<typeAlias type="com.naver.start.bankBook.BankBookDTO" alias="BankBookDTO" />
 		<typeAlias type="com.naver.start.bankBook.BankBookCommentDTO" alias="BankBookCommentDTO"/>

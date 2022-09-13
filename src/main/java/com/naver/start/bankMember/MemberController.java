@@ -20,9 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/member/*")
-// 占쎌뵠 占쎄깻占쎌삋占쎈뮞占쎈뮉 Controller 占쎈열占쎈막, Container(揶쏆빘猿� 占쎄문占쎄쉐, 占쎈꺖筌롳옙) 占쎈퓠野껓옙
-// 占쎌뵠 占쎄깻占쎌삋占쎈뮞占쎌벥 揶쏆빘猿�
-// 占쎄문占쎄쉐 占쎌맄占쎌뿫
 public class MemberController
 {
 	@Autowired

@@ -4,15 +4,15 @@ import com.naver.start.board.impl.CommentDTO;
 
 public class BankBookCommentDTO extends CommentDTO
 {
-	private Long bookNum;
+	private Long BookNum;
 
 	public Long getBookNum()
 	{
-		return bookNum;
+		return BookNum;
 	}
 
 	public void setBookNum(Long bookNum)
 	{
-		this.bookNum = bookNum;
+		BookNum = bookNum;
 	}
 }

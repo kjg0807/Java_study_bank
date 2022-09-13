@@ -26,33 +26,30 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<!-- Interceptor option -->
 	<!-- Interceptor 객체 생성 -->
+	<beans:bean class="com.naver.start.interceptor.AdminCheck"
+		id="AdminCheck"></beans:bean>
 	<beans:bean
-		class="com.naver.start.interceptor.TestInterceptor"
-		id="testInterceptor"></beans:bean>
-
+		class="com.naver.start.interceptor.MemberInterceptor"
+		id="memberInterceptor"></beans:bean>
 	<!-- URL - Interceptor mapping -->
 	<interceptors>
-
 		<interceptor>
-			<!-- url 경로(path) -->
-			<mapping path="/**" />
-			<beans:ref bean="testInterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/qna/*" />
-			<mapping path="/notice/*" />
-			<mapping path="/member/mypage.naver" />
-			<exclude-mapping path="/qna/list.naver" />
+			<mapping path="/notice/**" />
+			<mapping path="/qna/**" />
 			<exclude-mapping path="/notice/list.naver" />
 			<exclude-mapping path="/notice/detail.naver" />
-			<beans:bean
-				class="com.naver.start.interceptor.MemberInterceptor"
-				id="memberInterceptor"></beans:bean>
+			<exclude-mapping path="/qna/list.naver" />
+			<exclude-mapping path="/qna/detail.naver" />
+			<beans:ref bean="memberInterceptor" />
 		</interceptor>
 
+		<interceptor>
+			<mapping path="/notice/**" />
+			<exclude-mapping path="/notice/list.naver" />
+			<exclude-mapping path="/notice/detail.naver" />
+			<beans:ref bean="AdminCheck" />
+		</interceptor>
 	</interceptors>
 
 

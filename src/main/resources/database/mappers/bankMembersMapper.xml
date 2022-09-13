@@ -11,26 +11,56 @@
 	</insert>
 
 	<!-- id == DAO.method name -->
-	<select id="getLogin" parameterType="BankMembersDTO" resultType="BankMembersDTO">
-
-		select userid, name
-		from bankmembers where userid = #{userid} and pwd = #{pwd}
+	<select id="getLogin" parameterType="BankMembersDTO"
+		resultMap="getLoginResult">
+		select bm.userid, bm.name, r.rolename, r.rolenum
+		from bankmembers bm
+		inner join
+		memberrole mr
+		on bm.userid = mr.userid
+		inner join role r
+		on mr.rolenum = r.rolenum
+		where bm.userid=#{userid} and bm.pwd=#{pwd}
+		order by r.rolenum asc
+		<!-- select userid, name from bankmembers where userid = #{userid} and 
+			pwd = #{pwd} -->
 	</select>
 
-	<select id="getSearchByID" parameterType="String" resultType="BankMembersDTO">
+	<resultMap type="BankMembersDTO" id="getLoginResult">
+		<id column="userid" property="userid" />
+		<result column="name" property="name" />
+		<collection property="roleDTOs" javaType="List"
+			ofType="RoleDTO">
+			<id column="rolenum" property="roleNum" />
+			<result column="rolename" property="roleName" />
+		</collection>
+	</resultMap>
+
+	<select id="getSearchByID" parameterType="String"
+		resultType="BankMembersDTO">
 
 		select * from bankmembers
-		where name like #{name} order by name desc
+		where name like #{name} order by
+		name desc
 	</select>
 
 	<insert id="setJoin" parameterType="BankMembersDTO">
-		INSERT INTO BANKMEMBERS VALUES(#{userid},#{pwd},#{name},#{email},#{phone})
+		INSERT INTO BANKMEMBERS
+		VALUES(#{userid},#{pwd},#{name},#{email},#{phone})
 	</insert>
-	<!-- <select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult"> SELECT USERNAME, NAME, EMAIL, PHONE FROM BANKMEMBERS WHERE USERid = #{userID} </select> <resultMap type="BankMembersDTO" id="getMyPageResult"> <id column="userid" property="userid" /> <result column="name" property="name" 
-		/> <result column="email" property="email" /> <result column="phone" property="phone" /> <collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO"> <id column="accountnum" property="accountNum" /> <result column="accountdate" property="accountDate" /> <association property="bankBookDTO" 
-		javaType="BankBookDTO"> <result column="bookname" property="bookName" /> </association> </collection> </resultMap> -->
-	<select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult">
-		SELECT BM.USERID, NAME, EMAIL, PHONE,FILENUM, FILENAME, ACCOUNTNUM, BOOKNAME, ACCOUNTDATE
+	<!-- <select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult"> 
+		SELECT USERNAME, NAME, EMAIL, PHONE FROM BANKMEMBERS WHERE USERid = #{userID} 
+		</select> <resultMap type="BankMembersDTO" id="getMyPageResult"> <id column="userid" 
+		property="userid" /> <result column="name" property="name" /> <result column="email" 
+		property="email" /> <result column="phone" property="phone" /> <collection 
+		property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO"> <id column="accountnum" 
+		property="accountNum" /> <result column="accountdate" property="accountDate" 
+		/> <association property="bankBookDTO" javaType="BankBookDTO"> <result column="bookname" 
+		property="bookName" /> </association> </collection> </resultMap> -->
+	<select id="getMyPage" parameterType="BankMembersDTO"
+		resultMap="getMyPageResult">
+		SELECT BM.USERID, NAME, EMAIL, PHONE,FILENUM, FILENAME,
+		ACCOUNTNUM, BOOKNAME, ACCOUNTDATE
 		FROM
 		BANKMEMBERS BM
 		LEFT JOIN
@@ -38,7 +68,8 @@
 		ON BM.USERID = MF.USERID
 		LEFT JOIN
 		BANKACCOUNT BA
-		ON BM.USERID = BA.USERID
+		ON
+		BM.USERID = BA.USERID
 		LEFT JOIN
 		BANKBOOK BB
 		ON
@@ -51,13 +82,16 @@
 		<result column="NAME" property="name" />
 		<result column="EMAIL" property="email" />
 		<result column="PHONE" property="phone" />
-		<collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO">
+		<collection property="bankAccountDTOs" javaType="List"
+			ofType="BankAccountDTO">
 			<id column="ACCOUNTNUM" property="accountNum" />
 			<result column="ACCOUNTDATE" property="accountDate" />
-			<association property="bankBookDTO" javaType="bankBookDTO">
+			<association property="bankBookDTO"
+				javaType="bankBookDTO">
 				<result column="BOOKNUM" property="bookName" />
 			</association>
-			<association property="bankMembersFileDTO" javaType="bankMembersFileDTO">
+			<association property="bankMembersFileDTO"
+				javaType="bankMembersFileDTO">
 				<id column="FILENUM" property="fileNum" />
 				<result column="FILENAME" property="fileName" />
 			</association>
